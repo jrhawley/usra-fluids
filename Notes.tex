@@ -1,0 +1,105 @@
+\documentclass[12pt, twoside, letterpaper]{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section{Motivation for Hamiltonian Dynamics of Fluids}
+From a physical standpoint, Hamiltonian formulations are an intuitive and mathematically elegant way from analyzing physical systems. Hamiltonian mechanics is equivalent to Newtonian and Lagrangian formulations, but it is particularly advantageous in phase-plane analysis and determining conserved quantities.
+
+Hamiltonian mechanics is relatively simple when applied to particles and discrete systems. Hamiltonians are functions of positions and momenta (or other generalized coordinates), and the trajectories are found by solving the canonical Hamiltonian equations. For discrete systems, the coordinates are finite-dimensional, so compactness and a few other nice properties of the phase space is guaranteed.
+
+Hamiltonian mechanics becomes more difficult when analyzing continuous systems. In discrete systems, one typically assigns positions and momenta to individual particles. And given that the system is discrete, the dimension of the system is countable. But in a continuum, there are no individual particles, only infinitesimal volumes. In order to keep track of each infinitesimal volume, the system of interest needs to be infinite-dimensional. Analyzing these systems becomes trickier, since some of our nice properties in finite spaces no longer hold.
+
+The Hamiltonian for continuous systems plays an analogous role to the discrete case, but it is now a functional of the entire body, and the coordinates associated with the volume.
+
+\begin{align}
+\mathcal{H} = \iiint_\Omega H(\textbf{q}, \textbf{p}, t) dV
+\end{align}
+
+But the underlying structure, and the idea behind what makes Hamiltonian mechanics so useful, is still there. The mathematical structure is just more complicated to account for the continuum. We still aim to look for conserved quantities and stable solutions.
+
+Our sense of derivatives need to change as well, since there's no individual "position of the $i$th particle" anymore. To do this, we define the \emph{variation} of a functional.
+
+\section{Motivation for Shallow Water and Quasi-Geostrophic Models}
+The equations of motion describing fluids are very complicated because they are coupled, nonlinear, partial differential equations. There is no proven guarantee of existence of solutions to these equations, and for many solutions that do exist, their behaviour is chaotic.
+
+In order to make some sense of these equations in certain scenarios, we make models that simplify more general results. The hope is that the simplifications will be able to highlight certain behaviours, while eliminating others that aren't of interest.
+
+There's a sort of "nesting doll effect" that arises from all the different kinds of models, and they each have their realms of utility.
+
+\subsection{Compressible Navier-Stokes equations}
+Arguably the most general set of equations that governs fluids of all kinds. They are elegant in their apparent simplicity and compactness, but given their nonlinearity and coupled behaviour, they are incredibly difficult to solve, in general.
+
+\subsection{Incompressible Navier-Stokes equations}
+A subset of the above, incompressible flows are significantly easier to solve in many scenarios. The assumption of incompressibility ($\nabla \cdot \textbf{u} = 0$) not only gives us another equation to work with, it also gives us a number of more tools to work with when describing the flow. But these equations are still coupled and nonlinear, so many difficulties that arise for compressible flows show up in these models as well.
+
+\subsection{2D Flows}
+Many times we are not concerned with certain dimensions of fluid flow. We don't need to know (or aren't interested) in how fluids move in certain directions, and we can simplify the mathematics by assuming that there is simplify no flow. Things like layered fluids of different densities, or very thin layers of fluids can be considered within this subset of models.
+
+\subsection{Shallow Water Equations}
+Fluids can behave on vastly different length scales, depending on the situation of interest. An important situation is that of Earth. The oceans span thousands of kilometres in the horizontal directions, but are relatively small in the vertical direction. The deepest part of the ocean, the Mariana Trench, is 11 km at its deepest, yet it's width spans from 3000 km to 6000 km.
+
+Models describing the movement of ocean waters are incredibly important in determining weather patterns, migration patterns, and tectonic plate movement. And being able to make sense of these models, and solve them, is a must.
+
+\subsection{Quasi-Geostrophic Models}
+This is a model that relies on the assumptions of the Shallow Water equations, but the scales of motion are vastly different. It is here and within the Shallow Water scenario that much of the work is to be done.
+
+\section{Derivations}
+\subsection{Derivation of Shallow Water Model}
+\subsubsection{Assumptions}
+\begin{enumerate}
+	\item Homogeneous fluid ($\rho = \rho_0$)
+	\item Inviscid and non-diffusive fluid
+	\item Horizontal velocity is depth-independent
+	\item Hydrostatic balance
+\end{enumerate}
+
+\subsubsection{Variables}
+\begin{itemize}
+	\item $\vec u$: 3D fluid velocity with components $u, v, w$
+	\item $\rho$: fluid density (assumed constant)
+	\item $\mu$: kinematic viscosity (assumed $\mu = 0$)
+	\item $\vec \Omega$: angular velocity due to rotation. $\vec \Omega = \Omega \hat z$
+	\item $g$: gravitational acceleration constant
+	\item $\eta$: surface height as a function of $x, y, t$. Its mean is 0, which is where the $z$-coordinate is defined
+	\item $H$: bottom topography as a function of $x, y$. It is static in time, and in many models is considered constant
+	\item $h$: total fluid column height. $h(x,y,t) = \eta(x,y,t) + H(x,y)$
+\end{itemize}
+
+\subsubsection{Simplify Navier-Stokes equations}
+We start with the continuity and momentum equations (Navier-Stokes):
+\begin{align}
+\frac{1}{\rho} \frac{D \rho}{Dt} + \nabla \cdot \vec u &= 0 \\
+\rho \left[ \frac{D \vec u}{Dt} + 2\vec \Omega \times \vec u \right] &= -\nabla p - \rho g \hat z + \mu \nabla^2 \vec u
+\end{align}
+
+The continuity equation reduces to
+$$
+\nabla \cdot \vec u = 0
+$$
+since $\rho$ is constant. We are now only dealing with divergence-free flow. The viscous (last) term in the momentum equation vanishes, so we are left with
+\begin{align*}
+\frac{\partial u}{\partial t} + \vec u \cdot \nabla u + 2\Omega (-v) &= -\frac{1}{\rho} \frac{\partial p}{\partial x} \\
+\frac{\partial v}{\partial t} + \vec u \cdot \nabla v+ 2\Omega (u) &= -\frac{1}{\rho} \frac{\partial p}{\partial y} \\
+\frac{\partial w}{\partial t} + \vec u \cdot \nabla w + 2\Omega (0) &= -\frac{1}{\rho} \frac{\partial p}{\partial z} - g
+\end{align*}
+By the hydrostatic assumption, the entire left-hand side of the $z$ equation is 0, so our resultant set of equations is:
+
+\begin{align*}
+\frac{\partial u}{\partial t} + \vec u \cdot \nabla u - 2\Omega v &= -\frac{1}{\rho} \frac{\partial p}{\partial x} \\
+\frac{\partial v}{\partial t} + \vec u \cdot \nabla v+ 2\Omega u &= -\frac{1}{\rho} \frac{\partial p}{\partial y} \\
+\frac{\partial p}{\partial z} &= -\rho g \\
+\nabla \cdot \vec u &= 0
+\end{align*}
+
+\subsubsection{Solve pressure function}
+\subsubsection{Integrate continuity equation}
+\subsubsection{Apply boundary conditions}
+\subsubsection{Final set of equations}
+\begin{align}
+\frac{D \vec u}{Dt} + 2 \vec \Omega \times \vec u &= -g \nabla \eta \\
+\frac{\partial h}{\partial t} + \nabla \cdot (h \vec u) &= 0
+\end{align}
+
+
+\end{document}
