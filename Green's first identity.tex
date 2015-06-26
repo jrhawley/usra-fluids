@@ -1,0 +1,33 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\allowdisplaybreaks
+
+\begin{document}
+$x$-independence:
+$$
+\phi = \phi(y, t), \psi = \psi(y, t)
+$$
+Green's first identity:
+$$
+\int \psi \nabla^2 \phi + \nabla \psi \cdot \nabla \phi \, dV = \oint \psi \nabla \phi \cdot d \vec S
+$$
+
+Channel BC's:
+\begin{align*}
+\oint \psi \nabla \phi \cdot d \vec S &= \lim_{X \rightarrow \infty} \frac{1}{2X} \int_{-X}^X \psi(0,t) \nabla \phi(0,t) \, dx + \int_0^L \psi(y,t) \nabla \phi(y,t) \, dy  \\
+ &\quad + \int_X^{-X} \psi(L,t) \nabla \phi(L,t) \, dx + \int_L^0 \psi(y,t) \nabla \phi(y,t) \, dy \\
+ &= \lim_{X \rightarrow \infty} \frac{1}{2X} \int_{-X}^X \psi(0,t) \nabla \phi(0,t) \, dx + \int_X^{-X} \psi(L,t) \nabla \phi(L,t) \, dx \\
+ &= \lim_{X \rightarrow \infty} \frac{1}{2X} \int_{-X}^X \psi(0,t) \nabla \phi(0,t) - \psi(L,t) \nabla \phi(L,t) \, dx \\
+ &= \left. \psi(y,t) \nabla \phi(y,t) \right|_{y=L}^0
+\end{align*}
+which is a function of time.
+
+What I get by integrating the QG equation is 
+$$
+0= \partial_t \left[ \frac12 \iint \nabla\psi\cdot\nabla\psi + F\psi^2 \, dA + \frac12 \left. \psi^2(y,t) \right|_{y=0}^L \right]
+$$
+
+Am I able to neglect the last term? I know I can set $\psi$ on one of the boundaries to be 0 at a certain time, but can I do it for all time? And if so, can I set $\psi$ on the other boundary to be a constant for all time, too? If I can, then that last term is just a constant and can be neglected, which gives us the exact same Hamiltonian as the doubly periodic BC's, which will give the same stability criteria.
+\end{document}
