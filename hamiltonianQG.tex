@@ -15,7 +15,22 @@
 
 %%% Section 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{One-Layer Quasi-Geostrophy}
-  \textbf{Assumptions}
+  \textbf{Assumptions} \\
+  In the quasi-geostrophic model, there are a number of assumptions about the fluid that are made:
+  \begin{itemize}
+    \item The density, $\rho$, is constant
+    \item The flow is incompressible and non-diffusive
+    \item The fluid is inviscid
+    \item The fluid is in hydrostatic balance
+    \item Horizontal velocities are depth-indepenedent
+    \item The Rossby number is very small, and
+    \item Deformations in the fluid surface are small compared to the fluid depth
+  \end{itemize}
+  We will also impose the following assumption to simplify calculations:
+  \begin{itemize}
+    \item The bottom surface is flat
+    \item The domain is simply connected
+  \end{itemize}
 
   The one-layer QG model can be written as,
   $$
@@ -141,8 +156,8 @@
 
 %%% Section 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Two-Layer Quasi-Geostrophy}
-
-  \textbf{Assumptions}
+  \textbf{Assumptions} \\
+  All of the same assumptions that are made in the one-layer case will be made.
 
   The two-layer QG model can be written as,
   $$
@@ -217,6 +232,15 @@
       \mathcal{H} = \frac12 \iint \sum_{i=1}^2 \left[ \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \psi_i + 2C_i(q_i) \right]+ (\psi_1 - \psi_2)^2 \, dA
       \label{eqn:qg_tl_h}
     \end{equation}
+
+    \subsubsection{Aside: Boundary Conditions}
+      In the derivation above, we used Green's first identity to say $\iint \frac{1}{\alpha_i}\psi_i \nabla^2 \psi_i \, dA = - \iint \frac{1}{\alpha_i} \vec\nabla\psi_i \cdot \vec\nabla\psi_i \, dA$. But this identity depends on the boundary of the domain. Specfically, for an arbitrary $C^1$ function $u$, and a $C^2$ function $v$ on some region $U \subset \mathbb{R}^3$:
+      $$
+        \int_U u \nabla^2 v + \nabla u \cdot \nabla v \, dV = \oint_{\partial U} u \nabla v \cdot d \vec S
+      $$
+      If $\iint \frac{1}{\alpha_i}\psi_i \nabla^2 \psi_i \, dA = - \iint \frac{1}{\alpha_i} \vec\nabla\psi_i \cdot \vec\nabla\psi_i \, dA$, then we're clearly saying $\oint \frac{1}{\alpha_i}\psi_i \nabla \psi_i\cdot d \vec S = 0$. By Helmholtz's decomposition theorem, the stream function $\psi_i$ is unique up to a divergenceless function, thus $\psi_i$ can differ by a constant and still be a valid stream function for the velocity. As is mentioned in Holm et al. (1985), the boundary conditions for our scenario of interest is $\left. \psi_i \right|_{\partial D} = \,$constant. Since we assume the domain is simply connected, there is only on boundary we are concerned with, and each $\psi_i$ is constant on that boundary. Thus, we are free to assume whatever contant value we like. A natural choice is $\left. \psi_i \right|_{\partial D} = 0$, which automatically implies $\oint \frac{1}{\alpha_i}\psi_i \nabla \psi_i \cdot d \vec S = 0$.
+
+      If the domain was not simply connected, there would be multiple boundaries to deal with. We are allowed to arbitrarily choose a value of $\psi_i$ on one of the boundaries, but this dictates the value of $\psi_i$ on the other boundaries, so the surface integral may be some non-zero value. Assuming a simply connected domain makes this problem disappear.
 
   %%% 2.2 --------------------------------------------------------
   \subsection{First Variation}
@@ -301,8 +325,6 @@
 
 %%% Section 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{$N$-Layer Quasi-Geostrophy}
-
-  \textbf{Assumptions}
 
   The $N$-layer QG model can be written as,
   $$
@@ -400,7 +422,7 @@
 
   %%% 3.3 --------------------------------------------------------
   \subsection{Second Variation}
-    Like the single layer model, the second variation for the two-layer model is
+    The second variation for the $N$-layer model is
     \begin{align*}
       \delta^2 \mathcal{H} &= \iint \sum_{i=1}^N \left[ - \psi_i + C'_i(q_i) \right]  \delta^2 q_i  - \delta \psi_i \delta q_i +  C''_i(q_i) (\delta q_i)^2  \, dA \\
       \delta^2 \mathcal{H}_s &= \iint \sum_{i=1}^N \left[ - \psi_{is} + C'_i(q_{is}) \right]  \delta^2 q_i  - \delta \psi_i \delta q_i +  C''_i(q_{is}) (\delta q_i)^2  \, dA \\
