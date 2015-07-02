@@ -465,6 +465,15 @@
 \section{Shallow Water}
 
   \textbf{Assumptions}
+  The quasi-geostrophic model is actually an approximation of the Shallow Water Model, so the assumptions made here are very similar to those made above.
+  \begin{itemize}
+    \item The density, $\rho$, is constant
+    \item The flow is incompressible and non-diffusive
+    \item The fluid is inviscid
+    \item The fluid is in hydrostatic balance
+    \item Horizontal velocities are depth-indepenedent
+  \end{itemize}
+
   The SW model can be written as,
   \begin{align*}
   \partial_t \vec u + (\vec u \cdot \vec \nabla) \vec u + f \hat k \times \vec u &= - g \vec \nabla h, \\
