@@ -5,14 +5,14 @@
 #
 # Geometry: periodic in x and y
 #
-# Fields: 
+# Fields:
 #   q : Potential Vorticity
 #   u : zonal velocity
 #   v : meridional velocity
 # psi : streamfunction (not used)
 #
-# Evolution Eqns:	
-#	q_t = - u q_x - v q_y
+# Evolution Eqns:
+#    q_t = - u q_x - v q_y
 #
 # Potential Vorticity:
 #   q = psi_xx + psi_yy = v_x - u_y
@@ -37,15 +37,15 @@ import numpy as np
 import scipy as np
 import matplotlib.pyplot as plt
 from scipy.fftpack import fft, ifft, fftn, ifftn
+import pylab
 import sys
 
 class wavenum:
     pass
 
 # FJP: to do
-# 1) compute energy, enstrophy and plot at the end
-# 2) Make Arakawa version with FD2
-# 3) Try spectral Arakawa model???
+# 1) Make Arakawa version with FD2
+# 2) Try spectral Arakawa model???
 
 def flux_qg(q, parms):
 
@@ -68,7 +68,7 @@ def flux_qg(q, parms):
     return flux, energy, enstr
 
 def main():
-    
+
     # Grid Parameters
     sc  = 2
     Lx  = 200e3
@@ -90,7 +90,7 @@ def main():
     tt  = np.arange(Nt)*dt
 
     print "Time parameters", t0, tf, dt, Nt
-    
+
     # Define Grid
     x = np.linspace(-Lx/2+dx/2,Lx/2-dx/2,Nx)
     y = np.linspace(-Ly/2+dy/2,Ly/2-dy/2,Ny)
@@ -118,7 +118,7 @@ def main():
     beta  = 1.88/np.log(km/ks);
     sfilt = np.exp(-alpha*(kxx**2 + kyy**2)**(beta/2.0));
 
-    # Initial Conditions with plot 
+    # Initial Conditions with plot
     q0  = 1.e-4*np.exp(-(xx**2 + (4.0*yy)**2)/(Lx/6.0)**2);
     energy = np.zeros(Nt)
     enstr = np.zeros(Nt)
@@ -128,11 +128,11 @@ def main():
     plt.clf()
     plt.pcolormesh(xx/1e3,yy/1e3,q0)
     plt.colorbar()
-    plt.title( "buoyancy at t = 0.00")
+    plt.title("buoyancy at t = 0.00")
     plt.draw()
     plt.show()
-    
-    # Euler step 
+
+    # Euler step
     NLnm, energy[0], enstr[0] = flux_qg(q0, parms)
     q    = q0 + dt*NLnm;
     q    = (ifftn(sfilt*fftn(q))).real
@@ -159,7 +159,7 @@ def main():
             # make title
             t = ii*dt/(3600.0*24.0)
             name = "PV at t = %5.2f" % (t)
-            
+
             # Plot PV (or streamfunction)
             plt.clf()
             plt.pcolormesh(xx/1e3,yy/1e3,q)
@@ -168,7 +168,7 @@ def main():
             plt.draw()
 
             cnt = cnt+1
-
+            pylab.savefig('images/foo'+str(ii).zfill(3)+'.png', bbox_inches='tight')
     plt.show()
 
     print "Error in energy is ", np.amax(energy-energy[0])/energy[0]
@@ -186,4 +186,3 @@ def main():
     plt.show()
 
 main()
-
