@@ -16,11 +16,11 @@ $$
 
 Channel BC's:
 \begin{align*}
-\oint \psi \nabla \phi \cdot d \vec S &= \lim_{X \rightarrow \infty} \frac{1}{2X} \int_{-X}^X \psi(0,t) \nabla \phi(0,t) \, dx + \int_0^L \psi(y,t) \nabla \phi(y,t) \, dy  \\
- &\quad + \int_X^{-X} \psi(L,t) \nabla \phi(L,t) \, dx + \int_L^0 \psi(y,t) \nabla \phi(y,t) \, dy \\
- &= \lim_{X \rightarrow \infty} \frac{1}{2X} \int_{-X}^X \psi(0,t) \nabla \phi(0,t) \, dx + \int_X^{-X} \psi(L,t) \nabla \phi(L,t) \, dx \\
- &= \lim_{X \rightarrow \infty} \frac{1}{2X} \int_{-X}^X \psi(0,t) \nabla \phi(0,t) - \psi(L,t) \nabla \phi(L,t) \, dx \\
- &= \left. \psi(y,t) \nabla \phi(y,t) \right|_{y=L}^0
+\oint \psi \nabla \phi \cdot d \vec S &= \lim_{X \rightarrow \infty} \frac{1}{2X} \int_{-X}^X \psi(0,t) \phi_x(0,t) \, dx + \int_0^L \psi(y,t) \phi_y(y,t) \, dy  \\
+ &\quad + \int_X^{-X} \psi(L,t) \phi_x(L,t) \, dx + \int_L^0 \psi(y,t) \phi_y(y,t) \, dy \\
+ &= \lim_{X \rightarrow \infty} \frac{1}{2X} \int_{-X}^X \psi(0,t) \phi_x(0,t) \, dx + \int_X^{-X} \psi(L,t) \phi_x(L,t) \, dx \\
+ &= \lim_{X \rightarrow \infty} \frac{1}{2X} \int_{-X}^X \psi(0,t) \phi_x(0,t) - \psi(L,t) \phi_x(L,t) \, dx \\
+ &= \left. \psi(y,t) \phi_x(y,t) \right|_{y=L}^0
 \end{align*}
 which is a function of time.
 
