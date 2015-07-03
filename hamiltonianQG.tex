@@ -29,7 +29,6 @@
   We will also impose the following assumption to simplify calculations:
   \begin{itemize}
     \item The bottom surface is flat
-    \item The domain is simply connected
   \end{itemize}
 
   The one-layer QG model can be written as,
@@ -209,7 +208,8 @@
        &= \iint \sum_i \partial_t \left (\frac{1}{\alpha_i}\psi_i \nabla^2 \psi_i - \psi_i^2 + \psi_i\psi_{j\ne i} \right) \\
         &\quad - \left( \frac{1}{\alpha_i} \psi_{it} \nabla^2 \psi_i - \psi_i \psi_{it} + \psi_{j \ne i} \psi_{it} \right) \, dA \\
        &= \iint \sum_i \partial_t \left (-\frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \psi_i - \psi_i^2 + \psi_i\psi_{j\ne i} \right) \\
-        &\quad - \left( -\frac{1}{\alpha_i} \vec\nabla \psi_{it} \cdot \vec\nabla \psi_i - \psi_i \psi_{it} + \psi_{j \ne i} \psi_{it} \right) \, dA \\
+        &\quad - \left( -\frac{1}{\alpha_i} \vec\nabla \psi_{it} \cdot \vec\nabla \psi_i - \psi_i \psi_{it} + \psi_{j \ne i} \psi_{it} \right) \, dA \\ 
+        &\quad + \frac12 \partial_t \oint \sum_i \frac{1}{\alpha_i} \left[ \partial_t \left( \psi_i\vec\nabla\psi_i \right) - \psi_{it}\vec\nabla\psi_i\right] \cdot d\vec S \\
        &= \iint \sum_i \partial_t \left (-\frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \psi_i - \psi_i^2 \right) + \partial_t (\psi_i\psi_{j\ne i})  \\
         &\quad + \left( \frac{1}{\alpha_i} \vec\nabla \psi_{it} \cdot \vec\nabla \psi_i + \psi_i \psi_{it} \right) - \psi_{j \ne i} \psi_{it} \, dA \\
        &= \iint \sum_i \frac12 \partial_t \left[ \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \psi_i + \psi_i^2 \right] - \partial_t \psi_i\psi_{j\ne i} + \psi_{j \ne i} \psi_{it} \, dA \\
