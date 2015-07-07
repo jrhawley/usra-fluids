@@ -13,531 +13,535 @@
 
 \title{Hamiltonian Theory of Geophysical Fluids}
 
-%%% Section 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{One-Layer Quasi-Geostrophy}
-  \textbf{Assumptions} \\
-  In the quasi-geostrophic model, there are a number of assumptions about the fluid that are made:
-  \begin{itemize}
-    \item The density, $\rho$, is constant
-    \item The flow is incompressible and non-diffusive
-    \item The fluid is inviscid
-    \item The fluid is in hydrostatic balance
-    \item Horizontal velocities are depth-indepenedent
-    \item The Rossby number is very small, and
-    \item Deformations in the fluid surface are small compared to the fluid depth
-  \end{itemize}
-  We will also impose the following assumption to simplify calculations:
-  \begin{itemize}
-    \item The bottom surface is flat
-  \end{itemize}
+\begin{section}{One-Layer Quasi-Geostrophy}
+    \textbf{Assumptions} \\
+    In the quasi-geostrophic model, there are a number of assumptions about the fluid that are made:
+    \begin{itemize}
+        \item The density, $\rho$, is constant
+        \item The flow is incompressible and non-diffusive
+        \item The fluid is inviscid
+        \item The fluid is in hydrostatic balance
+        \item Horizontal velocities are depth-indepenedent
+        \item The Rossby number is very small, and
+        \item Deformations in the fluid surface are small compared to the fluid depth
+    \end{itemize}
+    We will also impose the following assumption to simplify calculations:
+    \begin{itemize}
+        \item The bottom surface is flat
+    \end{itemize}
 
-  The one-layer QG model can be written as,
-  $$
-  \partial_t q + J(\psi, q) = 0,
-  $$
-  with the following potential vorticity (PV) relation
-  $$
-  q = \nabla^2 \psi - \frac{f_0^2}{gH} \psi.
-  $$
-  
-  The Hamiltonian can be thought of as the energy in the system and takes the form,
-  $$
-  H =  \frac12 \iint \vec\nabla\psi \cdot \vec\nabla\psi + \frac{f_0^2}{g H} \psi^2 \, dA
-  $$
-  The Casimirs are functions of the PV,
-  $$
-  \mathcal{C} = \iint C(q) \, dA,
-  $$
-  where $C(q)$ is an arbitrary function. From this we form the constrained Hamiltonian,
-  \begin{equation}
-    \mathcal{H} = \iint  \frac12 \vec\nabla\psi \cdot \vec\nabla\psi + \frac12 \frac{f_0^2}{g H} \psi^2 + C(q) \, dA
-    \label{eqn:qg_ol_h}
-  \end{equation}
-
-  %%% 1.1 --------------------------------------------------------
-  \subsection{First Variation}
-    To compute the steady states we must first the first variational derivative of the above functional:
-    \begin{align*}
-    \delta \mathcal{H} 
-    & = \iint \vec\nabla\psi \cdot \vec\nabla \delta \psi + \frac{f_0^2}{g H} \psi \delta \psi + C'(q) \delta q \, dA, \\
-    & = \iint -\psi \left[ \nabla^2 \delta \psi - \frac{f_0^2}{g H} \delta \psi \right]  + C'(q) \delta q \, dA, \\
-    & = \iint \left[ - \psi + C'(q) \right]  \delta q  \, dA.
-    \end{align*}
-    From here we find that the steady solutions, which have a zero first variational derivative, must satisfy the following,
+    The one-layer QG model can be written as,
     $$
-    \psi_s = C'(q_s).
+    \partial_t q + J(\psi, q) = 0,
     $$
-    Here, and throughout, we use a subscript s to denote steady solution.
-  
-  %%% 1.2 --------------------------------------------------------
-  \subsection{Second Variation}
-    Similarly, we compute the second variational derivative,
-    \begin{align*}
-    \delta^2 \mathcal{H} 
-    & = \iint \left[ - \psi + C'(q) \right]  \delta^2 q  - \delta \psi \delta q +  C''(q) (\delta q)^2  \, dA, \\
-    & = \iint \left[ - \psi + C'(q) \right]  \delta^2 q   
-    + \vec\nabla \delta \psi \cdot \vec \nabla \delta \psi 
-    +\frac{f_0^2}{gH} (\delta \psi)^2+  C''(q) (\delta q)^2  \, dA, 
-    \end{align*}
-    after integrating by parts.
-    
-    Next, we evaluate the second variation at an arbitrary steady solution,
-    \begin{align*}
-    \delta^2 \mathcal{H}_s 
-    & = \iint \vec\nabla \delta \psi \cdot \vec \nabla \delta \psi + \frac{f_0^2}{gH} (\delta \psi)^2+  C''(q_s) (\delta q)^2  \, dA \\
-    & = \delta^2 H_s + \iint C''(q_s) (\delta q)^2  \, dA.
-    \end{align*}
-    Note that the $\delta^2 H_s$ term is positive definite and the Casimir term is sign definite.
-  
-  %%% 1.3 --------------------------------------------------------
-  \subsection{Linear Stability Theorems}
-  To prove stability it is sufficient to show that the second variation is sign definite. (FJP: explain why?).  
-  
-  \subsubsection{First Theorem}
-    The first theorem is the easiest and corresponds to showing where the second variation is positive definite.  It is readily seen that this occurs when
+    with the following potential vorticity (PV) relation
     $$
-    C''(q_s) > 0.
-    $$
-  
-    If we assume that the steady solution only depends on latitude, $y$, then $\Psi = \Psi(y)$, and we can differentiate our equation that defines the steady state to obtain,
-    $$
-    U_s = C''(q_s) \frac{dq_s}{dy} = C''(q_s) \left[ \frac{d^2 U_s}{dy^2} - \frac{f_0^2}{gH} U_s \right]
-    $$
-    where we used the fact that $U_s = - \frac{d \Psi_s}{dy}$.
-    
-    If we require that $C'' > 0$ then this is equivalent (assuming the PV is not zero) to,
-    $$
-    \frac{U_s}{\frac{dQ_s}{dy}} = \frac{U_s}{\left[ \frac{d^2 U_s}{dy^2} - \frac{f_0^2}{gH} U_s\right]} > 0.
-    $$
-    Since we are only concerned with the signs this can be rewritten as,
-    $$
-    U_s \frac{d Q_s}{dy} > 0.
-    $$
-  
-  \subsubsection{Second Theorem}
-    This is harder to show and requires first beginning with the Poincar\'e eigenvalue problem,
-    $$
-    q + \kappa \psi = 0.
-    $$
-    We must multiply this by $q$ integrate over the domain and find a bound on the gradient of $\delta \psi$ squared, which appears in the second variation.
-    
-    FJP: insert details?
-  
-  %%% 1.4 --------------------------------------------------------
-  \subsection{Nonlinear Stability Theorems}
-  
-    To analyze the the nonlinear stability, we introduce the functional
-    $$
-    \mathcal{N}(\delta q)  = \mathcal{H}(q_s + \delta q) - \mathcal{H}(q_s)
-    $$
-    since, when expanded about $q_s$, it becomes
-    \begin{align*}
-      \mathcal{N}(\delta q) 
-      &= - \mathcal{H}(q_s) + \mathcal{H}(q_s + \delta q) \\
-      & = - \mathcal{H}(q_s) + \left[ \mathcal{H}(q_s) + \delta \mathcal{H}(q_s)+ \frac12 \delta^2 \mathcal{H}(q_s) + ... \right] \\
-      &= \frac12 \delta^2 \mathcal{H}(q_s) + \mathcal{O}((\delta q)^3)
-    \end{align*}
-  
-    To leading order, arguments about $\mathcal{N}$ will be the same as arguments about $\delta^2 \mathcal{H}$. But $\mathcal{N}$ also captures the nonlinearity of the Hamiltonian, so more work will be required.
-  
-    \begin{align*}
-      \mathcal{N}(\delta q) 
-      & = \mathcal{H}(q_s + \delta q) - \mathcal{H}(q_s) \\
-      &= \iint  \frac12 \vec\nabla(\psi_s + \delta \psi) \cdot \vec\nabla(\psi_s + \delta \psi) + \frac12 \frac{f_0^2}{g H} (\psi_s + \delta \psi)^2 + C(q_s + \delta q) \, dA \\
-       & \quad - \iint  \frac12 \vec\nabla\psi_s \cdot \vec\nabla\psi_s + \frac12 \frac{f_0^2}{g H} \psi_s^2 + C(q_s) \, dA \\
-      &= \iint \frac12 \vec\nabla\delta\psi \cdot \vec\nabla\delta\psi + \frac12 \frac{f_0^2}{g H} (\delta \psi)^2 + \vec\nabla\psi_s \cdot \vec\nabla\delta\psi + \frac12 \frac{f_0^2}{g H} \psi_s\delta\psi + C(q_s + \delta q) - C(q_s) \, dA \\
-      &= \iint -\psi_s \left[ \nabla^2\delta\psi - \frac12 \frac{f_0^2}{g H} \delta\psi \right] + \frac12 \vec\nabla\delta\psi \cdot \vec\nabla\delta\psi + \frac12 \frac{f_0^2}{g H}(\delta\psi)^2 + C(q_s + \delta q) - C(q_s) \, dA \\
-      &= \iint \frac12 \vec\nabla\delta\psi \cdot \vec\nabla\delta\psi + \frac12 \frac{f_0^2}{g H}(\delta \psi)^2 + C(q_s + \delta q) - C(q_s) -C'(q_s)\delta q\, dA \\
-      &= \frac12 \delta^2 H_s + \iint C(q_s + \delta q) - C(q_s) -C'(q_s)\delta q\, dA
-    \end{align*}
-    where $H_s$ is the unconstrained Hamiltonian evaluated at the steady state, defined at the beginning of this section.
-
-
-%%% Section 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Two-Layer Quasi-Geostrophy}
-  \textbf{Assumptions} \\
-  All of the same assumptions that are made in the one-layer case will be made.
-
-  The two-layer QG model can be written as,
-  $$
-  \partial_t q_i + J(\psi_i, q_i) = 0,
-  $$
-  for $i=1,2$ where the PV relations are given by:
-
-  \begin{align*}
-    q_1 &= \frac{g'H_1}{f_0^2}\nabla^2 \psi_1 - (\psi_1 - \psi_2) - \psi_1,\\
-    q_2 &= \frac{g'H_2}{f_0^2}\nabla^2 \psi_2 - (\psi_2 - \psi_1) + \frac{g'}{f_0} h_b.
-  \end{align*}
-  We use the convention that $g$ is the full gravity at the surface and $g'$ is the reduced gravity between the two dynamic layers.  
-
-  If we want to consider a rigid lid and a flat bottom, then we neglect the last terms in each of these two equations.  We make this choice but can return to this later if we like. We get the following system (Holm \emph{et al.} 1985):
-
-  \begin{equation}
-    \left[\begin{array}{c}
-      q_1 \\
-      q_2
-    \end{array}\right]
-    =
-    \left[\begin{array}{c}
-      \frac{1}{\alpha_1}\nabla^2 \psi_1 \\
-      \frac{1}{\alpha_2}\nabla^2 \psi_2
-    \end{array}\right]
-    +
-    \left[\begin{array}{cc}
-      -1 & 1 \\
-      1 & -1
-    \end{array}\right]
-    \left[\begin{array}{c}
-      \psi_1 \\
-      \psi_2
-    \end{array}\right],
-    \quad \alpha_i = \frac{f_0^2}{g'H_i}
-  \end{equation}
-
-  Note that previous papers usually assume that the constants in front are equal. This is not the case.  In QG this might not be as important but in SW it will make a big difference.
-
-  %%% 2.1 --------------------------------------------------------
-  \subsection{Hamiltonian}
-
-    To derive an equation for the energy we must multiply the evolution equation by $\psi_i$ for each $i$ and then sum up over the different layers,
-    \begin{align*}
-      0 &= \iint \psi_1 \partial_t q_1 + \psi_2 \partial_t q_2 + \psi_1 J(\psi_1, q_1) + \psi_2 J(\psi_2, q_2) \, dA \\
-       &= \iint \psi_1 \partial_t q_1 + \psi_2 \partial_t q_2 + \frac12 J(\psi_1^2, q_1) + \frac12 J(\psi_2^2, q_2) \, dA \\
-       &= \iint \sum_i \left[\partial_t(q_i \psi_i) - q_i \partial_t\psi_i \right] + \frac12 J(\psi_1^2, q_1) + \frac12 J(\psi_2^2, q_2) \, dA \\
-       &= \iint \sum_i \left[\partial_t(q_i \psi_i) - q_i \partial_t\psi_i \right] \, dA \\
-       &= \iint \sum_i \partial_t \left (\frac{1}{\alpha_i}\psi_i \nabla^2 \psi_i - \psi_i^2 + \psi_i\psi_{j\ne i} \right) \\
-        &\quad - \left( \frac{1}{\alpha_i} \psi_{it} \nabla^2 \psi_i - \psi_i \psi_{it} + \psi_{j \ne i} \psi_{it} \right) \, dA \\
-       &= \iint \sum_i \partial_t \left (-\frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \psi_i - \psi_i^2 + \psi_i\psi_{j\ne i} \right) \\
-        &\quad - \left( -\frac{1}{\alpha_i} \vec\nabla \psi_{it} \cdot \vec\nabla \psi_i - \psi_i \psi_{it} + \psi_{j \ne i} \psi_{it} \right) \, dA \\ 
-        &\quad + \frac12 \partial_t \oint \sum_i \frac{1}{\alpha_i} \left[ \partial_t \left( \psi_i\vec\nabla\psi_i \right) - \psi_{it}\vec\nabla\psi_i\right] \cdot d\vec S \\
-       &= \iint \sum_i \partial_t \left (-\frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \psi_i - \psi_i^2 \right) + \partial_t (\psi_i\psi_{j\ne i})  \\
-        &\quad + \left( \frac{1}{\alpha_i} \vec\nabla \psi_{it} \cdot \vec\nabla \psi_i + \psi_i \psi_{it} \right) - \psi_{j \ne i} \psi_{it} \, dA \\
-       &= \iint \sum_i \frac12 \partial_t \left[ \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \psi_i + \psi_i^2 \right] - \partial_t \psi_i\psi_{j\ne i} + \psi_{j \ne i} \psi_{it} \, dA \\
-       &= \iint  \sum_i \frac12 \partial_t \left[ \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot  \vec\nabla \psi_i + \psi_i^2 \right] - \psi_1 \partial_t \psi_2  -  \psi_2 \partial_t \psi_1\, dA \\
-       &= \iint  \sum_i \frac12 \partial_t \left[ \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot  \vec\nabla \psi_i + \psi_i^2 \right] -  \partial_t (\psi_1\psi_2)\, dA \\
-       &= \frac12 \iint \partial_t \left[ \sum_{i=1}^2 \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \psi_i + (\psi_1 - \psi_2)^2 \right]\, dA
-    \end{align*}
-
-    This yields that the Hamiltonian of the system is the total energy in the system,
-    $$
-    H = \frac12 \iint \sum_{i=1}^2 \frac{1}{\alpha_i}\vec\nabla \psi_i \cdot \vec\nabla \psi_i + (\psi_1 - \psi_2)^2 \, dA
+    q = \nabla^2 \psi - \frac{f_0^2}{gH} \psi.
     $$
 
+    The Hamiltonian can be thought of as the energy in the system and takes the form,
+    $$
+    H =  \frac12 \iint \vec\nabla\psi \cdot \vec\nabla\psi + \frac{f_0^2}{g H} \psi^2 \, dA
+    $$
     The Casimirs are functions of the PV,
     $$
-    \mathcal{C}_i = \iint C_i(q_i) \, dA
+    \mathcal{C} = \iint C(q) \, dA,
     $$
-    From this we form the constrained Hamiltonian
+    where $C(q)$ is an arbitrary function. From this we form the constrained Hamiltonian,
     \begin{equation}
-      \mathcal{H} = \frac12 \iint \sum_{i=1}^2 \left[ \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \psi_i + 2C_i(q_i) \right]+ (\psi_1 - \psi_2)^2 \, dA
-      \label{eqn:qg_tl_h}
+        \mathcal{H} = \iint  \frac12 \vec\nabla\psi \cdot \vec\nabla\psi + \frac12 \frac{f_0^2}{g H} \psi^2 + C(q) \, dA
+        \label{eqn:qg_ol_h}
     \end{equation}
 
-    \subsubsection{Aside: Boundary Conditions}
-      In the derivation above, we used Green's first identity to say $\iint \frac{1}{\alpha_i}\psi_i \nabla^2 \psi_i \, dA = - \iint \frac{1}{\alpha_i} \vec\nabla\psi_i \cdot \vec\nabla\psi_i \, dA$. But this identity depends on the boundary of the domain. Specfically, for an arbitrary $C^1$ function $u$, and a $C^2$ function $v$ on some region $U \subset \mathbb{R}^3$:
-      $$
-        \int_U u \nabla^2 v + \nabla u \cdot \nabla v \, dV = \oint_{\partial U} u \nabla v \cdot d \vec S
-      $$
-      If $\iint \frac{1}{\alpha_i}\psi_i \nabla^2 \psi_i \, dA = - \iint \frac{1}{\alpha_i} \vec\nabla\psi_i \cdot \vec\nabla\psi_i \, dA$, then we're clearly saying $\oint \frac{1}{\alpha_i}\psi_i \nabla \psi_i\cdot d \vec S = 0$. By Helmholtz's decomposition theorem, the stream function $\psi_i$ is unique up to a divergenceless function, thus $\psi_i$ can differ by a constant and still be a valid stream function for the velocity. If we assume the domain is simply connected and the boundary is smooth everywhere, there is only on boundary we are concerned with, and each $\psi_i$ is constant on that boundary. Thus, we are free to assume whatever contant value we like. A natural choice is $\left. \psi_i \right|_{\partial D} = 0$, which automatically implies $\oint \frac{1}{\alpha_i}\psi_i \nabla \psi_i \cdot d \vec S = 0$.
+    \begin{subsection}{First Variation}
+        To compute the steady states we must first the first variational derivative of the above functional:
+        \begin{align*}
+            \delta \mathcal{H}
+            & = \iint \vec\nabla\psi \cdot \vec\nabla \delta \psi + \frac{f_0^2}{g H} \psi \delta \psi + C'(q) \delta q \, dA, \\
+            & = \iint -\psi \left[ \nabla^2 \delta \psi - \frac{f_0^2}{g H} \delta \psi \right]  + C'(q) \delta q \, dA, \\
+            & = \iint \left[ - \psi + C'(q) \right]  \delta q  \, dA.
+        \end{align*}
+        From here we find that the steady solutions, which have a zero first variational derivative, must satisfy the following,
+        $$
+        \psi_s = C'(q_s).
+        $$
+        Here, and throughout, we use a subscript s to denote steady solution.
+    \end{subsection}
 
-      If the domain was not simply connected or not smooth, there would be multiple boundaries to deal with. For example, a rectangle is a simply connected domain, but its boundary has corners. The stream function will be constant on each edge, but the value on one edge may be different from the value on another. We are allowed to arbitrarily choose a value of $\psi_i$ on one of the boundaries, but this dictates the value of $\psi_i$ on the others, so the surface integral may be some non-zero value. Assuming a simply connected, smoothly bounded domain makes this problem disappear.
+    \begin{subsection}{Second Variation}
+      Similarly, we compute the second variational derivative,
+      \begin{align*}
+          \delta^2 \mathcal{H}
+          & = \iint \left[ - \psi + C'(q) \right]  \delta^2 q  - \delta \psi \delta q +  C''(q) (\delta q)^2  \, dA, \\
+          & = \iint \left[ - \psi + C'(q) \right]  \delta^2 q
+          + \vec\nabla \delta \psi \cdot \vec \nabla \delta \psi
+          +\frac{f_0^2}{gH} (\delta \psi)^2+  C''(q) (\delta q)^2  \, dA,
+      \end{align*}
+      after integrating by parts.
 
-  %%% 2.2 --------------------------------------------------------
-  \subsection{First Variation}
+      Next, we evaluate the second variation at an arbitrary steady solution,
+      \begin{align*}
+          \delta^2 \mathcal{H}_s
+          & = \iint \vec\nabla \delta \psi \cdot \vec \nabla \delta \psi + \frac{f_0^2}{gH} (\delta \psi)^2+  C''(q_s) (\delta q)^2  \, dA \\
+          & = \delta^2 H_s + \iint C''(q_s) (\delta q)^2  \, dA.
+      \end{align*}
+      Note that the $\delta^2 H_s$ term is positive definite and the Casimir term is sign definite.
+    \end{subsection}
+    \begin{subsection}{Linear Stability Theorems}
+        To prove stability it is sufficient to show that the second variation is sign definite. (FJP: explain why?).
+
+        \begin{subsubsection}{First Theorem}
+            The first theorem is the easiest and corresponds to showing where the second variation is positive definite.  It is readily seen that this occurs when
+            $$
+            C''(q_s) > 0.
+            $$
+
+            If we assume that the steady solution only depends on latitude, $y$, then $\Psi = \Psi(y)$, and we can differentiate our equation that defines the steady state to obtain,
+            $$
+            U_s = C''(q_s) \frac{dq_s}{dy} = C''(q_s) \left[ \frac{d^2 U_s}{dy^2} - \frac{f_0^2}{gH} U_s \right]
+            $$
+            where we used the fact that $U_s = - \frac{d \Psi_s}{dy}$.
+
+            If we require that $C'' > 0$ then this is equivalent (assuming the PV is not zero) to,
+            $$
+            \frac{U_s}{\frac{dQ_s}{dy}} = \frac{U_s}{\left[ \frac{d^2 U_s}{dy^2} - \frac{f_0^2}{gH} U_s\right]} > 0.
+            $$
+            Since we are only concerned with the signs this can be rewritten as,
+            $$
+            U_s \frac{d Q_s}{dy} > 0.
+            $$
+        \end{subsubsection}
+
+        \begin{subsubsection}{Second Theorem}
+            This is harder to show and requires first beginning with the Poincar\'e eigenvalue problem,
+            $$
+            q + \kappa \psi = 0.
+            $$
+            We must multiply this by $q$ integrate over the domain and find a bound on the gradient of $\delta \psi$ squared, which appears in the second variation.
+
+            FJP: insert details?
+        \end{subsubsection}
+    \end{subsection}
+
+    \begin{subsection}{Nonlinear Stability Theorems}
+        To analyze the the nonlinear stability, we introduce the functional
+        $$
+        \mathcal{N}(\delta q)  = \mathcal{H}(q_s + \delta q) - \mathcal{H}(q_s)
+        $$
+        since, when expanded about $q_s$, it becomes
+        \begin{align*}
+            \mathcal{N}(\delta q)
+            &= - \mathcal{H}(q_s) + \mathcal{H}(q_s + \delta q) \\
+            & = - \mathcal{H}(q_s) + \left[ \mathcal{H}(q_s) + \delta \mathcal{H}(q_s)+ \frac12 \delta^2 \mathcal{H}(q_s) + ... \right] \\
+            &= \frac12 \delta^2 \mathcal{H}(q_s) + \mathcal{O}((\delta q)^3)
+        \end{align*}
+
+        To leading order, arguments about $\mathcal{N}$ will be the same as arguments about $\delta^2 \mathcal{H}$. But $\mathcal{N}$ also captures the nonlinearity of the Hamiltonian, so more work will be required.
+
+        \begin{align*}
+            \mathcal{N}(\delta q)
+            &= \mathcal{H}(q_s + \delta q) - \mathcal{H}(q_s) \\
+            &= \iint  \frac12 \vec\nabla(\psi_s + \delta \psi) \cdot \vec\nabla(\psi_s + \delta \psi) + \frac12 \frac{f_0^2}{g H} (\psi_s + \delta \psi)^2 + C(q_s + \delta q) \, dA \\
+            &\quad - \iint  \frac12 \vec\nabla\psi_s \cdot \vec\nabla\psi_s + \frac12 \frac{f_0^2}{g H} \psi_s^2 + C(q_s) \, dA \\
+            &= \iint \frac12 \vec\nabla\delta\psi \cdot \vec\nabla\delta\psi + \frac12 \frac{f_0^2}{g H} (\delta \psi)^2 + \vec\nabla\psi_s \cdot \vec\nabla\delta\psi + \frac12 \frac{f_0^2}{g H} \psi_s\delta\psi + C(q_s + \delta q) - C(q_s) \, dA \\
+            &= \iint -\psi_s \left[ \nabla^2\delta\psi - \frac12 \frac{f_0^2}{g H} \delta\psi \right] + \frac12 \vec\nabla\delta\psi \cdot \vec\nabla\delta\psi + \frac12 \frac{f_0^2}{g H}(\delta\psi)^2 + C(q_s + \delta q) - C(q_s) \, dA \\
+            &= \iint \frac12 \vec\nabla\delta\psi \cdot \vec\nabla\delta\psi + \frac12 \frac{f_0^2}{g H}(\delta \psi)^2 + C(q_s + \delta q) - C(q_s) -C'(q_s)\delta q\, dA \\
+            &= \frac12 \delta^2 H_s + \iint C(q_s + \delta q) - C(q_s) -C'(q_s)\delta q\, dA
+        \end{align*}
+        where $H_s$ is the unconstrained Hamiltonian evaluated at the steady state, defined at the beginning of this section.
+    \end{subsection}
+\end{section}
+
+\newpage
+\begin{section}{Two-Layer Quasi-Geostrophy}
+    \textbf{Assumptions} \\
+    All of the same assumptions that are made in the one-layer case will be made.
+
+    The two-layer QG model can be written as,
+    $$
+    \partial_t q_i + J(\psi_i, q_i) = 0,
+    $$
+    for $i=1,2$ where the PV relations are given by:
+
     \begin{align*}
-      \delta \mathcal{H} &= \delta \frac12 \iint \sum_{i=1}^2 \left[ \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \psi_i + 2C_i(q_i) \right]+ (\psi_1 - \psi_2)^2 \, dA \\
-       &= \iint \sum_{i=1}^2 \left[ \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \delta\psi_i + C'_i(q_i) \delta q_i \right]+ (\psi_1 - \psi_2)(\delta \psi_1 - \delta \psi_2) \, dA \\
-       &= \iint \sum_{i=1}^2 \left[ -\frac{1}{\alpha_i} \psi_i \nabla^2 \delta\psi_i + C'_i(q_i) \delta q_i - \psi_i(\delta \psi_i - \delta \psi_{j \ne i}) \right] \, dA \\
-       &= \iint \sum_{i=1}^2 (-\psi_i + C'_i(q_i)) \delta q_i\, dA \\
+        q_1 &= \frac{g'H_1}{f_0^2}\nabla^2 \psi_1 - (\psi_1 - \psi_2) - \psi_1,\\
+        q_2 &= \frac{g'H_2}{f_0^2}\nabla^2 \psi_2 - (\psi_2 - \psi_1) + \frac{g'}{f_0} h_b.
     \end{align*}
+    We use the convention that $g$ is the full gravity at the surface and $g'$ is the reduced gravity between the two dynamic layers.
 
-    Since $\delta \mathcal{H} = 0$ for steady solutions, and $q_1$ and $q_2$ are independent coordinates, we have that in vector form
+    If we want to consider a rigid lid and a flat bottom, then we neglect the last terms in each of these two equations.  We make this choice but can return to this later if we like. We get the following system (Holm \emph{et al.} 1985):
+
     \begin{equation}
-      \vec \psi_s = 
-      \left[\begin{array}{c}
-        \psi_{1s} \\
-        \psi_{2s}
-      \end{array}\right]
-      =
-      \left[\begin{array}{c}
-        C'_1(q_{1s}) \\
-        C'_2(q_{2s})
-      \end{array}\right]
-      =
-      \vec C'(\vec q_s)
+        \left[\begin{array}{c}
+        q_1 \\
+        q_2
+        \end{array}\right]
+        =
+        \left[\begin{array}{c}
+        \frac{1}{\alpha_1}\nabla^2 \psi_1 \\
+        \frac{1}{\alpha_2}\nabla^2 \psi_2
+        \end{array}\right]
+        +
+        \left[\begin{array}{cc}
+        -1 & 1 \\
+        1 & -1
+        \end{array}\right]
+        \left[\begin{array}{c}
+        \psi_1 \\
+        \psi_2
+        \end{array}\right],
+        \quad \alpha_i = \frac{f_0^2}{g'H_i}
     \end{equation}
 
-  %%% 2.3 --------------------------------------------------------
-  \subsection{Second Variation}
-    Like the single layer model, the second variation for the two-layer model is
+    Note that previous papers usually assume that the constants in front are equal. This is not the case.  In QG this might not be as important but in SW it will make a big difference.
+
+    \begin{subsection}{Hamiltonian}
+        To derive an equation for the energy we must multiply the evolution equation by $\psi_i$ for each $i$ and then sum up over the different layers,
+        \begin{align*}
+            0 &= \iint \psi_1 \partial_t q_1 + \psi_2 \partial_t q_2 + \psi_1 J(\psi_1, q_1) + \psi_2 J(\psi_2, q_2) \, dA \\
+            &= \iint \psi_1 \partial_t q_1 + \psi_2 \partial_t q_2 + \frac12 J(\psi_1^2, q_1) + \frac12 J(\psi_2^2, q_2) \, dA \\
+            &= \iint \sum_i \left[\partial_t(q_i \psi_i) - q_i \partial_t\psi_i \right] + \frac12 J(\psi_1^2, q_1) + \frac12 J(\psi_2^2, q_2) \, dA \\
+            &= \iint \sum_i \left[\partial_t(q_i \psi_i) - q_i \partial_t\psi_i \right] \, dA \\
+            &= \iint \sum_i \partial_t \left (\frac{1}{\alpha_i}\psi_i \nabla^2 \psi_i - \psi_i^2 + \psi_i\psi_{j\ne i} \right) \\
+            &\quad - \left( \frac{1}{\alpha_i} \psi_{it} \nabla^2 \psi_i - \psi_i \psi_{it} + \psi_{j \ne i} \psi_{it} \right) \, dA \\
+            &= \iint \sum_i \partial_t \left (-\frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \psi_i - \psi_i^2 + \psi_i\psi_{j\ne i} \right) \\
+            &\quad - \left( -\frac{1}{\alpha_i} \vec\nabla \psi_{it} \cdot \vec\nabla \psi_i - \psi_i \psi_{it} + \psi_{j \ne i} \psi_{it} \right) \, dA \\
+            &\quad + \frac12 \partial_t \oint \sum_i \frac{1}{\alpha_i} \left[ \partial_t \left( \psi_i\vec\nabla\psi_i \right) - \psi_{it}\vec\nabla\psi_i\right] \cdot d\vec S \\
+            &= \iint \sum_i \partial_t \left (-\frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \psi_i - \psi_i^2 \right) + \partial_t (\psi_i\psi_{j\ne i})  \\
+            &\quad + \left( \frac{1}{\alpha_i} \vec\nabla \psi_{it} \cdot \vec\nabla \psi_i + \psi_i \psi_{it} \right) - \psi_{j \ne i} \psi_{it} \, dA \\
+            &= \iint \sum_i \frac12 \partial_t \left[ \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \psi_i + \psi_i^2 \right] - \partial_t \psi_i\psi_{j\ne i} + \psi_{j \ne i} \psi_{it} \, dA \\
+            &= \iint  \sum_i \frac12 \partial_t \left[ \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot  \vec\nabla \psi_i + \psi_i^2 \right] - \psi_1 \partial_t \psi_2  -  \psi_2 \partial_t \psi_1\, dA \\
+            &= \iint  \sum_i \frac12 \partial_t \left[ \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot  \vec\nabla \psi_i + \psi_i^2 \right] -  \partial_t (\psi_1\psi_2)\, dA \\
+            &= \frac12 \iint \partial_t \left[ \sum_{i=1}^2 \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \psi_i + (\psi_1 - \psi_2)^2 \right]\, dA
+        \end{align*}
+
+        This yields that the Hamiltonian of the system is the total energy in the system,
+        $$
+        H = \frac12 \iint \sum_{i=1}^2 \frac{1}{\alpha_i}\vec\nabla \psi_i \cdot \vec\nabla \psi_i + (\psi_1 - \psi_2)^2 \, dA
+        $$
+
+        The Casimirs are functions of the PV,
+        $$
+        \mathcal{C}_i = \iint C_i(q_i) \, dA
+        $$
+        From this we form the constrained Hamiltonian
+        \begin{equation}
+            \mathcal{H} = \frac12 \iint \sum_{i=1}^2 \left[ \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \psi_i + 2C_i(q_i) \right]+ (\psi_1 - \psi_2)^2 \, dA
+            \label{eqn:qg_tl_h}
+        \end{equation}
+
+        \begin{subsubsection}{Aside: Boundary Conditions}
+            In the derivation above, we used Green's first identity to say $\iint \frac{1}{\alpha_i}\psi_i \nabla^2 \psi_i \, dA = - \iint \frac{1}{\alpha_i} \vec\nabla\psi_i \cdot \vec\nabla\psi_i \, dA$. But this identity depends on the boundary of the domain. Specfically, for an arbitrary $C^1$ function $u$, and a $C^2$ function $v$ on some region $U \subset \mathbb{R}^3$:
+            $$
+            \int_U u \nabla^2 v + \nabla u \cdot \nabla v \, dV = \oint_{\partial U} u \nabla v \cdot d \vec S
+            $$
+            If $\iint \frac{1}{\alpha_i}\psi_i \nabla^2 \psi_i \, dA = - \iint \frac{1}{\alpha_i} \vec\nabla\psi_i \cdot \vec\nabla\psi_i \, dA$, then we're clearly saying $\oint \frac{1}{\alpha_i}\psi_i \nabla \psi_i\cdot d \vec S = 0$. By Helmholtz's decomposition theorem, the stream function $\psi_i$ is unique up to a divergenceless function, thus $\psi_i$ can differ by a constant and still be a valid stream function for the velocity. If we assume the domain is simply connected and the boundary is smooth everywhere, there is only on boundary we are concerned with, and each $\psi_i$ is constant on that boundary. Thus, we are free to assume whatever contant value we like. A natural choice is $\left. \psi_i \right|_{\partial D} = 0$, which automatically implies $\oint \frac{1}{\alpha_i}\psi_i \nabla \psi_i \cdot d \vec S = 0$.
+
+            If the domain was not simply connected or not smooth, there would be multiple boundaries to deal with. For example, a rectangle is a simply connected domain, but its boundary has corners. The stream function will be constant on each edge, but the value on one edge may be different from the value on another. We are allowed to arbitrarily choose a value of $\psi_i$ on one of the boundaries, but this dictates the value of $\psi_i$ on the others, so the surface integral may be some non-zero value. Assuming a simply connected, smoothly bounded domain makes this problem disappear.
+        \end{subsubsection}
+    \end{subsection}
+
+    \begin{subsection}{First Variation}
+        \begin{align*}
+            \delta \mathcal{H} &= \delta \frac12 \iint \sum_{i=1}^2 \left[ \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \psi_i + 2C_i(q_i) \right]+ (\psi_1 - \psi_2)^2 \, dA \\
+            &= \iint \sum_{i=1}^2 \left[ \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \delta\psi_i + C'_i(q_i) \delta q_i \right]+ (\psi_1 - \psi_2)(\delta \psi_1 - \delta \psi_2) \, dA \\
+            &= \iint \sum_{i=1}^2 \left[ -\frac{1}{\alpha_i} \psi_i \nabla^2 \delta\psi_i + C'_i(q_i) \delta q_i - \psi_i(\delta \psi_i - \delta \psi_{j \ne i}) \right] \, dA \\
+            &= \iint \sum_{i=1}^2 (-\psi_i + C'_i(q_i)) \delta q_i\, dA \\
+        \end{align*}
+
+        Since $\delta \mathcal{H} = 0$ for steady solutions, and $q_1$ and $q_2$ are independent coordinates, we have that in vector form
+        \begin{equation}
+            \vec \psi_s =
+            \left[\begin{array}{c}
+            \psi_{1s} \\
+            \psi_{2s}
+            \end{array}\right]
+            =
+            \left[\begin{array}{c}
+            C'_1(q_{1s}) \\
+            C'_2(q_{2s})
+            \end{array}\right]
+            =
+            \vec C'(\vec q_s)
+        \end{equation}
+    \end{subsection}
+
+    \begin{subsection}{Second Variation}
+        Like the single layer model, the second variation for the two-layer model is
+        \begin{align*}
+            \delta^2 \mathcal{H} &= \iint \sum_i \left[ - \psi_i + C'_i(q_i) \right]  \delta^2 q_i  - \delta \psi_i \delta q_i +  C''_i(q_i) (\delta q_i)^2  \, dA \\
+            \delta^2 \mathcal{H}_s &= \iint \sum_i \left[ - \psi_{is} + C'_i(q_{is}) \right]  \delta^2 q_i  - \delta \psi_i \delta q_i +  C''_i(q_{is}) (\delta q_i)^2  \, dA \\
+            &= \iint \sum_i - \delta \psi_i \delta q_i +  C''_i(q_{is}) (\delta q_i)^2  \, dA \\
+            &= \iint \sum_i - \delta \psi_i \left( \frac{1}{\alpha_i} \nabla^2 \delta \psi_i - \delta\psi_i + \delta\psi_{j \ne i} \right) +  C''_i(q_{is}) (\delta q_i)^2  \, dA \\
+            &= \iint \sum_i \left[ \frac{1}{\alpha_i} \vec\nabla\delta\psi_i \cdot \vec\nabla\delta\psi_i + (\delta\psi_i)^2 + C''_i(q_{is}) (\delta q_i)^2 \right]  - 2\delta\psi_1\delta\psi_2 \, dA \\
+            &= \iint \sum_i \left[ \frac{1}{\alpha_i} \vec\nabla\delta\psi_i \cdot \vec\nabla\delta\psi_i + C''_i(q_{is}) (\delta q_i)^2 \right]+ (\delta\psi_1 - \delta\psi_2)^2 \, dA \\
+            &= \delta^2 H_s + \iint \sum_i C''_i(q_{is})(\delta q_i)^2 \, dA \\
+        \end{align*}
+
+        The $\delta^2 H_s$ term is clearly positive definite, while the $C''_i(q_{is})$ term is sign definite. Like in the single-layer case, the definiteness of the second variation depends on the definiteness of the Casimirs.
+    \end{subsection}
+
+    \begin{subsection}{Linear Stability Theorems}
+        \begin{subsubsection}{First Theorem}
+            The first theorem proceeds exactly like it did for the one-layer case. We require the second variation to be positive definite, so
+            $$
+            C''_i(q_{is}) > 0, \quad i=1,2
+            $$
+
+            If we assume that the steady solution only depends on latitude, $y$, then $\Psi_i = \Psi_i(y)$, and we can differentiate our equation that defines the steady state to obtain
+            $$
+            U_{is} = C''_i(q_{is}) \frac{dq_{is}}{dy}
+            $$
+            or succinctly,
+            $$
+            U_{is} \frac{d Q_{is}}{dy} > 0, \quad i=1,2
+            $$
+        \end{subsubsection}
+        \begin{subsubsection}{Second Theorem}
+        \end{subsubsection}
+    \end{subsection}
+
+    \begin{subsection}{Nonlinear Stability Theorems}
+        We proceed as stated in the single-layer case, by defining $\mathcal{N}$.
+
+        \begin{align*}
+            \mathcal{N}(q)
+            & = \mathcal{H}(q_s + \delta q) - \mathcal{H}(q_s) \\
+            &= \frac12 \iint \sum_{i=1}^2 \left( \frac{1}{\alpha_i}\vec\nabla (\psi_{is} + \delta\psi_i) \cdot \vec\nabla (\psi_{is} + \delta\psi_i) + 2C_i(q_{is} + \delta q_i) \right) \\
+            &\quad\quad + ((\psi_{1s} + \delta\psi_1) - (\psi_{2s} + \delta\psi_2))^2 \, dA \\
+            &\quad\quad - \left[ \frac12 \iint \sum_{i=1}^2 \left( \frac{1}{\alpha_i}\vec\nabla \psi_{is} \cdot \vec\nabla \psi_{is} + 2C_i(q_{is}) \right) + (\psi_{1s} - \psi_{2s})^2 \, dA \right] \\
+            &= \frac12 \iint \sum_{i=1}^2 \frac{1}{\alpha_i} (2 \vec\nabla\delta\psi_i \cdot \vec\nabla\psi_{is} + \vec\nabla\delta\psi_i \cdot \vec\nabla\delta\psi_i) \\
+            &\quad\quad + 2\psi_{1s}\delta\psi_1 + (\delta\psi_1)^2 + 2\psi_{2s}\delta\psi_2 + (\delta\psi_2)^2 - 2\psi_{1s}\delta\psi_2 - 2\delta\psi_1\psi_{2s} - 2\delta\psi_1\delta\psi_2 \, dA \\
+            &\quad\quad + \iint \sum_{i=1}^2 C_i(q_{is} + \delta q_i) - C_i(q_{is}) \, dA \\
+            &= \frac12 \iint \sum_{i=1}^2 \frac{1}{\alpha_i} (2 \vec\nabla\delta\psi_i \cdot \vec\nabla\psi_{is} + \vec\nabla\delta\psi_i \cdot \vec\nabla\delta\psi_i) \\
+            &\quad\quad + (\delta\psi_1 - \delta\psi_2)^2 + 2(\psi_{1s} - \psi_{2s})(\delta\psi_1 - \delta\psi_2) \, dA \\
+            &\quad\quad + \iint \sum_{i=1}^2 C_i(q_{is} + \delta q_i) - C_i(q_{is}) \, dA \\
+            &= \frac12 \iint \sum_{i=1}^2 \frac{1}{\alpha_i} \vec\nabla\delta\psi_i \cdot \vec\nabla\delta\psi_i + (\delta\psi_1 - \delta\psi_2)^2 \\
+            &\quad\quad + \iint \sum_{i=1}^2 C_i(q_{is} + \delta q_i) - C_i(q_{is}) + \vec\nabla\delta\psi_i \cdot \vec\nabla\psi_{is} + \psi_{is}(\delta\psi_i - \delta\psi_{j \ne i}) \, dA \\
+            &= \frac12 \delta^2 H_s + \iint \sum_{i=1}^2 C_i(q_{is} + \delta q_i) - C_i(q_{is}) - \psi_{is}(\nabla^2\delta\psi_i - (\delta\psi_i - \delta\psi_{j \ne i})) \, dA \\
+            &= \frac12 \delta^2 H_s + \iint \sum_{i=1}^2 C_i(q_{is} + \delta q_i) - C_i(q_{is}) - \psi_{is}\delta q_i \, dA \\
+            &= \frac12 \delta^2 H_s + \iint \sum_{i=1}^2 C_i(q_{is} + \delta q_i) - C_i(q_{is}) - C'_i(q_{is})\delta q_i \, dA \\
+        \end{align*}
+    \end{subsection}
+\end{section}
+
+\newpage
+\begin{section}{$N$-Layer Quasi-Geostrophy}
+    The $N$-layer QG model can be written as,
+    $$
+    \partial_t q_i + J(\psi_i, q_i) = 0,
+    $$
+    for $i=1,...,N$ where the PV relations are given by:
     \begin{align*}
-      \delta^2 \mathcal{H} &= \iint \sum_i \left[ - \psi_i + C'_i(q_i) \right]  \delta^2 q_i  - \delta \psi_i \delta q_i +  C''_i(q_i) (\delta q_i)^2  \, dA \\
-      \delta^2 \mathcal{H}_s &= \iint \sum_i \left[ - \psi_{is} + C'_i(q_{is}) \right]  \delta^2 q_i  - \delta \psi_i \delta q_i +  C''_i(q_{is}) (\delta q_i)^2  \, dA \\
-       &= \iint \sum_i - \delta \psi_i \delta q_i +  C''_i(q_{is}) (\delta q_i)^2  \, dA \\
-       &= \iint \sum_i - \delta \psi_i \left( \frac{1}{\alpha_i} \nabla^2 \delta \psi_i - \delta\psi_i + \delta\psi_{j \ne i} \right) +  C''_i(q_{is}) (\delta q_i)^2  \, dA \\
-       &= \iint \sum_i \left[ \frac{1}{\alpha_i} \vec\nabla\delta\psi_i \cdot \vec\nabla\delta\psi_i + (\delta\psi_i)^2 + C''_i(q_{is}) (\delta q_i)^2 \right]  - 2\delta\psi_1\delta\psi_2 \, dA \\
-       &= \iint \sum_i \left[ \frac{1}{\alpha_i} \vec\nabla\delta\psi_i \cdot \vec\nabla\delta\psi_i + C''_i(q_{is}) (\delta q_i)^2 \right]+ (\delta\psi_1 - \delta\psi_2)^2 \, dA \\
-       &= \delta^2 H_s + \iint \sum_i C''_i(q_{is})(\delta q_i)^2 \, dA \\
+        \left[\begin{array}{c}
+        q_1 \\
+        \\
+        \vdots \\
+        \\
+        q_N
+        \end{array}\right]
+        &=
+        \left[\begin{array}{c}
+        \frac{1}{\alpha_1}\nabla^2 \psi_1 \\
+        \\
+        \vdots \\
+        \\
+        \frac{1}{\alpha_N}\nabla^2 \psi_N
+        \end{array}\right]
+        +
+        \left[\begin{array}{ccccc}
+        -1 & 1 & & & \\
+        1 & -2 & 1 & & \\
+        & \ddots & \ddots & \ddots & \\
+        & & & & 1 \\
+        & & & 1 & -1\\
+        \end{array}\right]
+        \left[\begin{array}{c}
+        \psi_1 \\
+        \\
+        \vdots \\
+        \\
+        \psi_N
+        \end{array}\right] \\
+        \alpha_i &= \frac{f_0^2 \rho_0}{g (\rho_{i+1} - \rho_i) H_i}
     \end{align*}
 
-    The $\delta^2 H_s$ term is clearly positive definite, while the $C''_i(q_{is})$ term is sign definite. Like in the single-layer case, the definiteness of the second variation depends on the definiteness of the Casimirs.
+    Assuming a flat bottom, just as in the two-layer case.
 
-  %%% 2.4 --------------------------------------------------------
-  \subsection{Linear Stability Theorems}
-    \subsubsection{First Theorem}
-      The first theorem proceeds exactly like it did for the one-layer case. We require the second variation to be positive definite, so
-      $$
-      C''_i(q_{is}) > 0, \quad i=1,2
-      $$
+    \begin{subsection}{Hamiltonian}
+        To derive an equation for the energy, we do as we did in the two-layer case.
+        \begin{align*}
+        0 &= \iint \sum_{i=1}^N \psi_i \partial_t q_i + \psi_i J(\psi_i, q_i) \, dA \\
+        &= \iint \sum_{i=1}^N \psi_i \partial_t q_i + \frac12 J(\psi_i^2, q_i) \, dA \\
+        &= \iint \sum_i \left[\partial_t(q_i \psi_i) - q_i \partial_t\psi_i \right] \, dA \\
+        &= .......... \\
+        &= \frac12 \iint \partial_t \left[ \sum_{i=1}^N \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \psi_i + \sum_{i=1}^{N-1} (\psi_i - \psi_{i+1})^2 \right]\, dA
+        \end{align*}
 
-      If we assume that the steady solution only depends on latitude, $y$, then $\Psi_i = \Psi_i(y)$, and we can differentiate our equation that defines the steady state to obtain
-      $$
-      U_{is} = C''_i(q_{is}) \frac{dq_{is}}{dy}
-      $$
-      or succinctly,
-      $$
-      U_{is} \frac{d Q_{is}}{dy} > 0, \quad i=1,2
-      $$
+        This yields that the Hamiltonian of the system is the total energy in the system,
+        $$
+        H = \frac12 \iint \sum_{i=1}^N \frac{1}{\alpha_i}\vec\nabla \psi_i \cdot \vec\nabla \psi_i + \sum_{i=1}^{N-1} (\psi_i - \psi_{i+1})^2 \, dA
+        $$
 
-  %%% 2.5 --------------------------------------------------------
-  \subsection{Nonlinear Stability Theorems}
-    We proceed as stated in the single-layer case, by defining $\mathcal{N}$.
+        The Casimirs are functions of the PV,
+        $$
+        \mathcal{C}_i = \iint C_i(q_i) \, dA
+        $$
+        From this we form the constrained Hamiltonian
+        \begin{equation}
+        \mathcal{H} = \frac12 \iint \sum_{i=1}^N \left[ \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \psi_i + 2C_i(q_i) \right] + \sum_{i=1}^{N-1} (\psi_i - \psi_{i+1})^2 \, dA
+        \label{eqn:qg_Nl_h}
+        \end{equation}
+    \end{subsection}
 
-    \begin{align*}
-      \mathcal{N}(q) 
-      & = \mathcal{H}(q_s + \delta q) - \mathcal{H}(q_s) \\
-      &= \frac12 \iint \sum_{i=1}^2 \left( \frac{1}{\alpha_i}\vec\nabla (\psi_{is} + \delta\psi_i) \cdot \vec\nabla (\psi_{is} + \delta\psi_i) + 2C_i(q_{is} + \delta q_i) \right) \\
-      &\quad\quad + ((\psi_{1s} + \delta\psi_1) - (\psi_{2s} + \delta\psi_2))^2 \, dA \\
-      &\quad\quad - \left[ \frac12 \iint \sum_{i=1}^2 \left( \frac{1}{\alpha_i}\vec\nabla \psi_{is} \cdot \vec\nabla \psi_{is} + 2C_i(q_{is}) \right) + (\psi_{1s} - \psi_{2s})^2 \, dA \right] \\
-      &= \frac12 \iint \sum_{i=1}^2 \frac{1}{\alpha_i} (2 \vec\nabla\delta\psi_i \cdot \vec\nabla\psi_{is} + \vec\nabla\delta\psi_i \cdot \vec\nabla\delta\psi_i) \\
-      &\quad\quad + 2\psi_{1s}\delta\psi_1 + (\delta\psi_1)^2 + 2\psi_{2s}\delta\psi_2 + (\delta\psi_2)^2 - 2\psi_{1s}\delta\psi_2 - 2\delta\psi_1\psi_{2s} - 2\delta\psi_1\delta\psi_2 \, dA \\
-      &\quad\quad + \iint \sum_{i=1}^2 C_i(q_{is} + \delta q_i) - C_i(q_{is}) \, dA \\
-      &= \frac12 \iint \sum_{i=1}^2 \frac{1}{\alpha_i} (2 \vec\nabla\delta\psi_i \cdot \vec\nabla\psi_{is} + \vec\nabla\delta\psi_i \cdot \vec\nabla\delta\psi_i) \\
-      &\quad\quad + (\delta\psi_1 - \delta\psi_2)^2 + 2(\psi_{1s} - \psi_{2s})(\delta\psi_1 - \delta\psi_2) \, dA \\
-      &\quad\quad + \iint \sum_{i=1}^2 C_i(q_{is} + \delta q_i) - C_i(q_{is}) \, dA \\
-      &= \frac12 \iint \sum_{i=1}^2 \frac{1}{\alpha_i} \vec\nabla\delta\psi_i \cdot \vec\nabla\delta\psi_i + (\delta\psi_1 - \delta\psi_2)^2 \\
-      &\quad\quad + \iint \sum_{i=1}^2 C_i(q_{is} + \delta q_i) - C_i(q_{is}) + \vec\nabla\delta\psi_i \cdot \vec\nabla\psi_{is} + \psi_{is}(\delta\psi_i - \delta\psi_{j \ne i}) \, dA \\
-      &= \frac12 \delta^2 H_s + \iint \sum_{i=1}^2 C_i(q_{is} + \delta q_i) - C_i(q_{is}) - \psi_{is}(\nabla^2\delta\psi_i - (\delta\psi_i - \delta\psi_{j \ne i})) \, dA \\
-      &= \frac12 \delta^2 H_s + \iint \sum_{i=1}^2 C_i(q_{is} + \delta q_i) - C_i(q_{is}) - \psi_{is}\delta q_i \, dA \\
-      &= \frac12 \delta^2 H_s + \iint \sum_{i=1}^2 C_i(q_{is} + \delta q_i) - C_i(q_{is}) - C'_i(q_{is})\delta q_i \, dA \\
-    \end{align*}
+    \begin{subsection}{First Variation}
+        \begin{align*}
+        \delta \mathcal{H} &= \delta\frac12 \iint \sum_{i=1}^N \left[ \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \psi_i + 2C_i(q_i) \right] + \sum_{i=1}^{N-1} (\psi_i - \psi_{i+1})^2 \, dA \\
+        &= \iint \sum_{i=1}^N \left[ \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \delta\psi_i + C'_i(q_i) \delta q_i \right]+ \sum_{i=1}^{N-1} (\psi_i - \psi_{i+1})(\delta \psi_i - \delta \psi_{i+1}) \, dA \\
+        &= \iint \sum_{i=1}^N (-\psi_i + C'_i(q_i)) \delta q_i\, dA \\
+        \end{align*}
 
-
-%%% Section 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{$N$-Layer Quasi-Geostrophy}
-
-  The $N$-layer QG model can be written as,
-  $$
-  \partial_t q_i + J(\psi_i, q_i) = 0,
-  $$
-  for $i=1,...,N$ where the PV relations are given by:
-  \begin{align*}
-    \left[\begin{array}{c}
-      q_1 \\
-      \\
-      \vdots \\
-      \\
-      q_N
-    \end{array}\right]
-    &=
-    \left[\begin{array}{c}
-      \frac{1}{\alpha_1}\nabla^2 \psi_1 \\
-      \\
-      \vdots \\
-      \\
-      \frac{1}{\alpha_N}\nabla^2 \psi_N
-    \end{array}\right]
-    +
-    \left[\begin{array}{ccccc}
-      -1 & 1 & & & \\
-      1 & -2 & 1 & & \\
-       & \ddots & \ddots & \ddots & \\
-       & & & & 1 \\
-       & & & 1 & -1\\
-    \end{array}\right]
-    \left[\begin{array}{c}
-      \psi_1 \\
-      \\
-      \vdots \\
-      \\
-      \psi_N
-    \end{array}\right] \\
-    \alpha_i &= \frac{f_0^2 \rho_0}{g (\rho_{i+1} - \rho_i) H_i}
-  \end{align*}
-
-  Assuming a flat bottom, just as in the two-layer case.
-
-  %%% 3.1 --------------------------------------------------------
-  \subsection{Hamiltonian}
-
-  To derive an equation for the energy, we do as we did in the two-layer case.
-  \begin{align*}
-    0 &= \iint \sum_{i=1}^N \psi_i \partial_t q_i + \psi_i J(\psi_i, q_i) \, dA \\
-     &= \iint \sum_{i=1}^N \psi_i \partial_t q_i + \frac12 J(\psi_i^2, q_i) \, dA \\
-     &= \iint \sum_i \left[\partial_t(q_i \psi_i) - q_i \partial_t\psi_i \right] \, dA \\
-     &= .......... \\
-     &= \frac12 \iint \partial_t \left[ \sum_{i=1}^N \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \psi_i + \sum_{i=1}^{N-1} (\psi_i - \psi_{i+1})^2 \right]\, dA
-  \end{align*}
-
-  This yields that the Hamiltonian of the system is the total energy in the system,
-  $$
-  H = \frac12 \iint \sum_{i=1}^N \frac{1}{\alpha_i}\vec\nabla \psi_i \cdot \vec\nabla \psi_i + \sum_{i=1}^{N-1} (\psi_i - \psi_{i+1})^2 \, dA
-  $$
-
-  The Casimirs are functions of the PV,
-  $$
-  \mathcal{C}_i = \iint C_i(q_i) \, dA
-  $$
-  From this we form the constrained Hamiltonian
-  \begin{equation}
-    \mathcal{H} = \frac12 \iint \sum_{i=1}^N \left[ \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \psi_i + 2C_i(q_i) \right] + \sum_{i=1}^{N-1} (\psi_i - \psi_{i+1})^2 \, dA
-    \label{eqn:qg_Nl_h}
-  \end{equation}
-
-  %%% 3.2 --------------------------------------------------------
-  \subsection{First Variation}
-    \begin{align*}
-      \delta \mathcal{H} &= \delta\frac12 \iint \sum_{i=1}^N \left[ \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \psi_i + 2C_i(q_i) \right] + \sum_{i=1}^{N-1} (\psi_i - \psi_{i+1})^2 \, dA \\
-       &= \iint \sum_{i=1}^N \left[ \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \delta\psi_i + C'_i(q_i) \delta q_i \right]+ \sum_{i=1}^{N-1} (\psi_i - \psi_{i+1})(\delta \psi_i - \delta \psi_{i+1}) \, dA \\
-       &= \iint \sum_{i=1}^N (-\psi_i + C'_i(q_i)) \delta q_i\, dA \\
-    \end{align*}
-
-    $\delta \mathcal{H} = 0$ for steady solutions, and each $q_i$ is independent, so we have that in vector form
-    \begin{equation}
-      \vec \psi_s = 
-      \left[\begin{array}{c}
+        $\delta \mathcal{H} = 0$ for steady solutions, and each $q_i$ is independent, so we have that in vector form
+        \begin{equation}
+        \vec \psi_s =
+        \left[\begin{array}{c}
         \psi_{1s} \\
         \vdots \\
         \psi_{Ns}
-      \end{array}\right]
-      =
-      \left[\begin{array}{c}
+        \end{array}\right]
+        =
+        \left[\begin{array}{c}
         C'_1(q_{1s}) \\
         \vdots \\
         C'_N(q_{Ns})
-      \end{array}\right]
-      =
-      \vec C'(\vec q_s)
-    \end{equation}
+        \end{array}\right]
+        =
+        \vec C'(\vec q_s)
+        \end{equation}
+    \end{subsection}
 
-  %%% 3.3 --------------------------------------------------------
-  \subsection{Second Variation}
-    The second variation for the $N$-layer model is
+    \begin{subsection}{Second Variation}
+        The second variation for the $N$-layer model is
+        \begin{align*}
+            \delta^2 \mathcal{H} &= \iint \sum_{i=1}^N \left[ - \psi_i + C'_i(q_i) \right]  \delta^2 q_i  - \delta \psi_i \delta q_i +  C''_i(q_i) (\delta q_i)^2  \, dA \\
+            \delta^2 \mathcal{H}_s &= \iint \sum_{i=1}^N \left[ - \psi_{is} + C'_i(q_{is}) \right]  \delta^2 q_i  - \delta \psi_i \delta q_i +  C''_i(q_{is}) (\delta q_i)^2  \, dA \\
+            &= \iint \sum_{i=1}^N - \delta \psi_i \delta q_i +  C''_i(q_{is}) (\delta q_i)^2  \, dA \\
+            &= \iint \sum_{i=1}^N \left[ \frac{1}{\alpha_i} \vec\nabla\delta\psi_i \cdot \vec\nabla\delta\psi_i + C''_i(q_{is}) (\delta q_i)^2 \right] + \sum_{i=1}^{N-1}(\delta\psi_i - \delta\psi_{i+1})^2 \, dA \\
+            &= \delta^2 H_s + \iint \sum_{i=1}^N C''_i(q_{is})(\delta q_i)^2 \, dA \\
+        \end{align*}
+
+        Which is exactly the same result as the two-layer case, but summing from 1 to $N$.
+    \end{subsection}
+
+    \begin{subsection}{Linear Stability Theorems}
+        \begin{subsubsection}{First Theorem}
+            Our results for linear stability are thus identical to the results for the two-layer case.
+            $$
+            C''_i(q_{is}) > 0, \quad i=1,...,N
+            $$
+
+            If we assume that the steady solution only depends on latitude, $y$, then $\Psi_i = \Psi_i(y)$, and we have
+            $$
+            U_{is} \frac{d Q_{is}}{dy} > 0, \quad i=1,...,N
+            $$
+        \end{subsubsection}
+        \begin{subsubsection}{Second Theorem}
+        \end{subsubsection}
+    \end{subsection}
+
+    \begin{subsection}{Nonlinear Stability Theorems}
+        If you haven't noticed a pattern by now, we define $\mathcal{N}$ and proceed as before.
+
+        \begin{align*}
+            \mathcal{N}(q)
+            & = \mathcal{H}(q_s + \delta q) - \mathcal{H}(q_s) \\
+            &= \frac12 \iint \sum_{i=1}^N \left( \frac{1}{\alpha_i}\vec\nabla (\psi_{is} + \delta\psi_i) \cdot \vec\nabla (\psi_{is} + \delta\psi_i) + 2C_i(q_{is} + \delta q_i) \right) \\
+            &\quad\quad + \sum_{i=1}^{N-1}((\psi_{is} + \delta\psi_i) - (\psi_{(i+1)s} + \delta\psi_{i+1}))^2 \, dA \\
+            &\quad\quad - \left[ \frac12 \iint \sum_{i=1}^N \left( \frac{1}{\alpha_i}\vec\nabla \psi_{is} \cdot \vec\nabla \psi_{is} + 2C_i(q_{is}) \right) + \sum_{i=1}^{N-1}(\psi_{is} - \psi_{(i+1)s})^2 \, dA \right] \\
+            &= \frac12 \delta^2 H_s + \iint \sum_{i=1}^N C_i(q_{is} + \delta q_i) - C_i(q_{is}) - \psi_{is}\delta q_i \, dA \\
+            &= \frac12 \delta^2 H_s + \iint \sum_{i=1}^N C_i(q_{is} + \delta q_i) - C_i(q_{is}) - C'_i(q_{is})\delta q_i \, dA \\
+        \end{align*}
+    \end{subsection}
+\end{section}
+
+\newpage
+\begin{section}{Shallow Water}
+    \textbf{Assumptions}
+    The quasi-geostrophic model is actually an approximation of the Shallow Water Model, so the assumptions made here are very similar to those made above.
+    \begin{itemize}
+        \item The density, $\rho$, is constant
+        \item The flow is incompressible and non-diffusive
+        \item The fluid is inviscid
+        \item The fluid is in hydrostatic balance
+        \item Horizontal velocities are depth-indepenedent
+    \end{itemize}
+
+    The SW model can be written as,
     \begin{align*}
-      \delta^2 \mathcal{H} &= \iint \sum_{i=1}^N \left[ - \psi_i + C'_i(q_i) \right]  \delta^2 q_i  - \delta \psi_i \delta q_i +  C''_i(q_i) (\delta q_i)^2  \, dA \\
-      \delta^2 \mathcal{H}_s &= \iint \sum_{i=1}^N \left[ - \psi_{is} + C'_i(q_{is}) \right]  \delta^2 q_i  - \delta \psi_i \delta q_i +  C''_i(q_{is}) (\delta q_i)^2  \, dA \\
-       &= \iint \sum_{i=1}^N - \delta \psi_i \delta q_i +  C''_i(q_{is}) (\delta q_i)^2  \, dA \\
-       &= \iint \sum_{i=1}^N \left[ \frac{1}{\alpha_i} \vec\nabla\delta\psi_i \cdot \vec\nabla\delta\psi_i + C''_i(q_{is}) (\delta q_i)^2 \right] + \sum_{i=1}^{N-1}(\delta\psi_i - \delta\psi_{i+1})^2 \, dA \\
-       &= \delta^2 H_s + \iint \sum_{i=1}^N C''_i(q_{is})(\delta q_i)^2 \, dA \\
+        \partial_t \vec u + (\vec u \cdot \vec \nabla) \vec u + f \hat k \times \vec u &= - g \vec \nabla h, \\
+        \partial_t h + \vec\nabla \cdot \left( h \vec u \right) & = 0.
     \end{align*}
 
-    Which is exactly the same result as the two-layer case, but summing from 1 to $N$.
+    \begin{subsection}{Hamiltonian}
+        As can be found in Shepherd (1990), the regular Hamiltonian is
+        $$
+        H = \frac12 \iint h | \vec u |^2 + g h^2 \, dA.
+        $$
+        The PV is defined as,
+        $$
+        q = \frac{ \hat k \cdot (\vec \nabla \times \vec u) + f}{h},
+        $$
+        and is conserved following the motion.
 
-  %%% 3.4 --------------------------------------------------------
-  \subsection{Linear Stability Theorems}
-    \subsubsection{First Theorem}
-    Our results for linear stability are thus identical to the results for the two-layer case.
-    $$
-    C''_i(q_{is}) > 0, \quad i=1,...,N
-    $$
+        It can be shown (FJP: insert) that the Casimirs are
+        $$
+        \mathcal{C} = \iint hC(q) \, dA.
+        $$
+        Therefore, the constrained Hamiltonian is,
+        $$
+        \mathcal{H} =  \iint \frac12  \left( h (u^2 + v^2) + g h^2 \right) + h C(q) \, dA.
+        $$
+    \end{subsection}
 
-    If we assume that the steady solution only depends on latitude, $y$, then $\Psi_i = \Psi_i(y)$, and we have
-    $$
-    U_{is} \frac{d Q_{is}}{dy} > 0, \quad i=1,...,N
-    $$
+    \begin{subsection}{Equations of Motion}
+        Define the Poisson bracket.
 
-  %%% 3.5 --------------------------------------------------------
-  \subsection{Nonlinear Stability Theorems}
-    If you haven't noticed a pattern by now, we define $\mathcal{N}$ and proceed as before.
+        Show that we can recover the equations of motion.
+    \end{subsection}
 
-    \begin{align*}
-      \mathcal{N}(q)
-      & = \mathcal{H}(q_s + \delta q) - \mathcal{H}(q_s) \\
-      &= \frac12 \iint \sum_{i=1}^N \left( \frac{1}{\alpha_i}\vec\nabla (\psi_{is} + \delta\psi_i) \cdot \vec\nabla (\psi_{is} + \delta\psi_i) + 2C_i(q_{is} + \delta q_i) \right) \\
-      &\quad\quad + \sum_{i=1}^{N-1}((\psi_{is} + \delta\psi_i) - (\psi_{(i+1)s} + \delta\psi_{i+1}))^2 \, dA \\
-      &\quad\quad - \left[ \frac12 \iint \sum_{i=1}^N \left( \frac{1}{\alpha_i}\vec\nabla \psi_{is} \cdot \vec\nabla \psi_{is} + 2C_i(q_{is}) \right) + \sum_{i=1}^{N-1}(\psi_{is} - \psi_{(i+1)s})^2 \, dA \right] \\
-      &= \frac12 \delta^2 H_s + \iint \sum_{i=1}^N C_i(q_{is} + \delta q_i) - C_i(q_{is}) - \psi_{is}\delta q_i \, dA \\
-      &= \frac12 \delta^2 H_s + \iint \sum_{i=1}^N C_i(q_{is} + \delta q_i) - C_i(q_{is}) - C'_i(q_{is})\delta q_i \, dA \\
-    \end{align*}
+    \begin{subsection}{First Variation}
+        The variational derivative is,
+        \begin{align*}
+            \delta \mathcal{H}
+            &=  \iint \left[ \frac12  (u^2 + v^2) + g h  + C(q) \right] \delta h   +  uh  \delta u + vh \delta v   + h C'(q) \delta q \, dA.
+        \end{align*}
+        But we need to get everything in terms of the variations of height and velocity.  Therefore, we need the identity that
+        \begin{align*}
+            \iint h C'(q) \delta q \, dA
+            &= \iint h C'(q) \delta \frac{ \partial_x v - \partial_y u+ f}{h} \, dA, \\
+            &= \iint - C'(q) \frac{ \partial_x v - \partial_y u+ f}{h } \delta h + C'(q) \left(  \partial_x \delta v - \partial_y \delta u \right) \, dA, \\
+            &= \iint \left( - C'(q) q \delta h - \partial_x ( C'(q) )  \delta v + \partial_y ( C'(q) ) \delta u \right) \, dA.
+        \end{align*}
 
+        If we substitute this into our above equation for the first variation we get,
+        \begin{align*}
+            \delta \mathcal{H}
+            & =  \iint \left[ \frac12  (u^2 + v^2) + g h  + C(q)  - C'(q) q\right] \delta h     \, dA, \\
+            & +  \iint \left[ \partial_y ( C'(q) ) + u h \right] \delta u  +  \left[ vh - \partial_x ( C'(q) )  \right] \delta v \, dA.
+        \end{align*}
+        Steady solutions have a zero first variation and therefore are governed by the following equations,
+        \begin{align*}
+            \frac12  (u^2 + v^2) + g h & = - C(q)  + C'(q) q ,\\
+            u h & = - \partial_y ( C'(q) ) = - C''(q) \partial_y q, \\
+            vh  & = \partial_x ( C'(q) ) = C''(q) \partial_x q.
+        \end{align*}
 
-%%% Section 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Shallow Water}
+        If we restrict ourselves to basic states that are invariant with respect to $x$, then we find that $v= 0$.  This can be used in the first two equations to simplify things.  I would expect that the first two equations reduce down to geostrohic balance but I don't honestly know.  Shepherd 1990 looks at this in some detail.  Maybe a good reference?
+    \end{subsection}
 
-  \textbf{Assumptions}
-  The quasi-geostrophic model is actually an approximation of the Shallow Water Model, so the assumptions made here are very similar to those made above.
-  \begin{itemize}
-    \item The density, $\rho$, is constant
-    \item The flow is incompressible and non-diffusive
-    \item The fluid is inviscid
-    \item The fluid is in hydrostatic balance
-    \item Horizontal velocities are depth-indepenedent
-  \end{itemize}
+    \begin{subsection}{Second Variation}
+        Only after we understand the first variation.
+    \end{subsection}
+\end{section}
 
-  The SW model can be written as,
-  \begin{align*}
-  \partial_t \vec u + (\vec u \cdot \vec \nabla) \vec u + f \hat k \times \vec u &= - g \vec \nabla h, \\
-  \partial_t h + \vec\nabla \cdot \left( h \vec u \right) & = 0.
-  \end{align*}
-
-  %%% 4.1 --------------------------------------------------------
-  \subsection{Hamiltonian}
-    As can be found in Shepherd (1990), the regular Hamiltonian is 
-    $$
-    H = \frac12 \iint h | \vec u |^2 + g h^2 \, dA.
-    $$
-    The PV is defined as,
-    $$
-    q = \frac{ \hat k \cdot (\vec \nabla \times \vec u) + f}{h},
-    $$
-    and is conserved following the motion.  
-
-    It can be shown (FJP: insert) that the Casimirs are
-    $$
-    \mathcal{C} = \iint hC(q) \, dA.
-    $$
-    Therefore, the constrained Hamiltonian is,
-    $$
-    \mathcal{H} =  \iint \frac12  \left( h (u^2 + v^2) + g h^2 \right) + h C(q) \, dA.
-    $$
-
-  %%% 4.2 --------------------------------------------------------
-  \subsection{Equations of Motion}
-    Define the Poisson bracket.
-
-    Show that we can recover the equations of motion.
-
-  %%% 4.3 --------------------------------------------------------
-  \subsection{First Variation}
-    The variational derivative is,
-    \begin{align*}
-      \delta \mathcal{H} 
-      & =  \iint \left[ \frac12  (u^2 + v^2) + g h  + C(q) \right] \delta h   +  uh  \delta u + vh \delta v   + h C'(q) \delta q \, dA.
-    \end{align*}
-    But we need to get everything in terms of the variations of height and velocity.  Therefore, we need the identity that
-    \begin{align*}
-      \iint h C'(q) \delta q \, dA 
-      &= \iint h C'(q) \delta \frac{ \partial_x v - \partial_y u+ f}{h} \, dA, \\
-      &= \iint - C'(q) \frac{ \partial_x v - \partial_y u+ f}{h } \delta h + C'(q) \left(  \partial_x \delta v - \partial_y \delta u \right) \, dA, \\
-      &= \iint \left( - C'(q) q \delta h - \partial_x ( C'(q) )  \delta v + \partial_y ( C'(q) ) \delta u \right) \, dA.
-    \end{align*}
-
-    If we substitute this into our above equation for the first variation we get,
-    \begin{align*}
-      \delta \mathcal{H} 
-      & =  \iint \left[ \frac12  (u^2 + v^2) + g h  + C(q)  - C'(q) q\right] \delta h     \, dA, \\
-      & +  \iint \left[ \partial_y ( C'(q) ) + u h \right] \delta u  +  \left[ vh - \partial_x ( C'(q) )  \right] \delta v \, dA.
-    \end{align*}
-    Steady solutions have a zero first variation and therefore are governed by the following equations,
-    \begin{align*}
-      \frac12  (u^2 + v^2) + g h & = - C(q)  + C'(q) q ,\\
-       u h & = - \partial_y ( C'(q) ) = - C''(q) \partial_y q, \\
-      vh  & = \partial_x ( C'(q) ) = C''(q) \partial_x q.
-    \end{align*}
-
-    If we restrict ourselves to basic states that are invariant with respect to $x$, then we find that $v= 0$.  This can be used in the first two equations to simplify things.  I would expect that the first two equations reduce down to geostrohic balance but I don't honestly know.  Shepherd 1990 looks at this in some detail.  Maybe a good reference?
-
-  %%% 4.4 --------------------------------------------------------
-  \subsection{Second Variation}
-    Only after we understand the first variation.
 \end{document}
