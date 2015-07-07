@@ -21,6 +21,7 @@
 
 \newpage
 \begin{section}{Zonal channel Boundary Conditions}
+    The zonal channel is infinite in the $x$ direction, and has a finite length, $L$, in the $y$ direction. Volume and surface integrals must been taken in the limit.
     No $x$-independence implies
     $$
         \phi = \phi(y, t), \psi = \psi(y, t)
@@ -38,6 +39,22 @@
 
 \newpage
 \begin{section}{Doubly Periodic Boundary Conditions}
+    The boundary is a rectangle with side lengths $L_x$ and $L_y$, where the top edge is equivalent with the bottom edge, and the left is equivalent to the right. Mathematically, this is
+    \begin{align*}
+        f(0,y,t) = f(L_x,y,t) \\
+        f(x,0,t) = f(x,L_y,t) \\
+        f_t(0,y,t) = f_t(L_x,y,t) \\
+        f_t(x,0,t) = f_t(x,L_y,t) \\
+        \vec\nabla f(0,y,t) = \vec\nabla f(L_x,y,t) \\
+        \vec\nabla f(x,0,t) = \vec\nabla f(x,L_y,t)
+    \end{align*}
+
+    For any functions $u(y,t), v(y,t)$ that are doubly periodic, the surface integral evaluates to
+    \begin{align*}
+        &\oint u \vec\nabla v \cdot d\vec S \\
+        &= \int_0^{L_x} u(x,0,t)v_x(x,0,t) \, dx + \int_0^{L_y} u(L_x,y,t)v_y(L_x,y,t) \, dy \\
+        &\quad + \int_{L_x}^0 u(x,L_y,t)v_x(x,L_y,t) \, dx + \int_{L_x}^0 u(0,y,t)v_y(0,y,t) \, dy
+    \end{align*}
 \end{section}
 
 \end{document}
