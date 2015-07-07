@@ -5,44 +5,39 @@
 \allowdisplaybreaks
 
 \begin{document}
-$x$-independence:
-$$
-\phi = \phi(y, t), \psi = \psi(y, t)
-$$
-Green's first identity:
-$$
-\int \psi \nabla^2 \phi + \nabla \psi \cdot \nabla \phi \, dV = \oint \psi \nabla \phi \cdot d \vec S
-$$
+    \begin{section}{Green's First Identity}
+        Green's first identity:
+        $$
+        \int \psi \nabla^2 \phi + \nabla \psi \cdot \nabla \phi \, dV = \oint \psi \nabla \phi \cdot d \vec S
+        $$
 
-Channel BC's:
-\begin{align*}
-    \oint \psi \nabla \phi \cdot d \vec S &= \lim_{X \rightarrow \infty} \frac{1}{2X} \int_{-X}^X \psi(0,t) \phi_x(0,t) \, dx + \int_0^L \psi(y,t) \phi_y(y,t) \, dy  \\
-     &\quad + \int_X^{-X} \psi(L,t) \phi_x(L,t) \, dx + \int_L^0 \psi(y,t) \phi_y(y,t) \, dy \\
-     &= \lim_{X \rightarrow \infty} \frac{1}{2X} \int_{-X}^X \psi(0,t) \phi_x(0,t) \, dx + \int_X^{-X} \psi(L,t) \phi_x(L,t) \, dx \\
-     &= \lim_{X \rightarrow \infty} \frac{1}{2X} \int_{-X}^X \psi(0,t) \phi_x(0,t) - \psi(L,t) \phi_x(L,t) \, dx \\
-     &= \left. \psi(y,t) \phi_x(y,t) \right|_{y=L}^0
-\end{align*}
-which is a function of time.
+        What I get by integrating the QG equation is
+        $$
+            0= \partial_t \left[ \frac12 \iint \nabla\psi\cdot\nabla\psi + F\psi^2 \, dA + \frac12 \left. \psi^2(y,t) \right|_{y=0}^L \right]
+        $$
 
-What I get by integrating the QG equation is
-$$
-    0= \partial_t \left[ \frac12 \iint \nabla\psi\cdot\nabla\psi + F\psi^2 \, dA + \frac12 \left. \psi^2(y,t) \right|_{y=0}^L \right]
-$$
-
-Am I able to neglect the last term? I know I can set $\psi$ on one of the boundaries to be 0 at a certain time, but can I do it for all time? And if so, can I set $\psi$ on the other boundary to be a constant for all time, too? If I can, then that last term is just a constant and can be neglected, which gives us the exact same Hamiltonian as the doubly periodic BC's, which will give the same stability criteria.
+        Am I able to neglect the last term? I know I can set $\psi$ on one of the boundaries to be 0 at a certain time, but can I do it for all time? And if so, can I set $\psi$ on the other boundary to be a constant for all time, too? If I can, then that last term is just a constant and can be neglected, which gives us the exact same Hamiltonian as the doubly periodic BC's, which will give the same stability criteria.
+    \end{section}
 
 \newpage
-
 \begin{section}{Zonal channel Boundary Conditions}
+    No $x$-independence implies
+    $$
+        \phi = \phi(y, t), \psi = \psi(y, t)
+    $$
+    For any functions $u(y,t), v(y,t)$, the surface integral evaluates to
     \begin{align*}
-        &\oint \psi_i\vec\nabla\psi_i \cdot d\vec S \\
-        &= \lim_{X \rightarrow \infty} \frac{1}{2X} \oint_S \psi_i(y,t) \psi_{iy}(y,t) \, dy + \psi_i(y,t) \psi_{ix}(y,t) \, dx \\
-        &= \lim_{X \rightarrow \infty} \frac{1}{2X} \oint_S \psi_i(y,t) \psi_{iy}(y,t) \, dy \\
-        &= \lim_{X \rightarrow \infty} \frac{1}{2X} \left[ \int_0^L \psi_i(y,t)\psi+{iy}(y,t) \, dy + \int_0^L \psi_i(y,t)\psi+{iy}(y,t) \, dy \right]
+        &\oint u \vec\nabla v \cdot d\vec S \\
+        &= \lim_{X \rightarrow \infty} \frac{1}{2X} \oint_S u(y,t) v_y(y,t) \, dy + u(y,t) v_x(y,t) \, dx \\
+        &= \lim_{X \rightarrow \infty} \frac{1}{2X} \oint_S u(y,t) v_y(y,t) \, dy \\
+        &= \lim_{X \rightarrow \infty} \frac{1}{2X} \left[ \int_0^L u(y,t)u_y(y,t) \, dy + \int_0^L u(y,t)v_y(y,t) \, dy \right] \\
         &= 0
     \end{align*}
+    If we assign $u = \psi_i$ and either $v = \dot\psi_i$ or $v = \psi_i$, we get 0. This result is used in the derivation of the Hamiltonian.
 \end{section}
 
+\newpage
 \begin{section}{Doubly Periodic Boundary Conditions}
 \end{section}
+
 \end{document}
