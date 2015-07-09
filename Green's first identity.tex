@@ -5,24 +5,16 @@
 \allowdisplaybreaks
 
 \begin{document}
-    \begin{section}{Green's First Identity}
-        Green's first identity:
-        $$
-        \int \psi \nabla^2 \phi + \nabla \psi \cdot \nabla \phi \, dV = \oint \psi \nabla \phi \cdot d \vec S
-        $$
+\begin{section}{Green's First Identity}
+    $$
+    \int \psi \nabla^2 \phi + \nabla \psi \cdot \nabla \phi \, dV = \oint \psi \nabla \phi \cdot d \vec S
+    $$
+\end{section}
 
-        What I get by integrating the QG equation is
-        $$
-            0= \partial_t \left[ \frac12 \iint \nabla\psi\cdot\nabla\psi + F\psi^2 \, dA + \frac12 \left. \psi^2(y,t) \right|_{y=0}^L \right]
-        $$
-
-        Am I able to neglect the last term? I know I can set $\psi$ on one of the boundaries to be 0 at a certain time, but can I do it for all time? And if so, can I set $\psi$ on the other boundary to be a constant for all time, too? If I can, then that last term is just a constant and can be neglected, which gives us the exact same Hamiltonian as the doubly periodic BC's, which will give the same stability criteria.
-    \end{section}
-
-\newpage
 \begin{section}{Zonal channel Boundary Conditions}
     The zonal channel is infinite in the $x$ direction, and has a finite length, $L$, in the $y$ direction. Volume and surface integrals must been taken in the limit.
-    No $x$-independence implies
+
+    Since the channel is infinite in the $x$ direction, this imples that there is no $x$-independence in the stream function. Mathematically,
     $$
         \phi = \phi(y, t), \psi = \psi(y, t)
     $$
@@ -31,7 +23,7 @@
         &\oint u \vec\nabla v \cdot d\vec S \\
         &= \lim_{X \rightarrow \infty} \frac{1}{2X} \oint_S u(y,t) v_y(y,t) \, dy + u(y,t) v_x(y,t) \, dx \\
         &= \lim_{X \rightarrow \infty} \frac{1}{2X} \oint_S u(y,t) v_y(y,t) \, dy \\
-        &= \lim_{X \rightarrow \infty} \frac{1}{2X} \left[ \int_0^L u(y,t)u_y(y,t) \, dy + \int_0^L u(y,t)v_y(y,t) \, dy \right] \\
+        &= \lim_{X \rightarrow \infty} \frac{1}{2X} \left[ \int_0^L u(y,t)u_y(y,t) \, dy + \int_L^0 u(y,t)v_y(y,t) \, dy \right] \\
         &= 0
     \end{align*}
     If we assign $u = \psi_i$ and either $v = \dot\psi_i$ or $v = \psi_i$, we get 0. This result is used in the derivation of the Hamiltonian.
@@ -53,7 +45,10 @@
     \begin{align*}
         &\oint u \vec\nabla v \cdot d\vec S \\
         &= \int_0^{L_x} u(x,0,t)v_x(x,0,t) \, dx + \int_0^{L_y} u(L_x,y,t)v_y(L_x,y,t) \, dy \\
-        &\quad + \int_{L_x}^0 u(x,L_y,t)v_x(x,L_y,t) \, dx + \int_{L_x}^0 u(0,y,t)v_y(0,y,t) \, dy
+        &\quad + \int_{L_x}^0 u(x,L_y,t)v_x(x,L_y,t) \, dx + \int_{L_x}^0 u(0,y,t)v_y(0,y,t) \, dy \\
+        &= \int_0^{L_x} u(x,0,t)v_x(x,0,t) \, dx + \int_0^{L_y} u(0,y,t)v_y(0,y,t) \, dy \\
+        &\quad + \int_{L_x}^0 u(x,0,t)v_x(x,0,t) \, dx + \int_{L_x}^0 u(0,y,t)v_y(0,y,t) \, dy \\
+        &= 0
     \end{align*}
 \end{section}
 
