@@ -90,19 +90,21 @@
     \begin{subsection}{Linear Stability Theorems}
         To prove stability it is sufficient to show that the second variation is sign definite. (FJP: explain why?).
 
-        \begin{subsubsection}{First Theorem}
+        \begin{subsubsection}{First Theorem (Positive Definiteness)}
             The first theorem is the easiest and corresponds to showing where the second variation is positive definite.  It is readily seen that this occurs when
             $$
             C''(q_s) > 0.
             $$
 
-            If we assume that the steady solution only depends on latitude, $y$, then $\Psi = \Psi(y)$, and we can differentiate our equation that defines the steady state to obtain,
+            So for any steady flow that satisfies $\psi_s = C'(q_s)$ and the inequality above, we have a linearly stable flow.
+
+            As an example of flows one may have examined before, if we assume that the steady solution only depends on latitude, $y$, then $\Psi = \Psi(y)$, and we can differentiate our equation that defines the steady state to obtain,
             $$
             U_s = C''(q_s) \frac{dq_s}{dy} = C''(q_s) \left[ \frac{d^2 U_s}{dy^2} - \frac{f_0^2}{gH} U_s \right]
             $$
             where we used the fact that $U_s = - \frac{d \Psi_s}{dy}$.
 
-            If we require that $C'' > 0$ then this is equivalent (assuming the PV is not zero) to,
+            If we require that $C'' > 0$, then this is equivalent to (assuming the PV is not zero)
             $$
             \frac{U_s}{\frac{dQ_s}{dy}} = \frac{U_s}{\left[ \frac{d^2 U_s}{dy^2} - \frac{f_0^2}{gH} U_s\right]} > 0.
             $$
@@ -112,14 +114,26 @@
             $$
         \end{subsubsection}
 
-        \begin{subsubsection}{Second Theorem}
-            This is harder to show and requires first beginning with the Poincar\'e eigenvalue problem,
-            $$
-            q + \kappa \psi = 0.
-            $$
-            We must multiply this by $q$ integrate over the domain and find a bound on the gradient of $\delta \psi$ squared, which appears in the second variation.
+        \begin{subsubsection}{Second Theorem (Negative Definiteness)}
+            This is not as obvious at the first theorem, but we can use Poincar\'e's inequality to provide some bounds.
 
-            FJP: insert details?
+            Suppose that the minimum eigenvalue, denoted $\lambda_{min}$, of the boundary value problem
+            $$
+                \nabla^2 \phi + \lambda \phi = 0, (x,y) \in \Omega, \quad
+                \left. \phi \right|_{\partial \Omega} = 0
+            $$
+            is strictly positive. Then if $h(x,y)$ is a twice-continuously differentiable function satisfying $\left. h\right|_{\partial D} = 0$, then
+            $$
+                \iint_\Omega \nabla h \cdot \nabla h \, dA \le \frac{1}{\lambda_{min}}\iint_\Omega (\nabla^2 h)^2 \, dA
+            $$
+
+            Thus we have
+            \begin{align*}
+                \delta^2\mathcal{H}_s
+                &= \iint \vec\nabla \delta \psi \cdot \vec \nabla \delta \psi + \frac{f_0^2}{gH} (\delta \psi)^2+  C''(q_s) (\delta q)^2  \, dA \\
+                &\le \iint \frac{1}{\lambda_{min}}(\nabla^2\delta\psi)^2 + \frac{f_0^2}{gH} (\delta \psi)^2+  C''(q_s) (\delta q)^2  \, dA \\
+                &= \iint (\nabla^2 \delta\psi)^2\left[ \frac1\lambda_{min} + C''(q_s) \right] + (\delta\psi \nabla^2\delta\psi)\left[ -\frac{2f_0^2}{gH}C''(q_s) \right] + (\delta\psi)^2\left[ \frac{f_0^2}{gH} + (\frac{f_0^2}{gH})^2 + C''(q_s) \right] \, dA
+            \end{align*}
         \end{subsubsection}
     \end{subsection}
 
@@ -206,7 +220,6 @@
             &\quad - \left( \frac{1}{\alpha_i} \psi_{it} \nabla^2 \psi_i - \psi_i \psi_{it} + \psi_{j \ne i} \psi_{it} \right) \, dA \\
             &= \iint \sum_i \partial_t \left (-\frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \psi_i - \psi_i^2 + \psi_i\psi_{j\ne i} \right) \\
             &\quad - \left( -\frac{1}{\alpha_i} \vec\nabla \psi_{it} \cdot \vec\nabla \psi_i - \psi_i \psi_{it} + \psi_{j \ne i} \psi_{it} \right) \, dA \\
-            &\quad + \frac12 \partial_t \oint \sum_i \frac{1}{\alpha_i} \left[ \partial_t \left( \psi_i\vec\nabla\psi_i \right) - \psi_{it}\vec\nabla\psi_i\right] \cdot d\vec S \\
             &= \iint \sum_i \partial_t \left (-\frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \psi_i - \psi_i^2 \right) + \partial_t (\psi_i\psi_{j\ne i})  \\
             &\quad + \left( \frac{1}{\alpha_i} \vec\nabla \psi_{it} \cdot \vec\nabla \psi_i + \psi_i \psi_{it} \right) - \psi_{j \ne i} \psi_{it} \, dA \\
             &= \iint \sum_i \frac12 \partial_t \left[ \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \psi_i + \psi_i^2 \right] - \partial_t \psi_i\psi_{j\ne i} + \psi_{j \ne i} \psi_{it} \, dA \\
