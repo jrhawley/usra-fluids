@@ -39,11 +39,11 @@
 
 # Import libraries
 from __future__ import division
-import numpy as np
+#import numpy as np
 from numpy import linalg as LA
 import scipy as np
 import matplotlib.pyplot as plt
-from scipy.fftpack import fft, ifft, fftn, ifftn
+from scipy.fftpack import fft, ifft, fftn, ifftn, fftshift, fftfreq
 import sys
 
 #try:
@@ -67,6 +67,36 @@ import sys
 #except:    
 #    from scipy.fftpack import fft, ifft
 #    print Warning("Install pyfftw, it is much faster than numpy fft")
+
+def plot_q_qhat(q, t):
+
+    # Plot Potential Vorticity
+    plt.clf()
+    plt.subplot(2,1,1)
+    plt.pcolormesh(xx/1e3,yy/1e3,q)
+    plt.colorbar()
+    plt.axes([-Lx/2e3, Lx/2e3, -Ly/2e3, Ly/2e3])
+    name = "PV at t = %5.2f" % (t/(3600.0*24.0))
+    plt.title(name)
+
+    # compute power spectrum and shift ffts
+    qe = np.vstack((q0,-np.flipud(q)))
+    qhat = (np.absolute(fftn(qe)))
+    kx = fftshift((parms.ikx/parms.ikx[0,1]).real)
+    ky = fftshift((parms.iky/parms.iky[1,0]).real)
+    qhat = fftshift(qhat)
+
+    Sx, Sy = int(parms.Nx/2), parms.Ny
+    
+    # Plot power spectrum
+    plt.subplot(2,1,2)
+    plt.pcolor(kx[Sy:Sy+20,Sx:Sx+20],ky[Sy:Sy+20,Sx:Sx+20],qhat[Sy:Sy+20,Sx:Sx+20])
+    plt.axis([0, 10, 0, 10])
+    plt.colorbar()
+    name = "PS at t = %5.2f" % (t/(3600.0*24.0))
+    plt.title(name)
+
+    plt.draw()
 
 def flux_qg(q, parms):
 
@@ -219,6 +249,9 @@ def solve_qg(parms, q0):
     NLn, energy[1], enstr[1], mass[1] = flux_qg(q, parms)
     q   = q + 0.5*dt*(3*NLn - NLnm)
 
+    kx = fftshift((parms.ikx/parms.ikx[0,1]).real)
+    ky = fftshift((parms.iky/parms.iky[1,0]).real)
+    
     cnt = 2
     for ii in range(3,Nt+1):
 
@@ -238,16 +271,8 @@ def solve_qg(parms, q0):
 
         if (ii-0)%parms.npt==0:
 
-            # make title
-            name = "PV at t = %5.2f" % (t/(3600.0*24.0))
-            
-            # Plot PV (or streamfunction)
-            plt.clf()
-            plt.pcolormesh(xx/1e3,yy/1e3,q)
-            plt.colorbar()
-            plt.title(name)
-            plt.axes([-Lx/2, Lx/2, -Ly/2, Ly/2])
-            plt.draw()
+            t = ii*dt
+            plot_q_qhat(q, t)
 
             cnt += 1
 
@@ -272,12 +297,9 @@ q0  = 1e-8*np.sin(1.0*np.pi*(yy+Ly/2)/Ly)*np.cos(2*np.pi*(xx+Lx/2)/Lx)
 # Prepare animation
 plt.ion()
 plt.clf()
-plt.pcolormesh(xx/1e3,yy/1e3,q0)
-plt.colorbar()
-plt.title( "PV at t = 0.00")
-plt.axes([-Lx/2, Lx/2, -Ly/2, Ly/2])
-#plt.draw()
-plt.show()
+
+plot_q_qhat(q0,0)
+plt.draw()
 
 # Find Solution
 q, energy, enstr, mass = solve_qg(parms,q0)
