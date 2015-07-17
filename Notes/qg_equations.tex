@@ -15,8 +15,8 @@
         \begin{align*}
              &\psi_1 = \Psi_1 + \psi_1'
              &\psi_2 = \Psi_2 + \psi_2' \\
-             &q_1' = \frac{1}{F_1}\nabla^2\psi_1' - (\psi_1' - \psi_2')
-             &q_2' = \frac{1}{F_2}\nabla^2\psi_2' - (\psi_2' - \psi_1') \\
+             &q_1' = \nabla^2\psi_1' - F_1(\psi_1' - \psi_2')
+             &q_2' = \nabla^2\psi_2' - F_2(\psi_2' - \psi_1') \\
         \end{align*}
     \end{subsection}
 
@@ -29,10 +29,10 @@
 
     \begin{subsection}{Normal Modes}
         \begin{align*}
-             &\hat{q_1'} = -\hat{\psi_1'}\left( 1 + \frac{K^2}{F_1} \right) + \hat{\psi_2'}
-             &\hat{q_2'} = \hat{\psi_1'} - \hat{\psi_2'}\left( 1 + \frac{K^2}{F_2} \right) \\
-            &\hat{\psi_1'} = \frac{\left( 1 + \frac{K^2}{F_2} \right) \hat{q_1'} + \hat{q_2'}}{1 - \left( 1 + \frac{K^2}{F_1} \right)\left( 1 + \frac{K^2}{F_2} \right)}
-            &\hat{\psi_2'} = \frac{\hat{q_1'} + \left( 1 + \frac{K^2}{F_1} \right)\hat{q_2'}}{1 - \left( 1 + \frac{K^2}{F_1} \right)\left( 1 + \frac{K^2}{F_2} \right)} \\
+             &\hat{q_1'} = -\hat{\psi_1'}(F_1 + K^2) + F_1\hat{\psi_2'}
+             &\hat{q_2'} = F_2\hat{\psi_1'} - \hat{\psi_2'}(F_2 + K^2) \\
+            &\hat{\psi_1'} = \frac{(F_2 + K^2) \hat{q_1'} + F_1\hat{q_2'}}{F_1F_2 - (F_1 + K^2)(F_2 + K^2)}
+            &\hat{\psi_2'} = \frac{F_2\hat{q_1'} + (F_1 + K^2)\hat{q_2'}}{F_1F_2 - (F_1 + K^2)(F_2 + K^2)} \\
             &\hat{u_1'} = -ik \hat{\psi_1'}
             &\hat{u_2'} = -ik \hat{\psi_2'} \\
             &\hat{u_1'} = -il \hat{\psi_1'}
