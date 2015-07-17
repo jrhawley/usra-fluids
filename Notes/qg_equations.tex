@@ -4,41 +4,87 @@
 \usepackage{amssymb}
 
 \begin{document}
-    \begin{subsection}{Basic States}
-        \begin{align*}
-            &\Psi_1 = -U_1 y                      &\Psi_2 = -U_2 y \\
-            &Q_1 = (U_1 - U_2 + \beta) y   &Q_2 = (U_2 - U_1 + \beta) y
-        \end{align*}
-    \end{subsection}
+    \begin{section}{Constant Zonal Flow}
+        \begin{subsection}{Basic States}
+            \begin{align*}
+                &\Psi_1 = -U_1 y
+                &\Psi_2 = -U_2 y \\
+                &Q_1 = (U_1 - U_2 + \beta) y
+                &Q_2 = (U_2 - U_1 + \beta) y
+            \end{align*}
+        \end{subsection}
 
-    \begin{subsection}{New States and Perturbations}
-        \begin{align*}
-             &\psi_1 = \Psi_1 + \psi_1'
-             &\psi_2 = \Psi_2 + \psi_2' \\
-             &q_1' = \frac{1}{F_1}\nabla^2\psi_1' - (\psi_1' - \psi_2')
-             &q_2' = \frac{1}{F_2}\nabla^2\psi_2' - (\psi_2' - \psi_1') \\
-        \end{align*}
-    \end{subsection}
+        \begin{subsection}{New States and Perturbations}
+            \begin{align*}
+                 &\psi_1 = \Psi_1 + \psi_1'
+                 &\psi_2 = \Psi_2 + \psi_2' \\
+                 &q_1' = \nabla^2\psi_1' - F_1(\psi_1' - \psi_2')
+                 &q_2' = \nabla^2\psi_2' - F_2(\psi_2' - \psi_1') \\
+            \end{align*}
+        \end{subsection}
 
-    \begin{subsection}{QG Equations}
-        \begin{align*}
-             0 &= \partial_t q_1' + (u_1' + U_1)\partial_x q_1' + v_1' \partial_y(q_1' + Q_1) \\
-             0 &= \partial_t q_2' + (u_2' + U_2)\partial_x q_2' + v_2' \partial_y(q_2' + Q_2) \\
-        \end{align*}
-    \end{subsection}
+        \begin{subsection}{QG Equations}
+            \begin{align*}
+                 0 &= \partial_t q_1' + (u_1' + U_1)\partial_x q_1' + v_1' \partial_y(q_1' + Q_1) \\
+                 0 &= \partial_t q_2' + (u_2' + U_2)\partial_x q_2' + v_2' \partial_y(q_2' + Q_2) \\
+            \end{align*}
+        \end{subsection}
 
-    \begin{subsection}{Normal Modes}
-        \begin{align*}
-             &\hat{q_1'} = -\hat{\psi_1'}\left( 1 + \frac{K^2}{F_1} \right) + \hat{\psi_2'}
-             &\hat{q_2'} = \hat{\psi_1'} - \hat{\psi_2'}\left( 1 + \frac{K^2}{F_2} \right) \\
-            &\hat{\psi_1'} = \frac{\left( 1 + \frac{K^2}{F_2} \right) \hat{q_1'} + \hat{q_2'}}{1 - \left( 1 + \frac{K^2}{F_1} \right)\left( 1 + \frac{K^2}{F_2} \right)}
-            &\hat{\psi_2'} = \frac{\hat{q_1'} + \left( 1 + \frac{K^2}{F_1} \right)\hat{q_2'}}{1 - \left( 1 + \frac{K^2}{F_1} \right)\left( 1 + \frac{K^2}{F_2} \right)} \\
-            &\hat{u_1'} = -ik \hat{\psi_1'}
-            &\hat{u_2'} = -ik \hat{\psi_2'} \\
-            &\hat{u_1'} = -il \hat{\psi_1'}
-            &\hat{u_2'} = -il \hat{\psi_2'} \\
-            &K^2 = k^2 + l^2
-        \end{align*}
-    \end{subsection}
+        \begin{subsection}{Normal Modes}
+            \begin{align*}
+                 &\hat{q_1'} = -\hat{\psi_1'}(F_1 + K^2) + F_1\hat{\psi_2'}
+                 &\hat{q_2'} = F_2\hat{\psi_1'} - \hat{\psi_2'}(F_2 + K^2) \\
+                &\hat{\psi_1'} = \frac{(F_2 + K^2) \hat{q_1'} + F_1\hat{q_2'}}{F_1F_2 - (F_1 + K^2)(F_2 + K^2)}
+                &\hat{\psi_2'} = \frac{F_2\hat{q_1'} + (F_1 + K^2)\hat{q_2'}}{F_1F_2 - (F_1 + K^2)(F_2 + K^2)} \\
+                &\hat{u_1'} = -ik \hat{\psi_1'}
+                &\hat{u_2'} = -ik \hat{\psi_2'} \\
+                &\hat{u_1'} = -il \hat{\psi_1'}
+                &\hat{u_2'} = -il \hat{\psi_2'} \\
+                &K^2 = k^2 + l^2
+            \end{align*}
+        \end{subsection}
+    \end{section}
+
+    \newpage
+    \begin{section}{$x$-independent Zonal Flow}
+        \begin{subsection}{Basic States}
+            \begin{align*}
+                &\Psi_1 = \Psi_1(y)
+                &\Psi_2 = \Psi_2(y) \\
+                &Q_1 = \partial_{yy}\Psi_1 - F_1(\Psi_1 - \Psi_2) + \beta y
+                &Q_2 = \partial_{yy}\Psi_2 - F_2(\Psi_2 - \Psi_1) + \beta y
+            \end{align*}
+        \end{subsection}
+
+        \begin{subsection}{New States and Perturbations}
+            \begin{align*}
+                 &\psi_1 = \Psi_1 + \psi_1'
+                 &\psi_2 = \Psi_2 + \psi_2' \\
+                 &q_1' = \nabla^2\psi_1' - F_1(\psi_1' - \psi_2')
+                 &q_2' = \nabla^2\psi_2' - F_2(\psi_2' - \psi_1') \\
+            \end{align*}
+        \end{subsection}
+
+        \begin{subsection}{QG Equations}
+            \begin{align*}
+                 0 &= \partial_t q_1' + (u_1' + U_1)\partial_x q_1' + v_1' \partial_y(q_1' + Q_1) \\
+                 0 &= \partial_t q_2' + (u_2' + U_2)\partial_x q_2' + v_2' \partial_y(q_2' + Q_2) \\
+            \end{align*}
+        \end{subsection}
+
+        \begin{subsection}{Normal Modes}
+            \begin{align*}
+                 &\hat{q_1'} = -\hat{\psi_1'}(F_1 + K^2) + F_1\hat{\psi_2'}
+                 &\hat{q_2'} = F_2\hat{\psi_1'} - \hat{\psi_2'}(F_2 + K^2) \\
+                &\hat{\psi_1'} = \frac{(F_2 + K^2) \hat{q_1'} + F_1\hat{q_2'}}{F_1F_2 - (F_1 + K^2)(F_2 + K^2)}
+                &\hat{\psi_2'} = \frac{F_2\hat{q_1'} + (F_1 + K^2)\hat{q_2'}}{F_1F_2 - (F_1 + K^2)(F_2 + K^2)} \\
+                &\hat{u_1'} = -ik \hat{\psi_1'}
+                &\hat{u_2'} = -ik \hat{\psi_2'} \\
+                &\hat{u_1'} = -il \hat{\psi_1'}
+                &\hat{u_2'} = -il \hat{\psi_2'} \\
+                &K^2 = k^2 + l^2
+            \end{align*}
+        \end{subsection}
+    \end{section}
 
 \end{document}
