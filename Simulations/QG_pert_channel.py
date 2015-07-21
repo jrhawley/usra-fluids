@@ -80,15 +80,13 @@ except:
     sys.exit()
 
 def filt(k,kcut,beta,alph):
-#SPINS default parameters: 0.6, 2.0, 20.0
-
+    #SPINS default parameters: 0.6, 2.0, 20.0
     knyq = max(k)
     kxcut = kcut*knyq
     filt = np.ones_like(k)
     filt = np.exp(-alph*((np.absolute(k) - kxcut)/(knyq - kxcut))**beta)*(np.absolute(k)>kxcut) + (np.absolute(k)<=kxcut)
 
     return filt
-
 
 def plot_q_qhat(q, t):
 
@@ -181,7 +179,7 @@ class Parms(object):
 
         # Timestepping parameters
         t0  = 0.0,                   # Initial time
-        dt  = 3600.,                # Timestep
+        dt  = 3600.,                 # Timestep
         tf  = 20.*3600.*24.,         # Final time
         npt = 12,                    # Frequency of plotting
     ):
@@ -206,8 +204,8 @@ class Parms(object):
         F   = 0*(f0/(g0*H0))**2
         U   = 0
 
-        self.dx = dx
-        self.dy = dy
+        self.dx  = dx
+        self.dy  = dy
         self.F   = F
         self.U   = U
         self.Q_y = F*U + beta
@@ -228,6 +226,13 @@ class Parms(object):
             K2Fi[0,0] = 0.
         else:
             K2Fi[0,0] = -1./F
+
+        print "-----------------------------"
+        print kx
+        print ky
+        print kxx
+        print kyy
+        print K2Fi
 
         # Save parameters
         self.ikx = 1j*kxx
@@ -315,14 +320,22 @@ def solve_qg(parms, q0):
 #FJP: filter does not stabilize.  Why not?
 #FJP: copy pyfftw from 2dstrat_vort.py
 # Set parameters
-parms = Parms(Nx=64, Ny=64,dt=300, npt = 6*20, tf = 20*3600*24.)
+parms = Parms(
+    Nx=64,
+    Ny=64,
+    dt=300,
+    npt = 6*20,
+    tf = 20*3600*24.,
+    f0 = 20,
+    beta = 10*np.sqrt(2)
+    )
 
 # Initial Conditions
 Lx = parms.Lx
 Ly = parms.Ly
 xx = parms.xx
 yy = parms.yy
-q0  = 1e-4*np.sin(1.0*np.pi*(yy+Ly/2)/Ly)*np.cos(2*np.pi*(xx+Lx/2)/Lx)
+q0  = 1e-4*np.sin(1.0*np.pi*(yy+Ly/2)/Ly)*np.cos(1*np.pi*(xx+Lx/2)/Lx)
 
 # Prepare animation
 plt.ion()
