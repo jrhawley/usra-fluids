@@ -77,6 +77,7 @@ try:
 
 except:
     print Warning("Install pyfftw, it is much faster than numpy fft")
+    sys.exit()
 
 def filt(k,kcut,beta,alph):
 #SPINS default parameters: 0.6, 2.0, 20.0
