@@ -5,7 +5,7 @@
 #
 # Geometry: periodic in x and a channel in y
 #
-# Fields:
+# Fields: 
 #   q : Potential Vorticity
 #   u : zonal velocity
 #   v : meridional velocity
@@ -15,12 +15,12 @@
 #  U  : background velocity
 #  F  : Froude number
 #  Q_y: F*U + beta
-#
-# Evolution Eqns:
+#  
+# Evolution Eqns:	
 #   q_t = - (u + U) q_x - (q_y + Q_y) v
 #
 # Potential Vorticity:
-#   q = psi_xx + psi_yy - F psi
+#   q = psi_xx + psi_yy - F psi 
 #   q_hat = - (K2 + F) psi_hat
 #
 # Geostrophy:
@@ -60,7 +60,7 @@ try:
 
     def zeros(N, dtype="float", bytes=16):
         return pyfftw.n_byte_align(nzeros(N, dtype=dtype), bytes)
-
+    
     # Monkey patches for fft
     ifft = pyfftw.interfaces.numpy_fft.ifft
     fft = pyfftw.interfaces.numpy_fft.fft
@@ -75,18 +75,20 @@ try:
     irfftn = pyfftw.interfaces.numpy_fft.irfftn
     rfftn = pyfftw.interfaces.numpy_fft.rfftn
 
-except:
+except:    
     print Warning("Install pyfftw, it is much faster than numpy fft")
-    sys.exit()
 
 def filt(k,kcut,beta,alph):
+
     #SPINS default parameters: 0.6, 2.0, 20.0
+            
     knyq = max(k)
     kxcut = kcut*knyq
     filt = np.ones_like(k)
     filt = np.exp(-alph*((np.absolute(k) - kxcut)/(knyq - kxcut))**beta)*(np.absolute(k)>kxcut) + (np.absolute(k)<=kxcut)
-
+        
     return filt
+
 
 def plot_q_qhat(q, t):
 
@@ -96,7 +98,7 @@ def plot_q_qhat(q, t):
     plt.pcolormesh(xx/1e3,yy/1e3,q)
     plt.colorbar()
     plt.axes([-Lx/2e3, Lx/2e3, -Ly/2e3, Ly/2e3])
-    name = "PV at t = %5.2f days" % (t/(3600.0*24.0))
+    name = "PV at t = %5.2f" % (t/(3600.0*24.0))
     plt.title(name)
 
     # compute power spectrum and shift ffts
@@ -107,7 +109,7 @@ def plot_q_qhat(q, t):
     qhat = fftshift(qhat)
 
     Sx, Sy = int(parms.Nx/2), parms.Ny
-
+    
     # Plot power spectrum
     plt.subplot(2,1,2)
     #plt.pcolor(kx[Sy:Sy+20,Sx:Sx+20],ky[Sy:Sy+20,Sx:Sx+20],qhat[Sy:Sy+20,Sx:Sx+20])
@@ -115,7 +117,7 @@ def plot_q_qhat(q, t):
                qhat[Sy:int(1.5*Sy),Sx:int(1.5*Sx)])
     #plt.axis([0, 10, 0, 10])
     plt.colorbar()
-    name = "PS at t = %5.2f days" % (t/(3600.0*24.0))
+    name = "PS at t = %5.2f" % (t/(3600.0*24.0))
     plt.title(name)
 
     plt.draw()
@@ -133,7 +135,7 @@ def flux_qg(q, parms):
     # Compute streamfunction
     psie_hat = parms.K2Fi*qe_hat
     psi = (ifftn(psie_hat)).real
-
+        
     # Compute physical velocities
     u = (ifftn(-parms.iky*psie_hat)).real
     v = (ifftn( parms.ikx*psie_hat)).real
@@ -147,12 +149,12 @@ def flux_qg(q, parms):
 
     # Compute flux
     flux = - (u + parms.U)*q_x - (q_y + parms.Q_y)*v
-
+    
     # FJP: energy should include potential energy
     energy = 0.5*np.mean(u**2 + v**2) + np.mean(parms.F*psi**2)
     enstr  = np.mean(q**2)
     mass   = np.mean(psi)
-
+    
     return flux, energy, enstr, mass
 
 
@@ -162,15 +164,15 @@ def flux_qg(q, parms):
 
 class Parms(object):
     """A class to solve the one-layer QG model in a channel."""
-
+    
     def __init__(
         self,
         # Grid size parameters
         Nx=128,                     # x-grid resolution
         Ny=128,                     # y-grid resolution
-        Lx=1000e3,                  # zonal domain size
-        Ly=1000e3,                  # meridional domain size
-
+        Lx=1000e3,                  # zonal domain size 
+        Ly=1000e3,                  # meridional domain size 
+                 
         # Physical parameters
         g0  = 9.81,                 # (reduced) gravity
         H0  = 1000,                 # mean depth
@@ -179,9 +181,14 @@ class Parms(object):
 
         # Timestepping parameters
         t0  = 0.0,                   # Initial time
-        dt  = 3600.,                 # Timestep
+        dt  = 300.,                  # Timestep
         tf  = 20.*3600.*24.,         # Final time
         npt = 12,                    # Frequency of plotting
+
+        # Filter Parameters (Following SPINS)
+        kcut = 0.6, 
+        bet  = 2.0,
+        alph = 20.0,
     ):
 
         # Save parameters
@@ -203,20 +210,20 @@ class Parms(object):
         dy  = Ly/Ny
         F   = 0*(f0/(g0*H0))**2
         U   = 0
-
-        self.dx  = dx
-        self.dy  = dy
+        
+        self.dx = dx
+        self.dy = dy
         self.F   = F
         self.U   = U
         self.Q_y = F*U + beta
-
+    
         # Define Grid
         x = np.linspace(-Lx/2+dx/2,Lx/2-dx/2,Nx)
         y = np.linspace(-Ly/2+dy/2,Ly/2-dy/2,Ny)
         xx,yy = np.meshgrid(x,y)
         self.xx = xx
         self.yy = yy
-
+        
         #  Define wavenumber (frequency)
         kx = 2*np.pi/Lx*np.hstack([range(0,int(Nx/2)), range(-int(Nx/2),0)])
         ky = np.pi/Ly*np.hstack([range(0,Ny), range(-Ny,0)])
@@ -227,32 +234,19 @@ class Parms(object):
         else:
             K2Fi[0,0] = -1./F
 
-        print "-----------------------------"
-        print kx
-        print ky
-        print kxx
-        print kyy
-        print K2Fi
-
-        # Save parameters
+        # Save parameters    
         self.ikx = 1j*kxx
         self.iky = 1j*kyy
         self.K2Fi = K2Fi
         self.xx = xx
         self.yy = yy
 
-        # Filter Parameters (Following SPINS)
-        kcut, beta, alph = 0.6, 2.0, 20.0
-        sfiltx = filt(kx,kcut,beta,alph)
-        sfilty = filt(ky,kcut,beta,alph)
+        # Exponential Filter
+        sfiltx = filt(kx,kcut,bet,alph)
+        sfilty = filt(ky,kcut,bet,alph)
         [sfiltxs, sfiltys] = np.meshgrid(sfiltx,sfilty)
         self.sfilt = sfiltxs*sfiltys
-        #plt.figure()
-        #plt.plot(kx/kx[1],sfiltx,'or')
-        #plt.show()
-        #plt.figure()
-        #plt.plot(ky/ky[1],sfilty,'ob')
-        #plt.show()
+        
 
 #######################################################
 #        Solve 1-Layer QG model in a channel          #
@@ -264,26 +258,26 @@ def solve_qg(parms, q0):
     dt = parms.dt
     Nx = parms.Nx
     Ny = parms.Ny
-
+    
     # initialize fields
     Nt = int(parms.tf/parms.dt)
     energy = np.zeros(Nt)
     enstr  = np.zeros(Nt)
     mass   = np.zeros(Nt)
-
+    
     # Euler step
-    t,ii = 0., 0
+    t,ii = 0., 0 
     NLnm, energy[0], enstr[0], mass[0] = flux_qg(q0, parms)
     q  = q0 + dt*NLnm;
 
     # AB2 step
-    t,ii = parms.dt, 1
+    t,ii = parms.dt, 1 
     NLn, energy[1], enstr[1], mass[1] = flux_qg(q, parms)
     q   = q + 0.5*dt*(3*NLn - NLnm)
 
     kx = fftshift((parms.ikx/parms.ikx[0,1]).real)
     ky = fftshift((parms.iky/parms.iky[1,0]).real)
-
+    
     cnt = 2
     for ii in range(3,Nt+1):
 
@@ -291,7 +285,7 @@ def solve_qg(parms, q0):
         t = (ii-1)*parms.dt
         NL, energy[ii-1], enstr[ii-1], mass[ii-1] = flux_qg(q, parms)
         q  = q + dt/12*(23*NL - 16*NLn + 5*NLnm).real
-
+        
         # Exponential Filter
         qe = np.vstack((q,-np.flipud(q)))
         qe = (ifftn(parms.sfilt*fftn(qe))).real
@@ -320,22 +314,14 @@ def solve_qg(parms, q0):
 #FJP: filter does not stabilize.  Why not?
 #FJP: copy pyfftw from 2dstrat_vort.py
 # Set parameters
-parms = Parms(
-    Nx=64,
-    Ny=64,
-    dt=300,
-    npt = 6*20,
-    tf = 20*3600*24.,
-    f0 = 20,
-    beta = 10*np.sqrt(2)
-    )
+parms = Parms(Nx=64, Ny=64, dt=300, npt = 6*20, tf = 20*3600*24.)
 
 # Initial Conditions
 Lx = parms.Lx
 Ly = parms.Ly
 xx = parms.xx
 yy = parms.yy
-q0  = 1e-4*np.sin(1.0*np.pi*(yy+Ly/2)/Ly)*np.cos(1*np.pi*(xx+Lx/2)/Lx)
+q0  = 1e-4*np.sin(1.0*np.pi*(yy+Ly/2)/Ly)*np.cos(2*np.pi*(xx+Lx/2)/Lx)
 
 # Prepare animation
 plt.ion()
@@ -367,3 +353,4 @@ ax2.set_title('Enstrophy')
 ax3.plot((mass-mass[0]),'-or', linewidth=2, label='Enstrophy')
 ax3.set_title('Mass')
 plt.show()
+

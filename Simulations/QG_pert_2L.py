@@ -15,12 +15,12 @@
 #  U  : background velocity
 #  F  : Froude number
 #  Q_y: F*U + beta
-#
-# Evolution Eqns:
+#  
+# Evolution Eqns:	
 #   q_t = - (u + U) q_x - (q_y + Q_y) v
 #
 # Potential Vorticity:
-#   q = psi_xx + psi_yy - F psi
+#   q = psi_xx + psi_yy - F psi 
 #   q_hat = - (K2 + F) psi_hat
 #
 # Geostrophy:
@@ -58,7 +58,7 @@ try:
 
     def zeros(N, dtype="float", bytes=16):
         return pyfftw.n_byte_align(nzeros(N, dtype=dtype), bytes)
-
+    
     # Monkey patches for fft
     ifft = pyfftw.interfaces.numpy_fft.ifft
     fft = pyfftw.interfaces.numpy_fft.fft
@@ -73,26 +73,62 @@ try:
     irfftn = pyfftw.interfaces.numpy_fft.irfftn
     rfftn = pyfftw.interfaces.numpy_fft.rfftn
 
-except:
+except:    
     print Warning("Install pyfftw, it is much faster than numpy fft")
-    sys.exit()
 
 def filt(k,kcut,beta,alph):
-
+    
     #SPINS default parameters: 0.6, 2.0, 20.0
-
+            
     knyq = max(k)
     kxcut = kcut*knyq
     filt = np.ones_like(k)
     filt = np.exp(-alph*((np.absolute(k) - kxcut)/(knyq - kxcut))**beta)*(np.absolute(k)>kxcut) + (np.absolute(k)<=kxcut)
-
+        
     return filt
+
+def plot_q_qhat(q, t):
+
+    # Plot Potential Vorticity
+    plt.clf()
+    for jj in range(2):
+        plt.subplot(2,2,jj+1)
+        plt.pcolormesh(xx/1e3,yy/1e3,q[:,:,jj])
+        plt.colorbar()
+        name = "PV at t = %5.2f" % (t/(3600.0*24.0))
+        plt.title(name)
+        plt.axes([-Lx/2, Lx/2, -Ly/2, Ly/2])
+
+    kx = fftshift((parms.ikx/parms.ikx[0,1]).real)
+    ky = fftshift((parms.iky/parms.iky[1,0]).real)
+    
+    # compute power spectrum and shift ffts
+    qe = np.zeros((2*Ny,Nx,2))
+    qhat = np.zeros((2*Ny,Nx,2),dtype=complex)
+    
+    for jj in range(2):
+        qe[:,:,jj] = np.vstack((q[:,:,jj],-np.flipud(q[:,:,jj])))
+        qhat[:,:,jj] = np.absolute(fftn(qe[:,:,jj]))
+        qhat[:,:,jj] = fftshift(qhat[:,:,jj])
+
+    Sx, Sy = int(parms.Nx/2), parms.Ny
+
+    # Plot power spectrum
+    for jj in range(2):
+        plt.subplot(2,2,jj+3)
+        plt.pcolor(kx[Sy:int(1.5*Sy),Sx:int(1.5*Sx)],ky[Sy:int(1.5*Sy),Sx:int(1.5*Sx)],
+                   qhat[Sy:int(1.5*Sy),Sx:int(1.5*Sx),jj])
+        plt.colorbar()
+        name = "PS at t = %5.2f" % (t/(3600.0*24.0))
+        plt.title(name)
+
+    plt.draw()
 
 def flux_qg(q, parms):
 
     Nx = parms.Nx
     Ny = parms.Ny
-
+    
     psi = np.zeros((2*Ny,Nx,2),dtype=float)
     u = np.zeros((2*Ny,Nx,2),dtype=float)
     v = np.zeros((2*Ny,Nx,2),dtype=float)
@@ -102,7 +138,7 @@ def flux_qg(q, parms):
     q_y = np.zeros((2*Ny,Nx,2),dtype=float)
     qe_hat = np.zeros((2*Ny,Nx,2),dtype=complex)
     psie_hat = np.zeros((2*Ny,Nx,2),dtype=complex)
-
+    
     # - (u + U) q_x - (q_y + Q_y) v
     for ii in range(2):
         # Extend and take FFT
@@ -119,7 +155,7 @@ def flux_qg(q, parms):
 
     for ii in range(2):
         psi[:,:,ii] = (ifftn(psie_hat[:,:,ii])).real
-
+        
         # Compute physical velocities
         u[:,:,ii] = (ifftn(-parms.iky*psie_hat[:,:,ii])).real
         v[:,:,ii] = (ifftn( parms.ikx*psie_hat[:,:,ii])).real
@@ -133,12 +169,12 @@ def flux_qg(q, parms):
 
         # Compute flux
         flux[:,:,ii] = - (u[0:Ny,:,ii] + parms.U[ii])*q_x[0:Ny,:,ii]- (q_y[0:Ny,:,ii] + parms.Q_y[ii])*v[0:Ny,:,ii]
-
+    
     # FJP: energy should include potential energy
     #energy = 0.5*np.mean(u**2 + v**2) + np.mean(parms.F*psi**2)
     #enstr  = np.mean(q**2)
     #mass   = np.mean(psi)
-
+    
     return flux
 
 
@@ -148,18 +184,18 @@ def flux_qg(q, parms):
 
 class Parms(object):
     """A class to solve the one-layer QG model in a channel."""
-
+    
     def __init__(
         self,
         # Grid size parameters
         Nx=128,                     # x-grid resolution
         Ny=128,                     # y-grid resolution
-        Lx=1000e3,                  # zonal domain size
-        Ly=1000e3,                  # meridional domain size
-
+        Lx=1000e3,                  # zonal domain size 
+        Ly=1000e3,                  # meridional domain size 
+                 
         # Physical parameters
         g0  = 9.81,                 # (reduced) gravity
-        H1  = 500,                  # mean upper depth
+        H1  = 500,                  # mean upper depth 
         H2  = 500,                  # mean lower depth
         f0  = 1e-4,                 # Coriolis parameter        H0  = 1000,                 # mean depth
         beta= 1e-11,                # gradient of coriolis parameter
@@ -170,10 +206,10 @@ class Parms(object):
         t0  = 0.0,                   # Initial time
         dt  = 300.,                  # Timestep
         tf  = 50.*3600.*24.,         # Final time
-        npt = 60,                    # Frequency of plotting
-
+        npt = 60,                   # Frequency of plotting
+        
         # Filter Parameters (Following SPINS)
-        kcut = 0.4,
+        kcut = 0.4, 
         bet  = 2.0,
         alph = 20.0,
     ):
@@ -197,19 +233,19 @@ class Parms(object):
         dx  = Lx/Nx
         dy  = Ly/Ny
         U   = np.array([1,-1])
-
+        
         self.dx = dx
         self.dy = dy
         self.U   = U
         self.Q_y = self.F*U + beta
-
+    
         # Define Grid
         x = np.linspace(-Lx/2+dx/2,Lx/2-dx/2,Nx)
         y = np.linspace(-Ly/2+dy/2,Ly/2-dy/2,Ny)
         xx,yy = np.meshgrid(x,y)
         self.xx = xx
         self.yy = yy
-
+        
         #  Define wavenumber (frequency)
         kx = 2*np.pi/Lx*np.hstack([range(0,int(Nx/2)+1), range(-int(Nx/2)+1,0)])
         ky = np.pi/Ly*np.hstack([range(0,Ny+1), range(-Ny+1,0)])
@@ -217,17 +253,17 @@ class Parms(object):
         K2 = kxx**2 + kyy**2
         W1 = np.zeros((2*Ny,Nx,2))
         W2 = np.zeros((2*Ny,Nx,2))
-        W1[:,:,0] = -(self.F[1] + K2)/(K2*(K2 + self.F[0] + self.F[1]))
-        W1[:,:,1] = -self.F[0]/(K2*(K2 + self.F[0] + self.F[1]))
-        W2[:,:,0] = -self.F[1]/(K2*(K2 + self.F[0] + self.F[1]))
+        W1[:,:,0] = -(self.F[1] + K2)/(K2*(K2 + self.F[0] + self.F[1])) 
+        W1[:,:,1] = -self.F[0]/(K2*(K2 + self.F[0] + self.F[1])) 
+        W2[:,:,0] = -self.F[1]/(K2*(K2 + self.F[0] + self.F[1])) 
         W2[:,:,1] = -(self.F[0] + K2)/(K2*(K2 + self.F[0] + self.F[1]))
         W1[0,0,0] = 0.0
         W1[0,0,1] = 0.0
         W2[0,0,0] = 0.0
         W2[0,0,1] = 0.0
+        
 
-
-        # Save parameters
+        # Save parameters    
         self.ikx = 1j*kxx
         self.iky = 1j*kyy
         self.W1 = W1
@@ -258,7 +294,7 @@ class Parms(object):
         #plt.plot(ky/ky[1], np.exp(-alpha*(ky**2)**(beta/2.0)),'ob')
         #plt.show()
         #sys.exit()
-
+        
 #######################################################
 #        Solve 2-Layer QG model in a channel          #
 #######################################################
@@ -269,20 +305,20 @@ def solve_qg(parms, q0):
     dt = parms.dt
     Nx = parms.Nx
     Ny = parms.Ny
-
+    
     # initialize fields
     Nt = int(parms.tf/parms.dt)
     #energy = np.zeros(Nt)
     #enstr  = np.zeros(Nt)
     #mass   = np.zeros(Nt)
-
+    
     # Euler step
-    t,ii = 0., 0
+    t,ii = 0., 0 
     NLnm = flux_qg(q0, parms)
     q  = q0 + dt*NLnm;
 
     # AB2 step
-    t,ii = parms.dt, 1
+    t,ii = parms.dt, 1 
     NLn = flux_qg(q, parms)
     q   = q + 0.5*dt*(3*NLn - NLnm)
 
@@ -294,7 +330,7 @@ def solve_qg(parms, q0):
         t = (ii-1)*parms.dt
         NL = flux_qg(q, parms)
         q  = q + dt/12*(23*NL - 16*NLn + 5*NLnm).real
-
+        
         # Exponential Filter
         for jj in range(2):
             qe[:,:,jj] = np.vstack((q[:,:,jj],-np.flipud(q[:,:,jj])))
@@ -309,17 +345,11 @@ def solve_qg(parms, q0):
 
             # make title
             name = "PV at t = %5.2f" % (t/(3600.0*24.0))
-
+            
             # Plot PV (or streamfunction)
-            plt.clf()
-            for jj in range(2):
-                plt.subplot(1,2,jj+1)
-                plt.pcolormesh(xx/1e3,yy/1e3,q[:,:,jj])
-                plt.colorbar()
-                plt.title(name)
-                plt.axes([-Lx/2, Lx/2, -Ly/2, Ly/2])
+            plot_q_qhat(q, t)
             plt.draw()
-
+            
             cnt += 1
 
     return q
@@ -331,7 +361,7 @@ def solve_qg(parms, q0):
 # Numerical parameters
 
 # Set parameters
-parms = Parms()
+parms = Parms(Nx = 64, Ny = 64, dt = 600)
 Nx = parms.Nx
 Ny = parms.Ny
 
@@ -352,18 +382,12 @@ plt.ion()
 plt.clf()
 
 # Plot Potential Vorticity
-for jj in range(2):
-    plt.subplot(1,2,jj+1)
-    plt.pcolormesh(xx/1e3,yy/1e3,q0[:,:,jj])
-    plt.colorbar()
-    #plt.title(name)
-    plt.axes([-Lx/2, Lx/2, -Ly/2, Ly/2])
-    plt.draw()
-
-plt.show()
+plot_q_qhat(q0,0)
+plt.draw()
 
 # Find Solution
 q = solve_qg(parms,q0)
 
 plt.ioff()
 plt.show()
+
