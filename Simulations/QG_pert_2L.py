@@ -129,7 +129,7 @@ def plot_q_qhat(q, t):
         plt.title(name)
 
     plt.draw()
-    plt.savefig(fname + '\\%d.png' % (t))
+    plt.savefig(fname + os.sep + '%d.png' % (t))
 
 def flux_qg(q, parms):
 
