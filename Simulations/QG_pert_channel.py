@@ -84,6 +84,7 @@ except:
 # Make directory to store pictures in
 fname = strftime("%Y-%m-%d %H;%M;%S", gmtime())
 os.mkdir(fname)
+cnt = 0
 
 def filt(k,kcut,beta,alph):
 
@@ -127,7 +128,7 @@ def plot_q_qhat(q, t):
     plt.title(name)
 
     plt.draw()
-    plt.savefig(fname + os.sep + '%d.png' % (t))
+    plt.savefig(fname + os.sep + '%03d.png' % (cnt))
 
 def flux_qg(q, parms):
 
@@ -261,6 +262,7 @@ class Parms(object):
 
 def solve_qg(parms, q0):
 
+    global cnt
     # Set parameters
     dt = parms.dt
     Nx = parms.Nx
@@ -285,7 +287,7 @@ def solve_qg(parms, q0):
     kx = fftshift((parms.ikx/parms.ikx[0,1]).real)
     ky = fftshift((parms.iky/parms.iky[1,0]).real)
 
-    cnt = 2
+    cnt = 1
     for ii in range(3,Nt+1):
 
         # AB3 step
@@ -320,14 +322,14 @@ def solve_qg(parms, q0):
 #FJP: filter does not stabilize.  Why not?
 #FJP: copy pyfftw from 2dstrat_vort.py
 # Set parameters
-parms = Parms(Nx=64, Ny=64, dt=300, npt = 6*20, tf = 50*3600*24.)
+parms = Parms(Nx=64, Ny=64, dt=300, npt = 6*20, tf = 20*3600*24.)
 
 # Initial Conditions
 Lx = parms.Lx
 Ly = parms.Ly
 xx = parms.xx
 yy = parms.yy
-q0  = 1.0e-4/3.0*np.sin(1.0*np.pi*(yy+Ly/2)/Ly)*np.cos(2.0*np.pi*(xx+Lx/2)/Lx) + 1.0e-4/3.0*np.sin(1.0*np.pi*(yy+Ly/2)/Ly)*np.cos(-2.0*np.pi*(xx+Lx/2)/Lx) +  1.0e-4/3.0*np.sin(-1.0*np.pi*(yy+Ly/2)/Ly)*np.cos(0*np.pi*(xx+Lx/2)/Lx)
+q0 = 1.0e-4*np.sin(-1.0*np.pi*(yy+Ly/2)/Ly)*np.cos(0*np.pi*(xx+Lx/2)/Lx)
 
 # Prepare animation
 plt.ion()

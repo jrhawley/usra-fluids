@@ -81,6 +81,7 @@ except:
 # Make directory to store pictures in
 fname = strftime("%Y-%m-%d %H;%M;%S", gmtime())
 os.mkdir(fname)
+cnt = 0
 
 def filt(k,kcut,beta,alph):
 
@@ -129,7 +130,7 @@ def plot_q_qhat(q, t):
         plt.title(name)
 
     plt.draw()
-    plt.savefig(fname + os.sep + '%d.png' % (t))
+    plt.savefig(fname + os.sep + '%03d.png' % (cnt))
 
 def flux_qg(q, parms):
 
@@ -308,6 +309,7 @@ class Parms(object):
 
 def solve_qg(parms, q0):
 
+    global cnt
     # Set parameters
     dt = parms.dt
     Nx = parms.Nx
@@ -330,7 +332,7 @@ def solve_qg(parms, q0):
     q   = q + 0.5*dt*(3*NLn - NLnm)
 
     qe = np.zeros((2*Ny,Nx,2), dtype=float)
-    cnt = 2
+    cnt = 1
     for ii in range(3,Nt+1):
 
         # AB3 step
@@ -368,7 +370,7 @@ def solve_qg(parms, q0):
 # Numerical parameters
 
 # Set parameters
-parms = Parms(Nx = 64, Ny = 64, dt = 600)
+parms = Parms(Nx = 64, Ny = 64, dt = 600, tf = 50.*3600.*24.)
 Nx = parms.Nx
 Ny = parms.Ny
 
@@ -379,8 +381,8 @@ xx = parms.xx
 yy = parms.yy
 
 q0 = np.zeros((Ny,Nx,2))
-q0[:,:,0]  = 1e-8*np.sin(1.0*np.pi*(yy+Ly/2)/Ly)*np.cos(2.0*np.pi*(xx+Lx/2)/Lx)
-q0[:,:,1]  = 1e-8*np.sin(1.0*np.pi*(yy+Ly/2)/Ly)*np.cos(2.0*np.pi*(xx+Lx/2)/Lx)
+q0[:,:,0]  = 1e-8*np.sin(-2.0*np.pi*(yy+Ly/2)/Ly)*np.cos(0*np.pi*(xx+Lx/2)/Lx)
+q0[:,:,1]  = 1e-8*np.sin(-2.0*np.pi*(yy+Ly/2)/Ly)*np.cos(0*np.pi*(xx+Lx/2)/Lx)
 
 q0 = 1e-10*np.random.rand(Ny,Nx,2)
 
