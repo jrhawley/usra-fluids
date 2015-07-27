@@ -37,15 +37,17 @@
 
 # Import libraries
 from __future__ import division
-#import numpy as np
-from numpy import linalg as LA
+
+import os
+import csv
 import scipy as np
 import matplotlib.pyplot as plt
+import sys
+
 #from scipy.fftpack import fft, ifft, fftn, ifftn, fftshift, fftfreq
 from scipy.fftpack import fftshift, fftfreq
-import sys
+from numpy import linalg as LA
 from time import gmtime, strftime
-import os
 
 try:
     import pyfftw
@@ -79,8 +81,8 @@ except:
     print Warning("Install pyfftw, it is much faster than numpy fft")
 
 # Make directory to store pictures in
-fname = strftime("%Y-%m-%d %H;%M;%S", gmtime())
-os.mkdir(fname)
+#fname = strftime("%Y-%m-%d %H;%M;%S", gmtime())
+#os.mkdir(fname)
 cnt = 0
 
 def filt(k,kcut,beta,alph):
@@ -93,6 +95,7 @@ def filt(k,kcut,beta,alph):
     filt = np.exp(-alph*((np.absolute(k) - kxcut)/(knyq - kxcut))**beta)*(np.absolute(k)>kxcut) + (np.absolute(k)<=kxcut)
 
     return filt
+
 
 def plot_q_qhat(q, t):
 
@@ -129,8 +132,14 @@ def plot_q_qhat(q, t):
         name = "PS at t = %5.2f" % (t/(3600.0*24.0))
         plt.title(name)
 
+        for kx_i in kx[Sy:int(1.5*Sy),Sx:int(1.5*Sx)]:
+            for ky_i in ky[Sy:int(1.5*Sy),Sx:int(1.5*Sx)]:
+                for q_i in qhat[Sy:int(1.5*Sy),Sx:int(1.5*Sx),jj]:
+                    results_to_csv('output.csv', [t/(3600.0*24.0), kx_i, ky_i, q_i])
+
     plt.draw()
-    plt.savefig(fname + os.sep + '%03d.png' % (cnt))
+    #plt.savefig(fname + os.sep + '%03d.png' % (cnt))
+
 
 def flux_qg(q, parms):
 
@@ -185,6 +194,18 @@ def flux_qg(q, parms):
 
     return flux
 
+
+def results_to_csv(file, row):
+    csvwriter = csv.writer(open(file, 'a'), lineterminator='\n')
+    if os.stat(file).st_size == 0:
+        header = ['Time', 'W1_Amp', 'W2_Amp', 'W3_Amp']
+        csvwriter.writerow(header)
+
+    # append all data to csv
+    csvwriter.writerow(row)
+    # close csvs
+    with open(file, 'a') as f:
+        f.close()
 
 #######################################################
 #        Parameters Class                             #
