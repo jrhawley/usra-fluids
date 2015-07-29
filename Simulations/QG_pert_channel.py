@@ -39,16 +39,17 @@
 
 # Import libraries
 from __future__ import division
-#import numpy as np
-from numpy import linalg as LA
-import scipy as np
-import matplotlib.pyplot as plt
-#from scipy.fftpack import fft, ifft, fftn, ifftn, fftshift, fftfreq
-from scipy.fftpack import fftshift, fftfreq
-import sys
-from time import gmtime, strftime
-import os
 
+import csv
+import matplotlib.pyplot as plt
+import os
+import scipy as np
+import sys
+
+#from scipy.fftpack import fft, ifft, fftn, ifftn, fftshift, fftfreq
+from numpy import linalg as LA
+from scipy.fftpack import fftshift, fftfreq
+from time import gmtime, strftime
 
 try:
     import pyfftw
@@ -83,8 +84,10 @@ except:
 
 # Make directory to store pictures in
 fname = strftime("%Y-%m-%d %H;%M;%S", gmtime())
-os.mkdir(fname)
 cnt = 0
+KX = 0.
+KY = -2.
+file = 'output.csv'
 
 def filt(k,kcut,beta,alph):
 
@@ -98,7 +101,6 @@ def filt(k,kcut,beta,alph):
     return filt
 
 def plot_q_qhat(q, t):
-
     # Plot Potential Vorticity
     plt.clf()
     plt.subplot(2,1,1)
@@ -110,7 +112,7 @@ def plot_q_qhat(q, t):
 
     # compute power spectrum and shift ffts
     qe = np.vstack((q0,-np.flipud(q)))
-    qhat = (np.absolute(fftn(qe)))
+    qhat = np.absolute(fftn(qe))
     kx = fftshift((parms.ikx/parms.ikx[0,1]).real)
     ky = fftshift((parms.iky/parms.iky[1,0]).real)
     qhat = fftshift(qhat)
@@ -122,13 +124,19 @@ def plot_q_qhat(q, t):
     #plt.pcolor(kx[Sy:Sy+20,Sx:Sx+20],ky[Sy:Sy+20,Sx:Sx+20],qhat[Sy:Sy+20,Sx:Sx+20])
     plt.pcolor(kx[Sy:int(1.5*Sy),Sx:int(1.5*Sx)],ky[Sy:int(1.5*Sy),Sx:int(1.5*Sx)],
                qhat[Sy:int(1.5*Sy),Sx:int(1.5*Sx)])
-    #plt.axis([0, 10, 0, 10])
+    plt.axis([0, 10, 0, 10])
     plt.colorbar()
     name = "PS at t = %5.2f" % (t/(3600.0*24.0))
     plt.title(name)
 
     plt.draw()
-    plt.savefig(fname + os.sep + '%03d.png' % (cnt))
+    #plt.savefig(os.path.join(fname, '%03d.png' % (cnt)))
+    for idx_x, ii in enumerate(qhat):
+        for idx_y, jj in enumerate(ii):
+            if 0 != jj:
+                print idx_x, idx_y, jj
+    results_to_csv(csvwriter, [t, int(KX), int(KY), qhat[int(KY), int(KX)]])
+    results_to_csv(csvwriter, [t, int(KX), int(KY), qhat[int(KX), int(KY)]])
 
 def flux_qg(q, parms):
 
@@ -164,6 +172,11 @@ def flux_qg(q, parms):
     mass   = np.mean(psi)
 
     return flux, energy, enstr, mass
+
+
+def results_to_csv(row):
+    file.writerow(row)
+
 
 
 #######################################################
@@ -329,17 +342,24 @@ Lx = parms.Lx
 Ly = parms.Ly
 xx = parms.xx
 yy = parms.yy
-q0 = 1.0e-4*np.sin(-1.0*np.pi*(yy+Ly/2)/Ly)*np.cos(0*np.pi*(xx+Lx/2)/Lx)
+q0 = 1.0e-4*np.sin(KY*np.pi*(yy+Ly/2)/Ly)*np.cos(KX*np.pi*(xx+Lx/2)/Lx)
 
 # Prepare animation
-plt.ion()
-plt.clf()
+#plt.ion()
+#plt.clf()
 
+os.mkdir(fname)
+csvwriter = csv.writer(open(file, 'a'), lineterminator='\n')
+csvwriter.writerow(['Time', 'kx', 'ky', 'Amp'])
 plot_q_qhat(q0,0)
-plt.draw()
+with open(file, 'a') as f: #close csv
+    f.close()
+
+print "Done"
+#plt.draw()
 
 # Find Solution
-q, energy, enstr, mass = solve_qg(parms,q0)
+#q, energy, enstr, mass = solve_qg(parms,q0)
 
-plt.ioff()
-plt.show()
+#plt.ioff()
+#plt.show()
