@@ -85,8 +85,6 @@ except:
 # Make directory to store pictures in
 fname = strftime("%Y-%m-%d %H;%M;%S", gmtime())
 cnt = 0
-KX = 0.
-KY = -2.
 file = 'output.csv'
 
 def filt(k,kcut,beta,alph):
@@ -124,7 +122,7 @@ def plot_q_qhat(q, t):
     #plt.pcolor(kx[Sy:Sy+20,Sx:Sx+20],ky[Sy:Sy+20,Sx:Sx+20],qhat[Sy:Sy+20,Sx:Sx+20])
     plt.pcolor(kx[Sy:int(1.5*Sy),Sx:int(1.5*Sx)],ky[Sy:int(1.5*Sy),Sx:int(1.5*Sx)],
                qhat[Sy:int(1.5*Sy),Sx:int(1.5*Sx)])
-    plt.axis([0, 10, 0, 10])
+    plt.axis([-10, 10, -10, 10])
     plt.colorbar()
     name = "PS at t = %5.2f" % (t/(3600.0*24.0))
     plt.title(name)
@@ -133,8 +131,8 @@ def plot_q_qhat(q, t):
     #plt.savefig(os.path.join(fname, '%03d.png' % (cnt)))
     for idx_x, ii in enumerate(qhat):
         for idx_y, jj in enumerate(ii):
-            if 0 != jj:
-                print idx_x, idx_y, jj
+            if np.finfo(float).eps < jj:
+                print idx_x, idx_y, jj, kx[idx_x, idx_y], ky[idx_x, idx_y]
     results_to_csv(csvwriter, [t, int(KX), int(KY), qhat[int(KY), int(KX)]])
     results_to_csv(csvwriter, [t, int(KX), int(KY), qhat[int(KX), int(KY)]])
 
@@ -174,7 +172,7 @@ def flux_qg(q, parms):
     return flux, energy, enstr, mass
 
 
-def results_to_csv(row):
+def results_to_csv(file, row):
     file.writerow(row)
 
 
@@ -254,6 +252,12 @@ class Parms(object):
             K2Fi[0,0] = 0.
         else:
             K2Fi[0,0] = -1./F
+
+        # Parameters for waves of interest
+        self.KX = 0
+        self.KX_idx = np.where(kx == self.KX*2*np.pi/Lx)
+        self.KY = -2
+        self.KY_idx = np.where(ky == self.KY*np.pi/Ly)
 
         # Save parameters
         self.ikx = 1j*kxx
@@ -337,6 +341,13 @@ def solve_qg(parms, q0):
 # Set parameters
 parms = Parms(Nx=64, Ny=64, dt=300, npt = 6*20, tf = 20*3600*24.)
 
+KX = parms.KX
+KX_idx = parms.KX_idx
+KY = parms.KY
+KY_idx = parms.KY_idx
+print KX, KX_idx, KY, KY_idx
+
+
 # Initial Conditions
 Lx = parms.Lx
 Ly = parms.Ly
@@ -345,21 +356,21 @@ yy = parms.yy
 q0 = 1.0e-4*np.sin(KY*np.pi*(yy+Ly/2)/Ly)*np.cos(KX*np.pi*(xx+Lx/2)/Lx)
 
 # Prepare animation
-#plt.ion()
-#plt.clf()
+plt.ion()
+plt.clf()
 
-os.mkdir(fname)
+#os.mkdir(fname)
 csvwriter = csv.writer(open(file, 'a'), lineterminator='\n')
 csvwriter.writerow(['Time', 'kx', 'ky', 'Amp'])
 plot_q_qhat(q0,0)
 with open(file, 'a') as f: #close csv
     f.close()
 
+plt.draw()
 print "Done"
-#plt.draw()
 
 # Find Solution
 #q, energy, enstr, mass = solve_qg(parms,q0)
 
-#plt.ioff()
-#plt.show()
+plt.ioff()
+plt.show()
