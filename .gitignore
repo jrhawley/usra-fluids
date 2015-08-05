@@ -3,3 +3,7 @@
 *.log
 images*/*
 ._*
+*.out
+*.nav
+USRA Presentation/presentation.snm
+*.toc
