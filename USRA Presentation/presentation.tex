@@ -2,6 +2,8 @@
 \usetheme{Singapore}
 \usecolortheme{beaver}
 \usepackage{subfig}
+\usepackage{float}
+\graphicspath{{./img/}}
 
 
 
@@ -24,18 +26,44 @@
 
 	\section{Background}
 		\subsection{Shallow Water Model}
-			\begin{frame}[t]{Shallow Water Assumptions}
-				body
+			\begin{frame}[t]{Shallow Water Model}
+				\begin{center}
+					\includegraphics[width=0.4\textwidth]{nested_models_sw.png}
+				\end{center}
 			\end{frame}
-			\begin{frame}[t]{Shallow Water Equations}
-				body
+			\begin{frame}[t]{Shallow Water Model}
+				\begin{center}
+					\begin{minipage}{0.45\textwidth}
+						\includegraphics[width=\textwidth]{sw_diagram.png}
+					\end{minipage}
+					\begin{minipage}{0.45\textwidth}
+						\begin{align*}
+							0 &=\nabla \cdot \vec u\\
+							0 &=\frac{\partial h}{\partial t} + \frac{\partial}{\partial x}(hu) + \frac{\partial}{\partial y}(hv)
+						\end{align*}
+					\end{minipage}
+				\end{center}
+			\end{frame}
+		\subsection{Quasigeostrophic Model}
+			\begin{frame}[t]{Geostrophic Model}
+				\begin{center}
+					\includegraphics[width=0.4\textwidth]{nested_models_qg.png}
+				\end{center}
+			\end{frame}
+			\begin{frame}[t]{Quasigeostrophic Model}
+				\begin{center}
+					\begin{align*}
+						0 &=\frac{\partial q}{\partial t} + J(\psi, q) \\
+						J(a, b) &=\frac{\partial a}{\partial x}\frac{\partial b}{\partial y} - \frac{\partial a}{\partial y}\frac{\partial b}{\partial x}
+					\end{align*}
+				\end{center}
 			\end{frame}
 		\subsection{Hamiltonian Equations}
 
 	\section{Main Work}
 
 	\section{References}
-		\begin{frame}{Refrences}
+		\begin{frame}{References}
 			\begin{enumerate}
 				\item Reference
 			\end{enumerate}
