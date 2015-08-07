@@ -25,6 +25,40 @@
 		\end{frame}
 
 	\section{Background}
+		\subsection{Hamiltonian Dynamics}
+			\begin{frame}[t]{Classical Mechanics}
+				\begin{minipage}{0.45\textwidth}
+					\begin{itemize}
+						\item<2-> Newtonian Dynamics
+						\item<3-> Solve system of coupled ODEs or PDEs
+						\item<3-> $\frac{d \vec p}{dt} = -\nabla \Pi$
+					\end{itemize}
+				\end{minipage}
+				\begin{minipage}{0.45\textwidth}
+					\begin{itemize}
+						\item<4-> Navier-Stokes Equations
+						\item<5-> Solve system of coupled, non-linear, PDEs
+						\item<5-> $\rho\frac{d \vec u}{dt} = -\nabla p + \rho \nabla \Pi + F$
+					\end{itemize}
+				\end{minipage}
+			\end{frame}
+			\begin{frame}[t]{Hamiltonian Dynamics}
+				\begin{minipage}{0.45\textwidth}
+					\begin{itemize}
+						\item<2-> Particles
+						\item<3-> Solve system of coupled, first order PDEs
+						\item<3-> $\frac{d \vec p}{dt} = -\nabla \Pi$
+					\end{itemize}
+				\end{minipage}
+				\begin{minipage}{0.45\textwidth}
+					\begin{itemize}
+						\item<4-> Navier-Stokes Equations
+						\item<5-> Solve system of coupled, non-linear, PDEs
+						\item<5-> $\rho\frac{d \vec u}{dt} = -\nabla p + \rho \nabla \Pi + F$
+					\end{itemize}
+				\end{minipage}
+			\end{frame}
+
 		\subsection{Shallow Water Model}
 			\begin{frame}[t]{Shallow Water Model}
 				\begin{center}
@@ -50,11 +84,22 @@
 					\includegraphics[width=0.4\textwidth]{nested_models_qg.png}
 				\end{center}
 			\end{frame}
+			\begin{frame}[t]{Geostropic Model}
+				\begin{align*}
+					\frac{d \vec u}{dt} + 2 \vec \Omega \times \vec u &= -\frac{\nabla p}{\rho} + \nabla \Pi + \frac{F}{\rho}\\
+					\vec u &= \text{velocity field}\\
+					\vec \Omega &= \text{rotation vector}\\
+					p &= \text{pressure}\\
+					\Pi &= \text{scalar potential field}\\
+					F &= \text{viscous forces}\\
+				\end{align*}
+			\end{frame}
+			%--- Next Frame ---%
 			\begin{frame}[t]{Quasigeostrophic Model}
 				\begin{center}
 					\begin{align*}
 						0 &=\frac{\partial q}{\partial t} + J(\psi, q) \\
-						J(a, b) &=\frac{\partial a}{\partial x}\frac{\partial b}{\partial y} - \frac{\partial a}{\partial y}\frac{\partial b}{\partial x}
+						J(a, b) &=\frac{\partial a}{\partial x}\frac{\partial b}{\partial y} - \frac{\partial a}{\partial y}\frac{\partial b}{\partial x} \\
 					\end{align*}
 				\end{center}
 			\end{frame}
