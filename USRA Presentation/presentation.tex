@@ -27,37 +27,47 @@
 	\section{Background}
 		\subsection{Hamiltonian Dynamics}
 			\begin{frame}[t]{Classical Mechanics}
-				\begin{minipage}{0.45\textwidth}
-					\begin{itemize}
-						\item<2-> Newtonian Dynamics
-						\item<3-> $\frac{d^2 \vec q}{dt} = -\nabla \Pi$
-						\item<3-> Solve second order system
-					\end{itemize}
-				\end{minipage}
-				\begin{minipage}{0.45\textwidth}
-					\begin{itemize}
-						\item<4-> Hamiltonian Dynamics
-						\item<5-> $\frac{d \vec p}{dt} = -\frac{\partial \mathcal{H}}{\partial \vec q}$
-						\item<5-> $\frac{d \vec q}{dt} = \frac{\partial \mathcal{H}}{\partial \vec p}$
-						\item<5-> Often first order, coupled system
-					\end{itemize}
-				\end{minipage}
+				\begin{columns}
+					\begin{column}{0.5\textwidth}
+						\begin{itemize}
+							\item[]<2-> \textbf{Newtonian Dynamics}
+							\item<3-> $\frac{d^2 \vec q}{dt} = -\nabla \Pi$
+							\item<3-> Second order system
+						\end{itemize}
+					\end{column}
+					\begin{column}{0.5\textwidth}
+						\begin{itemize}
+							\item[]<4-> \textbf{Hamiltonian Dynamics}
+							\item<5-> $\frac{d \vec p}{dt} = -\frac{\partial H}{\partial \vec q}, \frac{d \vec q}{dt} = \frac{\partial \mathcal{H}}{\partial \vec p}$
+							\item<5-> First order, coupled system
+						\end{itemize}
+					\end{column}
+				\end{columns}
 			\end{frame}
 			\begin{frame}[t]{Fluids}
-				\begin{minipage}{0.45\textwidth}
-					\begin{itemize}
-						\item<2-> Navier-Stokes Equations
-						\item<3-> $\rho\frac{d \vec u}{dt} = -\nabla p + \rho \nabla \Pi + F$
-						\item<3-> Solve system of coupled, non-linear, PDEs
-					\end{itemize}
-				\end{minipage}
-				\begin{minipage}{0.45\textwidth}
-					\begin{itemize}
-						\item<4-> Hamiltonian
-						\item<5-> $\frac{d \vec p}{dt} = -\frac{\partial \mathcal{H}}{\partial \vec q}$
-						\item<5-> $\frac{d \vec q}{dt} = \frac{\partial \mathcal{H}}{\partial \vec q}$
-					\end{itemize}
-				\end{minipage}
+				\begin{columns}
+					\begin{column}{0.5\textwidth}
+						\begin{itemize}
+							\item[]<2-> \textbf{Navier-Stokes Equations}
+							\item<3-> $\rho\frac{d \vec u}{dt} = -\nabla p + \rho \nabla \Pi + F$
+							\item<3-> Coupled, first order, nonlinear system
+						\end{itemize}
+					\end{column}
+					\begin{column}{0.5\textwidth}
+						\begin{itemize}
+							\item[]<4-> \textbf{Hamiltonian}
+							\item<5-> $\frac{d \vec p}{dt} = -\frac{\delta \mathcal{H}}{\delta \vec q}, \frac{d \vec q}{dt} = \frac{\delta \mathcal{H}}{\delta \vec p}$
+							\item<5-> Coupled, first order, linear system
+						\end{itemize}
+					\end{column}
+				\end{columns}
+			\end{frame}
+			\begin{frame}[t]{Hamiltonian Fluid Dynamics}
+				\begin{itemize}
+					\item[]<2-> System of PDEs $$\mathbf{0} = F\left(\mathbf{q}, \frac{\partial}{\partial x_i}, \frac{\partial}{\partial t} \right)$$
+					\item[]<3-> Hamiltonian $$\mathcal{H} = \iiint_\Omega H(\mathbf{q}) dV$$
+					\item[]<4-> Canonical equations $$\mathbf{q}_t = \mathbf{J}\frac{\delta \mathcal{H}}{\delta \mathbf{q}}$$
+				\end{itemize}
 			\end{frame}
 
 		\subsection{Shallow Water Model}
