@@ -30,31 +30,32 @@
 				\begin{minipage}{0.45\textwidth}
 					\begin{itemize}
 						\item<2-> Newtonian Dynamics
-						\item<3-> Solve system of coupled ODEs or PDEs
-						\item<3-> $\frac{d \vec p}{dt} = -\nabla \Pi$
+						\item<3-> $\frac{d^2 \vec q}{dt} = -\nabla \Pi$
+						\item<3-> Solve second order system
 					\end{itemize}
 				\end{minipage}
 				\begin{minipage}{0.45\textwidth}
 					\begin{itemize}
-						\item<4-> Navier-Stokes Equations
-						\item<5-> Solve system of coupled, non-linear, PDEs
-						\item<5-> $\rho\frac{d \vec u}{dt} = -\nabla p + \rho \nabla \Pi + F$
+						\item<4-> Hamiltonian Dynamics
+						\item<5-> $\frac{d \vec p}{dt} = -\frac{\partial \mathcal{H}}{\partial \vec q}$
+						\item<5-> $\frac{d \vec q}{dt} = \frac{\partial \mathcal{H}}{\partial \vec p}$
+						\item<5-> Often first order, coupled system
 					\end{itemize}
 				\end{minipage}
 			\end{frame}
-			\begin{frame}[t]{Hamiltonian Dynamics}
+			\begin{frame}[t]{Fluids}
 				\begin{minipage}{0.45\textwidth}
 					\begin{itemize}
-						\item<2-> Particles
-						\item<3-> Solve system of coupled, first order PDEs
-						\item<3-> $\frac{d \vec p}{dt} = -\nabla \Pi$
+						\item<2-> Navier-Stokes Equations
+						\item<3-> $\rho\frac{d \vec u}{dt} = -\nabla p + \rho \nabla \Pi + F$
+						\item<3-> Solve system of coupled, non-linear, PDEs
 					\end{itemize}
 				\end{minipage}
 				\begin{minipage}{0.45\textwidth}
 					\begin{itemize}
-						\item<4-> Navier-Stokes Equations
-						\item<5-> Solve system of coupled, non-linear, PDEs
-						\item<5-> $\rho\frac{d \vec u}{dt} = -\nabla p + \rho \nabla \Pi + F$
+						\item<4-> Hamiltonian
+						\item<5-> $\frac{d \vec p}{dt} = -\frac{\partial \mathcal{H}}{\partial \vec q}$
+						\item<5-> $\frac{d \vec q}{dt} = \frac{\partial \mathcal{H}}{\partial \vec q}$
 					\end{itemize}
 				\end{minipage}
 			\end{frame}
@@ -103,7 +104,6 @@
 					\end{align*}
 				\end{center}
 			\end{frame}
-		\subsection{Hamiltonian Equations}
 
 	\section{Main Work}
 
