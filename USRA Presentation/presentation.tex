@@ -7,7 +7,7 @@
 
 
 
-\title{Quasigeostrophic fluids and resonant interactions}
+\title{Hamiltonian Dynamics of Fluids}
 \author{James Hawley}
 \date{August 14, 2015}
 \institute{University of Waterloo}
@@ -64,12 +64,29 @@
 			\end{frame}
 			\begin{frame}[t]{Hamiltonian Fluid Dynamics}
 				\begin{itemize}
-					\item[]<2-> System of PDEs $$\mathbf{0} = F\left(\mathbf{q}, \frac{\partial}{\partial x_i}, \frac{\partial}{\partial t} \right)$$
-					\item[]<3-> Hamiltonian $$\mathcal{H} = \iiint_\Omega H(\mathbf{q}) dV$$
-					\item[]<4-> Canonical equations $$\mathbf{q}_t = \mathbf{J}\frac{\delta \mathcal{H}}{\delta \mathbf{q}}$$
+					\item[]<2-> System of PDEs $$\mathbf{0} = \textbf{F}\left(\mathbf{q}, \frac{\partial}{\partial x_i}, \frac{\partial}{\partial t} \right)$$
+					\item[]<3-> is \emph{Hamiltonian} if $\exists \; \mathcal{H}, J$ such that
+					\item[]<4->$$\mathcal{H} = \int_\Omega H(\mathbf{q}) d\mathbf{x}$$ is conserved, and solutions $\mathbf{q}(x_i, t)$ satisfy
+					\item[]<5-> $$\mathbf{q}_t = \mathbf{J}\frac{\delta \mathcal{H}}{\delta \mathbf{q}}$$
 				\end{itemize}
 			\end{frame}
-
+			\begin{frame}[t]{Derivatives}
+				\begin{itemize}
+					\item[]<2->$$ \mathcal{F}(\mathbf{q}) = \int_\Omega F(\mathbf{q}) \, d\mathbf{x} $$
+					\item[]<3->$$ \lim_{\epsilon \rightarrow 0} \frac{\partial}{\partial \epsilon}\mathcal{F}(\mathbf{q} + \epsilon\delta\mathbf{q}) \equiv \left< \frac{\delta \mathcal{F}}{\delta \mathbf{q}}, \delta\mathbf{q} \right> \equiv \int_\Omega \frac{\delta \mathcal{F}}{\delta \mathbf{q}} \delta\mathbf{q} \, d\mathbf{x} $$
+				\end{itemize}
+			\end{frame}
+			\begin{frame}[t]{Poisson Bracket}
+				\begin{align*}
+						\onslide<2->{\frac{\partial \mathcal{F}}{\partial t}}
+						\onslide<3->{&= \int_\Omega \frac{\partial F}{\partial t} \, d\mathbf{x} \\}
+						\onslide<4->{&= \int_\Omega \frac{\delta \mathcal{F}}{\delta \mathbf{q}}^\top \mathbf{q}_t\, d\mathbf{x} \\}
+						\onslide<5->{&= \int_\Omega \frac{\delta \mathcal{F}}{\delta \mathbf{q}}^\top \mathbf{J}\frac{\delta \mathcal{H}}{\delta \mathbf{q}}\, d\mathbf{x} \\}
+						\onslide<6->{&= \left< \frac{\delta \mathcal{F}}{\delta \mathbf{q}}, \mathbf{J}\frac{\delta \mathcal{H}}{\delta \mathbf{q}} \right> \\}
+						\onslide<7->{&\equiv \{\mathcal{F}, \mathcal{H}\}}
+					\end{align*}
+			\end{frame}
+			
 		\subsection{Shallow Water Model}
 			\begin{frame}[t]{Shallow Water Model}
 				\begin{center}
