@@ -32,15 +32,15 @@
 						\item[]<2-> \textbf{Newtonian Dynamics}
 						\item<3-> $m\frac{d^2 \mathbf{q}}{dt} = \mathbf{F}$
 						\item<3-> $\mathbf{F} = -\nabla \Pi$
-						\item<3-> Second order ODE
+						\item<3-> $\mathbf{p} = \frac{d}{dt}(m\mathbf{q})$
 					\end{itemize}
 				\end{column}
 				\begin{column}{0.5\textwidth}
 					\begin{itemize}
 						\item[]<4-> \textbf{Hamiltonian Dynamics}
 						\item<5-> $\frac{d \mathbf{p}}{dt} = -\frac{\partial H}{\partial \mathbf{q}}$
-						\item<5-> $\frac{d \mathbf{q}}{dt} = \frac{\partial \mathcal{H}}{\partial \mathbf{p}}$
-						\item<5-> System of first order ODEs
+						\item<5-> $\frac{d \mathbf{q}}{dt} = \frac{\partial H}{\partial \mathbf{p}}$
+						\item<5-> $H = \mathbf{p}^2/2m + \Pi(\mathbf{q})$
 					\end{itemize}
 				\end{column}
 			\end{columns}
@@ -52,7 +52,7 @@
 						\item[]<2-> \textbf{Navier-Stokes Equations}
 						\item<3-> $\rho\frac{d \mathbf{u}}{dt} = \nabla\cdot\mathbf{\sigma} + \mathbf{F}$
 						\item<3-> $\frac{\partial \rho}{\partial t} + \nabla\cdot\mathbf{u} = 0$
-						\item<3-> System of coupled, nonlinear, PDEs
+						\item<3-> System of coupled, nonlinear, partial differential equations
 					\end{itemize}
 				\end{column}
 				\begin{column}{0.5\textwidth}
@@ -60,7 +60,8 @@
 						\item[]<4-> \textbf{Hamiltonian}
 						\item<5-> $\frac{d \mathbf{p}}{dt} = -\frac{\delta \mathcal{H}}{\delta \mathbf{q}}$
 						\item<5-> $\frac{d \mathbf{q}}{dt} = \frac{\delta \mathcal{H}}{\delta \mathbf{p}}$
-						\item<5-> More analytical tools to work with
+						\item<5-> $\mathcal{H} = \iint \frac12 \nabla\psi\cdot\nabla\psi \, dA$
+						\item[]<5->$- \sum_n \lambda_n \oint \mathbf{n}\cdot\nabla\psi \, ds$
 					\end{itemize}
 				\end{column}
 			\end{columns}
@@ -117,9 +118,8 @@
 			\begin{frame}[t]{Second Variation}
 				\begin{itemize}
 					\item[]<2-> $$\delta^2 \mathcal{H} = \iint \sum_n \left[ \frac{1}{\alpha_n} \vec\nabla\delta\psi_n \cdot \vec\nabla\delta\psi_n + \psi'_n\cdot(\delta q_n)^2 \right]+ (\delta\psi_1 - \delta\psi_2)^2 \, dA$$
-					\item[]<3-> $$U_n \frac{d q_n}{dy} > 0, \quad n=1,2$$
-					\item[]<4-> $$U_1(U_1 - U_2) > 0$$
-					\item[]<4-> $$U_2(U_2 - U_1) > 0$$
+					\item[]<3-> $$U_1(U_1 - U_2) = 0$$
+					\item[]<3-> $$U_2(U_2 - U_1) = 0$$
 				\end{itemize}
 			\end{frame}
 
@@ -129,7 +129,7 @@
 				\item G. Swaters. "Introduction to Hamiltonian Fluid Dynamics and Stability Theory". Monographs and Surveys in Pure and Applied Mathematics (1999).
 				\item  M. E. McIntyre and T. G. Shepherd. "An exact local conservation theorem for finite-amplitude disturbances to non-parallel shear flows, with remarks on Hamiltonian structure and on Arnol’d’s stability theorems". Journal of Fluid Mechanics (1987), vol. 181, pp. 527-565.
 				\item T. G. Shepherd. "Symmetries, conservation laws, and Hamiltonian structure in geophysical fluid dynamics". Advances in Geophysics (1990), vol. 32, pp. 287-338.
-				\item Jacques Vanneste. "Explosive resonant interaction of baroclinic Rossby waves and stability of multilayer quasi-geostrophic flow". Journal of Fluid Mechanics (1995), vol. 291, pp. 83-107.
+				\item J. Pedlosky. "Geophysical Fluid Dynamics". Springer Study Edition (1992).
 			\end{enumerate}
 		\end{frame}
 
