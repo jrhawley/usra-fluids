@@ -43,7 +43,11 @@
     $$
     H =  \frac12 \iint \vec\nabla\psi \cdot \vec\nabla\psi + \frac{f_0^2}{g H} \psi^2 \, dA
     $$
-    The Casimirs are functions of the PV,
+    The canonical matrix is
+    $$
+    \mathbf{J} = -J(q,\cdot)
+    $$
+    with the Casimirs being functions of the PV,
     $$
     \mathcal{C} = \iint C(q) \, dA,
     $$
@@ -100,17 +104,17 @@
 
             As an example of flows one may have examined before, if we assume that the steady solution only depends on latitude, $y$, then $\Psi = \Psi(y)$, and we can differentiate our equation that defines the steady state to obtain,
             $$
-            U_s = C''(q_s) \frac{dq_s}{dy} = C''(q_s) \left[ \frac{d^2 U_s}{dy^2} - \frac{f_0^2}{gH} U_s \right]
+            U_s = -C''(q_s) \frac{dq_s}{dy} = C''(q_s) \left[ \frac{d^2 U_s}{dy^2} - \frac{f_0^2}{gH} U_s \right]
             $$
             where we used the fact that $U_s = - \frac{d \Psi_s}{dy}$.
 
             If we require that $C'' > 0$, then this is equivalent to (assuming the PV is not zero)
             $$
-            \frac{U_s}{\frac{dQ_s}{dy}} = \frac{U_s}{\left[ \frac{d^2 U_s}{dy^2} - \frac{f_0^2}{gH} U_s\right]} > 0.
+            -\frac{U_s}{\frac{dQ_s}{dy}} = \frac{U_s}{\left[ \frac{d^2 U_s}{dy^2} - \frac{f_0^2}{gH} U_s\right]} > 0.
             $$
             Since we are only concerned with the signs this can be rewritten as,
             $$
-            U_s \frac{d Q_s}{dy} > 0.
+            U_s \frac{d Q_s}{dy} < 0.
             $$
         \end{subsubsection}
 
@@ -244,8 +248,14 @@
         $$
         H = \frac12 \iint \sum_{i=1}^2 \frac{1}{\alpha_i}\vec\nabla \psi_i \cdot \vec\nabla \psi_i + (\psi_1 - \psi_2)^2 \, dA
         $$
-
-        The Casimirs are functions of the PV,
+        The canonical matrix is
+        $$
+        \mathbf{J} = \left[\begin{array}{cc}
+        -J(q_1, \cdot) & \\
+        & -J(q_2, \cdot)
+        \end{array}\right]
+        $$
+        with the Casimirs being functions of the PV,
         $$
         \mathcal{C}_i = \iint C_i(q_i) \, dA
         $$
@@ -315,11 +325,11 @@
 
             If we assume that the steady solution only depends on latitude, $y$, then $\Psi_i = \Psi_i(y)$, and we can differentiate our equation that defines the steady state to obtain
             $$
-            U_{is} = C''_i(q_{is}) \frac{dq_{is}}{dy}
+            U_{is} = -C''_i(q_{is}) \frac{dq_{is}}{dy}
             $$
             or succinctly,
             $$
-            U_{is} \frac{d Q_{is}}{dy} > 0, \quad i=1,2
+            U_{is} \frac{d Q_{is}}{dy} < 0, \quad i=1,2
             $$
         \end{subsubsection}
         \begin{subsubsection}{Second Theorem}
@@ -407,8 +417,15 @@
         $$
         H = \frac12 \iint \sum_{i=1}^N \frac{1}{\alpha_i}\vec\nabla \psi_i \cdot \vec\nabla \psi_i + \sum_{i=1}^{N-1} (\psi_i - \psi_{i+1})^2 \, dA
         $$
-
-        The Casimirs are functions of the PV,
+        The canonical matrix is
+        $$
+        \mathbf{J} = \left[\begin{array}{ccc}
+        -J(q_1, \cdot) & & \\
+        & \ddots & \\
+        & & -J(q_n, \cdot)
+        \end{array}\right]
+        $$
+        with the Casimirs being functions of the PV,
         $$
         \mathcal{C}_i = \iint C_i(q_i) \, dA
         $$
@@ -467,7 +484,7 @@
 
             If we assume that the steady solution only depends on latitude, $y$, then $\Psi_i = \Psi_i(y)$, and we have
             $$
-            U_{is} \frac{d Q_{is}}{dy} > 0, \quad i=1,...,N
+            U_{is} \frac{d Q_{is}}{dy} < 0, \quad i=1,...,N
             $$
         \end{subsubsection}
         \begin{subsubsection}{Second Theorem}
@@ -518,7 +535,15 @@
         $$
         and is conserved following the motion.
 
-        It can be shown (FJP: insert) that the Casimirs are
+        It can be shown that the canonical matrix is
+        $$
+        \mathbf{J} = \left[\begin{array}{ccc}
+        0 & q & -\partial_x \\
+        -q & 0 & -\partial_y \\
+        -\partial_x & -\partial_y & 0
+        \end{array}\right]
+        $$
+        and that the Casimirs are
         $$
         \mathcal{C} = \iint hC(q) \, dA.
         $$
