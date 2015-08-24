@@ -13,7 +13,7 @@
 
 \title{Hamiltonian Theory of Geophysical Fluids}
 
-\begin{section}{One-Layer Quasi-Geostrophy}
+\section{One-Layer Quasi-Geostrophy}{
     \textbf{Assumptions} \\
     In the quasi-geostrophic model, there are a number of assumptions about the fluid that are made:
     \begin{itemize}
@@ -57,7 +57,7 @@
         \label{eqn:qg_ol_h}
     \end{equation}
 
-    \begin{subsection}{First Variation}
+    \subsection{First Variation}{
         To compute the steady states we must first the first variational derivative of the above functional:
         \begin{align*}
             \delta \mathcal{H}
@@ -70,9 +70,9 @@
         \psi_s = C'(q_s + \beta y).
         $$
         Here, and throughout, we use a subscript s to denote steady solution.
-    \end{subsection}
+    }
 
-    \begin{subsection}{Second Variation}
+    \subsection{Second Variation}{
       Similarly, we compute the second variational derivative,
       \begin{align*}
           \delta^2 \mathcal{H}
@@ -90,11 +90,11 @@
           & = \delta^2 H_s + \iint C''(q_s + \beta y) (\delta q)^2  \, dA.
       \end{align*}
       Note that the $\delta^2 H_s$ term is positive definite and the Casimir term is sign definite.
-    \end{subsection}
-    \begin{subsection}{Linear Stability Theorems}
+    }
+    \subsection{Linear Stability Theorems}{
         To prove stability it is sufficient to show that the second variation is sign definite. (FJP: explain why?).
 
-        \begin{subsubsection}{First Theorem (Positive Definiteness)}
+        \subsubsection{First Theorem (Positive Definiteness)}{
             The first theorem is the easiest and corresponds to showing where the second variation is positive definite.  It is readily seen that this occurs when
             $$
             C''(q_s + \beta y) > 0.
@@ -113,9 +113,9 @@
             U_s \left(\frac{d Q_s}{dy} + \beta \right) < 0.
             $$
             since we are only concerned with the signs.
-        \end{subsubsection}
+        }
 
-        \begin{subsubsection}{Second Theorem (Negative Definiteness)}
+        \subsubsection{Second Theorem (Negative Definiteness)}{
             This is not as obvious at the first theorem, but we can use Poincar\'e's inequality to provide some bounds.
 
             Suppose that the minimum eigenvalue, denoted $\lambda_{min}$, of the boundary value problem
@@ -140,10 +140,10 @@
             \end{align*}
             The value of $\lambda_{min}$ will depend on the geometry of the domain. For example, two commonly used domains are the doubly periodic rectangle and an infinite channel in $x$.
             It can be shown that $\lambda_{min} = 4\pi^2(\frac1{L_x^2} + \frac1{L_y^2})$ for the doubly periodic boundary, and $\lambda_{min} = \frac{\pi^2}{W^2}$ for the channel.
-        \end{subsubsection}
-    \end{subsection}
+        }
+    }
 
-    \begin{subsection}{Nonlinear Stability Theorems}
+    \subsection{Nonlinear Stability Theorems}{
         To analyze the the nonlinear stability, we introduce the functional
         $$
         \mathcal{N}(\delta q)  = \mathcal{H}(q_s + \delta q) - \mathcal{H}(q_s)
@@ -171,11 +171,11 @@
             &= \frac12 \delta^2 H_s + \iint C(q_s + \beta y + \delta q) - C(q_s + \beta y) -C'(q_s + \beta y)\delta q\, dA
         \end{align*}
         where $H_s$ is the unconstrained Hamiltonian evaluated at the steady state, defined at the beginning of this section.
-    \end{subsection}
-\end{section}
+    }
+}
 
 \newpage
-\begin{section}{Two-Layer Quasi-Geostrophy}
+\section{Two-Layer Quasi-Geostrophy}{
     \textbf{Assumptions} \\
     All of the same assumptions that are made in the one-layer case will be made.
 
@@ -217,7 +217,7 @@
 
     Note that previous papers usually assume that the constants in front are equal. This is not the case.  In QG this might not be as important but in SW it will make a big difference.
 
-    \begin{subsection}{Hamiltonian}
+    \subsection{Hamiltonian}{
         To derive an equation for the energy we must multiply the evolution equation by $\psi_i$ for each $i$ and then sum up over the different layers,
         \begin{align*}
             0 &= \iint \psi_1 \partial_t q_1 + \psi_2 \partial_t q_2 + \psi_1 J(\psi_1, q_1 + \beta y) + \psi_2 J(\psi_2, q_2 + \beta y) \, dA \\
@@ -257,7 +257,7 @@
             \label{eqn:qg_tl_h}
         \end{equation}
 
-        \begin{subsubsection}{Aside: Boundary Conditions}
+        \subsubsection{Aside: Boundary Conditions}{
             In the derivation above, we used Green's first identity to say $\iint \frac{1}{\alpha_i}\psi_i \nabla^2 \psi_i \, dA = - \iint \frac{1}{\alpha_i} \vec\nabla\psi_i \cdot \vec\nabla\psi_i \, dA$. But this identity depends on the boundary of the domain. Specfically, for an arbitrary $C^1$ function $u$, and a $C^2$ function $v$ on some region $U \subset \mathbb{R}^3$:
             $$
             \int_U u \nabla^2 v + \nabla u \cdot \nabla v \, dV = \oint_{\partial U} u \nabla v \cdot d \vec S
@@ -265,10 +265,10 @@
             If $\iint \frac{1}{\alpha_i}\psi_i \nabla^2 \psi_i \, dA = - \iint \frac{1}{\alpha_i} \vec\nabla\psi_i \cdot \vec\nabla\psi_i \, dA$, then we're clearly saying $\oint \frac{1}{\alpha_i}\psi_i \nabla \psi_i\cdot d \vec S = 0$. By Helmholtz's decomposition theorem, the stream function $\psi_i$ is unique up to a divergenceless function, thus $\psi_i$ can differ by a constant and still be a valid stream function for the velocity. If we assume the domain is simply connected and the boundary is smooth everywhere, there is only on boundary we are concerned with, and each $\psi_i$ is constant on that boundary. Thus, we are free to assume whatever contant value we like. A natural choice is $\left. \psi_i \right|_{\partial D} = 0$, which automatically implies $\oint \frac{1}{\alpha_i}\psi_i \nabla \psi_i \cdot d \vec S = 0$.
 
             If the domain was not simply connected or not smooth, there would be multiple boundaries to deal with. For example, a rectangle is a simply connected domain, but its boundary has corners. The stream function will be constant on each edge, but the value on one edge may be different from the value on another. We are allowed to arbitrarily choose a value of $\psi_i$ on one of the boundaries, but this dictates the value of $\psi_i$ on the others, so the surface integral may be some non-zero value. Assuming a simply connected, smoothly bounded domain, or a domain that has $\oint \frac{1}{\alpha_i}\psi_i \nabla \psi_i\cdot d \vec S = 0$, makes this problem disappear
-        \end{subsubsection}
-    \end{subsection}
+        }
+    }
 
-    \begin{subsection}{First Variation}
+    \subsection{First Variation}{
         \begin{align*}
             \delta \mathcal{H} &= \delta \frac12 \iint \sum_{i=1}^2 \left[ \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \psi_i + 2C_i(q_i + \beta y) \right]+ (\psi_1 - \psi_2)^2 \, dA \\
             &= \iint \sum_{i=1}^2 \left[ \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \delta\psi_i + C'_i(q_i + \beta y) \delta q_i \right]+ (\psi_1 - \psi_2)(\delta \psi_1 - \delta \psi_2) \, dA \\
@@ -289,9 +289,9 @@
             C'_2(q_{2s} + \beta y)
             \end{array}\right]
         \end{equation}
-    \end{subsection}
+    }
 
-    \begin{subsection}{Second Variation}
+    \subsection{Second Variation}{
         Like the single layer model, the second variation for the two-layer model is
         \begin{align*}
             \delta^2 \mathcal{H} &= \iint \sum_i \left[ - \psi_i + C'_i(q_i + \beta y) \right]  \delta^2 q_i  - \delta \psi_i \delta q_i +  C''_i(q_i + \beta y) (\delta q_i)^2  \, dA \\
@@ -304,10 +304,10 @@
         \end{align*}
 
         The $\delta^2 H_s$ term is clearly positive definite, while the $C''_i(q_{is} + \beta y)$ term is sign definite. Like in the single-layer case, the definiteness of the second variation depends on the definiteness of the Casimirs.
-    \end{subsection}
+    }
 
-    \begin{subsection}{Linear Stability Theorems}
-        \begin{subsubsection}{First Theorem}
+    \subsection{Linear Stability Theorems}{
+        \subsubsection{First Theorem}{
             The first theorem proceeds exactly like it did for the one-layer case. We require the second variation to be positive definite, so
             $$
             C''_i(q_{is} + \beta y) > 0, \quad i=1,2
@@ -321,12 +321,12 @@
             $$
             U_{is} \left(\frac{d Q_{is}}{dy} + \beta \right) < 0, \quad i=1,2
             $$
-        \end{subsubsection}
-        \begin{subsubsection}{Second Theorem}
-        \end{subsubsection}
-    \end{subsection}
+        }
+        \subsubsection{Second Theorem}
+            Text
+    }
 
-    \begin{subsection}{Nonlinear Stability Theorems}
+    \subsection{Nonlinear Stability Theorems}{
         We proceed as stated in the single-layer case, by defining $\mathcal{N}$.
 
         \begin{align*}
@@ -347,11 +347,14 @@
             &= \frac12 \delta^2 H_s + \iint \sum_{i=1}^2 C_i(q_{is} + \beta y + \delta q_i) - C_i(q_{is} + \beta y) - \psi_{is}\delta q_i \, dA \\
             &= \frac12 \delta^2 H_s + \iint \sum_{i=1}^2 C_i(q_{is} + \beta y + \delta q_i) - C_i(q_{is} + \beta y) - C'_i(q_{is} + \beta y)\delta q_i \, dA \\
         \end{align*}
-    \end{subsection}
-\end{section}
+    }
+    \subsection{Example: Two Layer Philips Model}{
+        Insert text here
+    }   
+}
 
 \newpage
-\begin{section}{$N$-Layer Quasi-Geostrophy}
+\section{$N$-Layer Quasi-Geostrophy}{
     The $N$-layer QG model can be written as,
     $$
     \partial_t q_i + J(\psi_i, q_i + \beta y) = 0,
@@ -393,7 +396,7 @@
 
     Assuming a flat bottom, just as in the two-layer case.
 
-    \begin{subsection}{Hamiltonian}
+    \subsection{Hamiltonian}{
         To derive an equation for the energy, we do as we did in the two-layer case.
         \begin{align*}
         0 &= \iint \sum_{i=1}^N \psi_i \partial_t q_i + \psi_i J(\psi_i, q_i + \beta y) \, dA \\
@@ -424,9 +427,9 @@
         \mathcal{H} = \frac12 \iint \sum_{i=1}^N \left[ \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \psi_i + 2C_i(q_i + \beta y) \right] + \sum_{i=1}^{N-1} (\psi_i - \psi_{i+1})^2 \, dA
         \label{eqn:qg_Nl_h}
         \end{equation}
-    \end{subsection}
+    }
 
-    \begin{subsection}{First Variation}
+    \subsection{First Variation}{
         \begin{align*}
         \delta \mathcal{H} &= \delta\frac12 \iint \sum_{i=1}^N \left[ \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \psi_i + 2C_i(q_i + \beta y) \right] + \sum_{i=1}^{N-1} (\psi_i - \psi_{i+1})^2 \, dA \\
         &= \iint \sum_{i=1}^N \left[ \frac{1}{\alpha_i} \vec\nabla \psi_i \cdot \vec\nabla \delta\psi_i + C'_i(q_i + \beta y) \delta q_i \right]+ \sum_{i=1}^{N-1} (\psi_i - \psi_{i+1})(\delta \psi_i - \delta \psi_{i+1}) \, dA \\
@@ -448,9 +451,9 @@
         C'_N(q_{Ns} + \beta y)
         \end{array}\right]
         \end{equation}
-    \end{subsection}
+    }
 
-    \begin{subsection}{Second Variation}
+    \subsection{Second Variation}{
         The second variation for the $N$-layer model is
         \begin{align*}
             \delta^2 \mathcal{H} &= \iint \sum_{i=1}^N \left[ - \psi_i + C'_i(q_i + \beta y) \right]  \delta^2 q_i  - \delta \psi_i \delta q_i +  C''_i(q_i + \beta y) (\delta q_i)^2  \, dA \\
@@ -461,10 +464,10 @@
         \end{align*}
 
         Which is exactly the same result as the two-layer case, but summing from 1 to $N$.
-    \end{subsection}
+    }
 
-    \begin{subsection}{Linear Stability Theorems}
-        \begin{subsubsection}{First Theorem}
+    \subsection{Linear Stability Theorems}{
+        \subsubsection{First Theorem}{
             Our results for linear stability are thus identical to the results for the two-layer case.
             $$
             C''_i(q_{is} + \beta y) > 0, \quad i=1,...,N
@@ -474,12 +477,12 @@
             $$
             U_{is} \left(\frac{d Q_{is}}{dy} + \beta \right) < 0, \quad i=1,...,N
             $$
-        \end{subsubsection}
-        \begin{subsubsection}{Second Theorem}
-        \end{subsubsection}
-    \end{subsection}
+        }
+        \subsubsection{Second Theorem}{        
+        }
+    }
 
-    \begin{subsection}{Nonlinear Stability Theorems}
+    \subsection{Nonlinear Stability Theorems}{
         If you haven't noticed a pattern by now, we define $\mathcal{N}$ and proceed as before.
 
         \begin{align*}
@@ -491,11 +494,11 @@
             &= \frac12 \delta^2 H_s + \iint \sum_{i=1}^N C_i(q_{is} + \beta y + \delta q_i) - C_i(q_{is} + \beta y) - \psi_{is}\delta q_i \, dA \\
             &= \frac12 \delta^2 H_s + \iint \sum_{i=1}^N C_i(q_{is} + \beta y + \delta q_i) - C_i(q_{is} + \beta y) - C'_i(q_{is} + \beta y)\delta q_i \, dA \\
         \end{align*}
-    \end{subsection}
-\end{section}
+    }
+}
 
 \newpage
-\begin{section}{Shallow Water}
+\section{Shallow Water}{
     \textbf{Assumptions}
     The quasi-geostrophic model is actually an approximation of the Shallow Water Model, so the assumptions made here are very similar to those made above.
     \begin{itemize}
@@ -512,7 +515,7 @@
         \partial_t h + \vec\nabla \cdot \left( h \vec u \right) & = 0.
     \end{align*}
 
-    \begin{subsection}{Hamiltonian}
+    \subsection{Hamiltonian}{
         As can be found in Shepherd (1990), the regular Hamiltonian is
         $$
         H = \frac12 \iint h | \vec u |^2 + g h^2 \, dA.
@@ -539,15 +542,15 @@
         $$
         \mathcal{H} =  \iint \frac12  \left( h (u^2 + v^2) + g h^2 \right) + h C(q) \, dA.
         $$
-    \end{subsection}
+    }
 
-    \begin{subsection}{Equations of Motion}
+    \subsection{Equations of Motion}{
         Define the Poisson bracket.
 
         Show that we can recover the equations of motion.
-    \end{subsection}
+    }
 
-    \begin{subsection}{First Variation}
+    \subsection{First Variation}{
         The variational derivative is,
         \begin{align*}
             \delta \mathcal{H}
@@ -575,11 +578,11 @@
         \end{align*}
 
         If we restrict ourselves to basic states that are invariant with respect to $x$, then we find that $v= 0$.  This can be used in the first two equations to simplify things.  I would expect that the first two equations reduce down to geostrohic balance but I don't honestly know.  Shepherd 1990 looks at this in some detail.  Maybe a good reference?
-    \end{subsection}
+    }
 
-    \begin{subsection}{Second Variation}
+    \subsection{Second Variation}{
         Only after we understand the first variation.
-    \end{subsection}
-\end{section}
+    }
+}
 
 \end{document}
