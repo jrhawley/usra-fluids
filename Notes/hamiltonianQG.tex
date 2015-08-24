@@ -322,8 +322,9 @@
             U_{is} \left(\frac{d Q_{is}}{dy} + \beta \right) < 0, \quad i=1,2
             $$
         }
-        \subsubsection{Second Theorem}
-            Text
+        \subsubsection{Second Theorem}{
+            Like the Second Theorem for one layer, we have that
+        }
     }
 
     \subsection{Nonlinear Stability Theorems}{
@@ -348,8 +349,27 @@
             &= \frac12 \delta^2 H_s + \iint \sum_{i=1}^2 C_i(q_{is} + \beta y + \delta q_i) - C_i(q_{is} + \beta y) - C'_i(q_{is} + \beta y)\delta q_i \, dA \\
         \end{align*}
     }
-    \subsection{Example: Two Layer Philips Model}{
-        Insert text here
+    \subsection{Example: Two-Layer Phillips Model}{
+        The Two-Layer Phillips Model is a quasigeostrophic model where two layers of fluid are in a channel with periodic $x$-boundaries, and the basic flow in each layer is independent of $y$ (\emph{i.e.} constant velocity in the $x$-direction in each layer). We follow the above instructions to derive some sufficient conditions for the model.
+
+        \begin{align*}
+            U_1, U_2 &= \text{constants} \\
+            U_i &= -\partial_y \Psi_i \implies \Psi_i = -U_i y \\
+            Q_i &= \nabla^2\Psi_i - F\Psi_i = F U_i y
+        \end{align*}
+        First stability theorem:
+        \begin{align*}
+            0 &> U_{is} \left(\frac{d Q_{is}}{dy} + \beta \right) \\
+            &= U_{is} (F U_{is} + \beta) \\
+        \end{align*}
+        Second stability theorem:
+        \begin{align*}
+            \frac1F &< \frac{U_{is}}{\frac{d Q_{is}}{dy} + \beta} \\
+            &= \frac{U_{is}}{F U_{is} + \beta} \\
+            \implies 0 &> \frac{\beta}{F}
+        \end{align*}
+
+        Since $\beta, F > 0$, the second theorem is never satisfied. The first theorem is true when $U_{is} \in (-\frac{\beta}{F}, 0)$.
     }   
 }
 
