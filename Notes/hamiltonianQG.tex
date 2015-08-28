@@ -342,7 +342,24 @@
             $$
         }
         \subsubsection{Second Theorem}{
-            Like the Second Theorem for one layer, we have that
+            We follow a similar pattern to the one-layer case.
+            \begin{align*}
+                \delta^2\mathcal{H}_s
+                &= \iint \sum_i \left[ \frac{1}{\alpha_i} \vec\nabla\delta\psi_i \cdot \vec\nabla\delta\psi_i + C''_i(q_{is} + \beta y) (\delta q_i)^2 \right]+ (\delta\psi_1 - \delta\psi_2)^2 \, dA \\
+                &\le \iint \sum_i \left[ \frac{1}{\Lambda\alpha_i} (\nabla^2\delta\psi_i)^2 + C''_i(q_{is} + \beta y) (\delta q_i)^2 \right]+ (\delta\psi_1 - \delta\psi_2)^2 \, dA \\
+                &\le \iint \sum_i \left[ \frac{1}{\Lambda\alpha_i} (\nabla^2\delta\psi_i)^2 \right]+ (\delta\psi_1 - \delta\psi_2)^2 \, dA \\
+                &\quad + 2C''_1(q_{1s} + \beta y) \left[ \left(\frac{1}{\alpha_1} \nabla^2\delta\psi_1 \right)^2 + (\delta\psi_1 - \delta\psi_2)^2 \right] \\
+                &\quad + 2C''_2(q_{2s} + \beta y) \left[ \left(\frac{1}{\alpha_2} \nabla^2\delta\psi_2 \right)^2 + (\delta\psi_1 - \delta\psi_2)^2 \right] \\
+                &= \iint (\nabla^2\delta\psi_1)^2\left[ \frac{1}{\Lambda\alpha_1} + \frac{2}{\alpha_1^2}C_1'' \right] + (\nabla^2\delta\psi_2)^2\left[ \frac{1}{\Lambda\alpha_2} + \frac{2}{\alpha_2^2}C_2'' \right] \\
+                &\quad + (\delta\psi_1-\delta\psi_2)^2[1+2C_1'' + 2C_2''] \, dA \\
+            \end{align*}            
+            
+            This gives the following conditions:
+            \begin{align*}
+                C_1''(q_{1s} + \beta y) &< -\frac{\alpha_1}{2\Lambda} \\
+                C_2''(q_{2s} + \beta y) &< -\frac{\alpha_2}{2\Lambda} \\
+                C_1''(q_{1s} + \beta y) + C_2''(q_{2s} + \beta y) &< -\frac12
+            \end{align*}
         }
     }
 
@@ -368,7 +385,7 @@
             &= \frac12 \delta^2 H_s + \iint \sum_{i=1}^2 C_i(q_{is} + \beta y + \delta q_i) - C_i(q_{is} + \beta y) - C'_i(q_{is} + \beta y)\delta q_i \, dA \\
         \end{align*}
     }
-    \subsection{Example: Two-Layer Phillips Model}{
+    \subsection{Example: Two-Layer Phillips Model (incorrect at the moment)}{
         The Two-Layer Phillips Model is a quasigeostrophic model where two layers of fluid are in a channel with periodic $x$-boundaries, and the basic flow in each layer is independent of $y$ (\emph{i.e.} constant velocity in the $x$-direction in each layer). We follow the above instructions to derive some sufficient conditions for the model.
 
         \begin{align*}
