@@ -116,30 +116,49 @@
         }
 
         \subsubsection{Second Theorem (Negative Definiteness)}{
-            This is not as obvious at the first theorem, but we can use Poincar\'e's inequality to provide some bounds.
+            This is not as obvious at the first theorem, but will use two theorems provide some bounds. The first is Poincar\'e's inequality, and the second is the triangle inequality
 
-            Suppose that the minimum eigenvalue, denoted $\lambda_{min}$, of the boundary value problem
+            Poincar\'e's inequality: Consider the boundary value problem
             $$
                 \nabla^2 \phi + \lambda \phi = 0, (x,y) \in \Omega, \quad
                 \left. \phi \right|_{\partial \Omega} = 0
             $$
-            is strictly positive. Then if $h(x,y)$ is a twice-continuously differentiable function satisfying $\left. h\right|_{\partial D} = 0$, then
+            whose eigenvalues are strictly positive. Then if $h(x,y)$ is a twice-continuously differentiable function satisfying $\left. h\right|_{\partial D} = 0$, then
             $$
-                \iint_\Omega\nabla h \cdot\nabla h \, dA \le \frac{1}{\lambda_{min}}\iint_\Omega (\nabla^2 h)^2 \, dA
+                \iint_\Omega\nabla h \cdot\nabla h \, dA \le \frac{1}{\Lambda}\iint_\Omega (\nabla^2 h)^2 \, dA
+            $$
+            where $\Lambda = \min \{ \lambda \}$. For the triangle inequality, we just need
+            $$
+            	2xy \le x^2+y^2
+            $$
+            which we will use when expanding $(\delta q)^2$.
+            $$
+            	(\delta q)^2 = \left(\nabla^2\delta\psi - \frac{f_0^2}{gH}\delta\psi \right)^2 \implies 2\frac{f_0^2}{gH}\delta\psi\nabla^2\delta\psi \le (\nabla^2\delta\psi)^2 + \left(\frac{f_0^2}{gH} \right)^2(\delta\psi)^2 
             $$
 
-            Thus we have
+            Using these two theorems, we have the following:
             \begin{align*}
                 \delta^2\mathcal{H}_s
                 &= \iint \vec\nabla \delta \psi \cdot \vec \nabla \delta \psi + \frac{f_0^2}{gH} (\delta \psi)^2+  C''(q_s + \beta y) (\delta q)^2  \, dA \\
-                &\le \iint \frac{1}{\lambda_{min}}(\nabla^2\delta\psi)^2 + \frac{f_0^2}{gH} (\delta \psi)^2+  C''(q_s + \beta y) (\delta q)^2  \, dA \\
+                &\le \iint \frac{1}{\Lambda}(\nabla^2\delta\psi)^2 + \frac{f_0^2}{gH} (\delta \psi)^2+  C''(q_s + \beta y) (\delta q)^2  \, dA \\
+                &= \iint \frac{1}{\Lambda}(\nabla^2\delta\psi)^2 + \frac{f_0^2}{gH} (\delta \psi)^2 \\
+                &\quad+  C''(q_s + \beta y) \left[ (\nabla^2 \delta\psi)^2 - 2\frac{f_0^2}{gH}\delta\psi\nabla^2\delta\psi + \left( \frac{f_0^2}{gH} \right)^2 (\delta\psi)^2 \right]  \, dA \\
             \end{align*}
-            For $\delta^2\mathcal{H}$ to be negative definite, the integrand must be negative everywhere. By factoring this homogeneous polynomial, we find:
+            
+            Since $C''(q_s + \beta y) < 0$, by the triangle inequality we have
             \begin{align*}
-                C''(q_s + \beta y) < -\frac{\frac1\lambda_{min}(\nabla^2\delta\psi)^2 + \frac{f_0^2}{gH}(\delta\psi)^2}{(\delta q)^2}
+                \delta^2\mathcal{H}_s
+                &\le \iint \frac{1}{\Lambda}(\nabla^2\delta\psi)^2 + \frac{f_0^2}{gH} (\delta \psi)^2 +  2C'' \left[ (\nabla^2 \delta\psi)^2 + \left( \frac{f_0^2}{gH} \right)^2 (\delta\psi)^2 \right]  \, dA \\
+                &= \iint \left[ \frac1\Lambda + 2C''\right](\nabla^2\delta\psi)^2 + \left[ \frac{f_0^2}{gH} + 2C''\left(\frac{f_0^2}{gH}\right)^2\right](\delta\psi)^2    
             \end{align*}
-            The value of $\lambda_{min}$ will depend on the geometry of the domain. For example, two commonly used domains are the doubly periodic rectangle and an infinite channel in $x$.
-            It can be shown that $\lambda_{min} = 4\pi^2(\frac1{L_x^2} + \frac1{L_y^2})$ for the doubly periodic boundary, and $\lambda_{min} = \frac{\pi^2}{W^2}$ for the channel.
+            
+            
+            This gives us two conditions that $C''$ must follow
+            $$
+                C''(q_s + \beta y) < -\frac{1}{2\Lambda}, \quad\quad C''(q_s + \beta y) < -\frac{gH}{2f_0^2}=-\frac{L_R^2}{2}
+            $$
+            The value of $\Lambda$ will depend on the geometry of the domain. For example, two commonly used domains are the doubly periodic rectangle and an infinite channel in $x$.
+            It can be shown that $\Lambda = 4\pi^2(\frac1{L_x^2} + \frac1{L_y^2})$ for the doubly periodic boundary, and $\Lambda = \frac{\pi^2}{W^2}$ for the channel.
         }
     }
 
